@@ -1,93 +1,143 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <div class="text-center">
-        <logo />
-        <vuetify-logo />
+  <v-main class="my-4">
+    <div id="main">
+      <div id="bg-img1">
+        <div class="title">First image</div>
       </div>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
-        <v-card-text>
-          <p>
-            Vuetify is a progressive Material Design component framework for
-            Vue.js. It was designed to empower developers to create amazing
-            applications.
-          </p>
-          <p>
-            For more information on Vuetify, check out the
-            <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation </a
-            >.
-          </p>
-          <p>
-            If you have questions, please join the official
-            <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-            >
-              discord </a
-            >.
-          </p>
-          <p>
-            Find a bug? Report it on the github
-            <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board </a
-            >.
-          </p>
-          <p>
-            Thank you for developing with Vuetify and I look forward to bringing
-            more exciting features in the future.
-          </p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3" />
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt Documentation
-          </a>
-          <br />
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt GitHub
-          </a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn color="primary" nuxt to="/inspire"> Continue </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-col>
-  </v-row>
+
+      <section id="section-one">
+        <h2>Section One</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt,
+          laudantium, quibusdam? Nobis, delectus, commodi, fugit amet tempora
+          facere dolores nisi facilis consequatur, odio hic minima nostrum.
+          Perferendis eos earum praesentium, blanditiis sapiente labore aliquam
+          ipsa architecto vitae. Minima soluta temporibus voluptates inventore
+          commodi cumque esse suscipit optio aliquam et, dolorem a cupiditate
+          nihil fuga laboriosam fugiat placeat dignissimos! Unde eveniet placeat
+          quisquam blanditiis voluptatem doloremque fugiat dolor repellendus
+          ratione in. Distinctio provident dolorem modi cumque illo enim quidem
+          tempora deserunt nostrum voluptate labore repellat quisquam quasi cum
+          suscipit dolore ab consequuntur, ad porro earum temporibus. Laborum ad
+          temporibus ex, omnis!
+        </p>
+      </section>
+
+      <div id="bg-img2">
+        <div class="title">
+          <span>
+            <span>Second Image</span>
+          </span>
+        </div>
+      </div>
+
+      <section id="section-two">
+        <h2>Section Two</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt,
+          laudantium, quibusdam? Nobis, delectus, commodi, fugit amet tempora
+          facere dolores nisi facilis consequatur, odio hic minima nostrum.
+          Perferendis eos earum praesentium, blanditiis sapiente labore aliquam
+          ipsa architecto vitae. Minima soluta temporibus voluptates inventore
+          commodi cumque esse suscipit optio aliquam et, dolorem a cupiditate
+          nihil fuga laboriosam fugiat placeat dignissimos! Unde eveniet placeat
+          quisquam blanditiis voluptatem doloremque fugiat dolor repellendus
+          ratione in.
+        </p>
+      </section>
+
+      <div id="bg-img3">
+        <div class="title">
+          <span class="border trans"> Third Image </span>
+        </div>
+      </div>
+
+      <section id="section-three">
+        <h2>Section Three</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt,
+          laudantium, quibusdam? Nobis, delectus, commodi, fugit amet tempora
+          facere dolores nisi facilis consequatur, odio hic minima nostrum.
+          Perferendis eos earum praesentium, blanditiis sapiente labore aliquam
+          ipsa architecto vitae. Minima soluta temporibus voluptates inventore
+          commodi cumque esse suscipit optio aliquam et, dolorem a cupiditate
+          nihil fuga laboriosam fugiat placeat dignissimos! Unde eveniet placeat
+          quisquam blanditiis voluptatem doloremque fugiat dolor repellendus
+          ratione in.
+        </p>
+      </section>
+
+      <div id="bg-img4">
+        <div class="title">One more image</div>
+      </div>
+    </div>
+
+    <Social />
+  </v-main>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
+import Social from '~/components/Social.vue'
 
 export default {
   components: {
-    Logo,
-    VuetifyLogo,
+    Social,
+  },
+  data() {
+    return {
+      images: [
+        { url: 'https://picsum.photos/2000/3000?random=1' },
+        { url: 'https://picsum.photos/2000/3000?random=2' },
+        { url: 'https://picsum.photos/2000/3000?random=3' },
+        { url: 'https://picsum.photos/2000/3000?random=4' },
+      ],
+    }
   },
 }
 </script>
+
+<style>
+#bg-img1,
+#bg-img2,
+#bg-img3,
+#bg-img4 {
+  height: 30vh;
+  background-attachment: fixed;
+  position: relative;
+  margin: 0px 10vw 0px 10vw;
+}
+
+#bg-img1 {
+  background-image: url('https://picsum.photos/1920/1080');
+}
+
+#bg-img2 {
+  background-image: url('https://picsum.photos/1920/1070');
+}
+
+#bg-img3 {
+  background-image: url('https://picsum.photos/1910/1080');
+}
+
+#bg-img4 {
+  background-image: url('https://picsum.photos/1910/1070');
+}
+
+.title {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #141414;
+  width: 50%;
+  left: 25%;
+  text-align: center;
+  padding: 2vh 0px;
+  text-transform: uppercase;
+}
+p {
+  padding: 0px 7vw 0px 7vw;
+}
+h2 {
+  text-align: center;
+}
+</style>
