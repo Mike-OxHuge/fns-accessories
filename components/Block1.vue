@@ -4,34 +4,33 @@
       class="main-wrap"
       :style="{ 'background-image': 'url(' + image + ')' }"
     >
-      <div class="awesome-pics-mobile">
-        <div
-          class="bg-img"
-          :style="{ 'background-image': 'url(' + images[0] + ')' }"
-          style="top: 0vh; left: 10vw"
-        ></div>
-        <div
-          class="bg-img"
-          :style="{ 'background-image': 'url(' + images[1] + ')' }"
-          style="top: -5vh; left: 20vw"
-        ></div>
-      </div>
+      <div
+        class="bg-img"
+        :style="{ 'background-image': 'url(' + images[0] + ')' }"
+        style="top: 10vh; left: 10vw"
+      ></div>
+      <div
+        class="bg-img"
+        :style="{ 'background-image': 'url(' + images[1] + ')' }"
+        style="top: 5vh; left: 20vw"
+      ></div>
+
       <div class="title">
         <h2>Lorem, ipsum dolor.</h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
       </div>
-      <div class="awesome-pics-mobile" style="top: 62vh; left: 30vw">
-        <div
-          class="bg-img"
-          :style="{ 'background-image': 'url(' + images[2] + ')' }"
-          style="top: 0vh; left: 20vw"
-        ></div>
-        <div
-          class="bg-img"
-          :style="{ 'background-image': 'url(' + images[3] + ')' }"
-          style="bottom: 13vh; right: 9vw"
-        ></div>
-      </div>
+
+      <div
+        class="bg-img"
+        :style="{ 'background-image': 'url(' + images[2] + ')' }"
+        style="bottom: 5vh; left: 20vw"
+      ></div>
+      <div
+        class="bg-img"
+        :style="{ 'background-image': 'url(' + images[3] + ')' }"
+        style="bottom: 13vh; right: 15vw"
+      ></div>
+
       <section></section>
     </div>
   </v-main>
@@ -62,16 +61,18 @@ export default {
   height: 20vh;
   width: 20vh;
   background-attachment: fixed;
-  position: relative;
+  position: absolute;
   box-shadow: whitesmoke 0px 0px 3px 3px;
 }
-.awesome-pics-mobile {
+/* .awesome-pics-mobile {
+  display: flex;
+  flex-direction: row;
   position: absolute;
   top: 5vh;
   left: 1vw;
   height: 30vh;
   width: 50vw;
-}
+} */
 .title {
   position: absolute;
   top: 53%;
