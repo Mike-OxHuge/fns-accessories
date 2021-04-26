@@ -3,7 +3,7 @@
     <v-list-item v-for="social in socials" :key="social.i" dense class="px-0">
       <v-list-item-icon class="mx-0">
         <a :href="social.link">
-          <v-icon left>
+          <v-icon left color="black">
             {{ social.icon }}
           </v-icon>
         </a>
@@ -39,7 +39,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .floating {
   display: flex;
   flex-direction: column;
@@ -47,5 +47,8 @@ export default {
   position: fixed;
   right: 0;
   bottom: 5%;
+}
+a {
+  text-decoration: none;
 }
 </style>
