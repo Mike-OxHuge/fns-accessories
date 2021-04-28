@@ -16,7 +16,8 @@
     "@nuxtjs/pwa": "^3.3.5",
     "core-js": "^3.9.1",
     "material-design-icons": "^3.0.1",
-    "nuxt": "^2.15.3"
+    "nuxt": "^2.15.3",
+    "object-fit-images": "^3.2.4"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^6.0.0",

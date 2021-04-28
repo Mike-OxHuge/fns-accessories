@@ -4,40 +4,51 @@
       class="main-wrap"
       :style="{ 'background-image': 'url(' + image + ')' }"
     >
-      <div
-        class="bg-img"
-        :style="{ 'background-image': 'url(' + images[0] + ')' }"
-        style="top: 10vh; left: 10vw"
-      ></div>
-      <div
-        class="bg-img"
-        :style="{ 'background-image': 'url(' + images[1] + ')' }"
-        style="top: 5vh; left: 20vw"
-      ></div>
+      <div class="block-one">
+        <v-parallax
+          :style="customWidth"
+          :height="customHeight"
+          :src="images[0]"
+          style="left: 10vw"
+          class="parallax"
+        />
+        <v-parallax
+          :style="customWidth"
+          style="left: 20vw; bottom: 5vh"
+          :src="images[1]"
+          class="parallax"
+          :height="customHeight"
+        />
+      </div>
 
       <div class="title">
         <h2>Lorem, ipsum dolor.</h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
       </div>
 
-      <div
-        class="bg-img"
-        :style="{ 'background-image': 'url(' + images[2] + ')' }"
-        style="bottom: 5vh; left: 20vw"
-      ></div>
-      <div
-        class="bg-img"
-        :style="{ 'background-image': 'url(' + images[3] + ')' }"
-        style="bottom: 13vh; right: 15vw"
-      ></div>
-
-      <section></section>
+      <div class="block-two" style="top: 70vh">
+        <v-parallax
+          :style="customWidth"
+          style="left: 10vw"
+          :src="images[2]"
+          class="parallax"
+          :height="customHeight"
+        />
+        <v-parallax
+          :style="customWidth"
+          style="left: 20vw; bottom: 5vh"
+          :src="images[3]"
+          class="parallax"
+          :height="customHeight"
+        />
+      </div>
     </div>
   </v-main>
 </template>
 
 <script>
 export default {
+  // components: {  },
   data() {
     return {
       image: 'https://picsum.photos/1920/1080?random=1',
@@ -46,42 +57,50 @@ export default {
         'https://picsum.photos/800/600?random=2',
         'https://picsum.photos/800/600?random=3',
         'https://picsum.photos/800/600?random=4',
+        'https://picsum.photos/800/600?random=5',
       ],
     }
   },
-  computed: {},
+  computed: {
+    customHeight() {
+      return this.$vuetify.breakpoint.smAndDown ? '100' : '200'
+    },
+    customWidth() {
+      return this.$vuetify.breakpoint.mdAndUp ? 'width: 25vw' : 'width:35vw'
+    },
+  },
 }
 </script>
 
 <style>
+.block-one,
+.block-two {
+  width: 100%;
+  height: 30%;
+  position: absolute;
+  top: 2vh;
+  bottom: 2vh;
+}
 .main-wrap {
   height: 100vh;
 }
-.bg-img {
-  height: 20vh;
-  width: 20vh;
-  background-attachment: fixed;
-  position: absolute;
+.parallax {
+  width: 25vw;
+  /* background-attachment: fixed; */
+  /* background-position: center !important; */
+  /* background-repeat: no-repeat !important; */
+  /* background-size: cover !important; */
+  /* position: absolute; */
   box-shadow: whitesmoke 0px 0px 3px 3px;
 }
-/* .awesome-pics-mobile {
-  display: flex;
-  flex-direction: row;
-  position: absolute;
-  top: 5vh;
-  left: 1vw;
-  height: 30vh;
-  width: 50vw;
-} */
+
 .title {
   position: absolute;
   top: 53%;
   transform: translateY(-60%);
   width: 100vw;
-  /* left: 25%; */
   text-align: center;
   padding: 1vh 0px;
-  /* text-transform: uppercase; */
   background-color: rgba(0, 0, 0, 0.37);
   color: whitesmoke;
 }
