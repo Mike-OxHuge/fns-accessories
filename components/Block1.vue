@@ -4,7 +4,19 @@
       class="main-wrap"
       :style="{ 'background-image': 'url(' + image + ')' }"
     >
-      <div class="block-one">
+      <div class="d-flex justify-space-between">
+        <v-avatar :size="customSize" class="mt-5 ml-5">
+          <v-img src="logo.png"></v-img>
+        </v-avatar>
+        <div class="d-flex flex-column align-self-center">
+          <h1 class="text-center">F&S</h1>
+          <h3>Handmade Accessories</h3>
+        </div>
+        <v-avatar :size="customSize" class="mt-5 mr-5">
+          <v-img src="logo2.png"></v-img>
+        </v-avatar>
+      </div>
+      <!-- <div class="block-one">
         <v-parallax
           :style="customWidth"
           :height="customHeight"
@@ -19,14 +31,14 @@
           class="parallax"
           :height="customHeight"
         />
-      </div>
+      </div> -->
 
       <div class="title">
-        <h2>Lorem, ipsum dolor.</h2>
+        <h2>Lorem, ipsum.</h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
       </div>
 
-      <div class="block-two" style="top: 70vh">
+      <!-- <div class="block-two" style="top: 70vh">
         <v-parallax
           :style="customWidth"
           style="left: 10vw"
@@ -41,7 +53,7 @@
           class="parallax"
           :height="customHeight"
         />
-      </div>
+      </div> -->
     </div>
   </v-main>
 </template>
@@ -67,6 +79,9 @@ export default {
     },
     customWidth() {
       return this.$vuetify.breakpoint.mdAndUp ? 'width: 25vw' : 'width:35vw'
+    },
+    customSize() {
+      return this.$vuetify.breakpoint.smAndDown ? '100' : '200'
     },
   },
 }
