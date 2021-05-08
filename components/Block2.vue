@@ -1,9 +1,10 @@
 <template>
-  <v-main>
+  <v-main id="main-wrap">
     <div class="title">
       <h2>Shop with us at:</h2>
     </div>
     <v-main style="height: 100vh" class="bg">
+      <!-- upper section -->
       <div class="upper-section">
         <div
           v-observe-visibility="{
@@ -77,50 +78,6 @@
         </div>
       </div>
     </v-main>
-
-    <!-- <div id="demo">
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, ratione.
-        Tempore, sit! Repudiandae dolorem sapiente dolores quos ipsum libero
-        tenetur, non explicabo sed nobis labore exercitationem dolore nam,
-        architecto harum ab corrupti totam ipsam ipsa enim adipisci possimus
-        perspiciatis animi. Voluptate, eos! Praesentium architecto distinctio
-        minus? Optio sequi ut odit.
-      </p>
-      <div
-        v-observe-visibility="{
-          callback: (isVisible, entry) => isViewableNow(isVisible, entry, 'a'),
-        }"
-        :class="{
-          'visible animated slideInRight': showAnimationFor.a,
-          invisible: !showAnimationFor.a,
-        }"
-      >
-        <ShopLogo
-          src="amazon-logo.png"
-          alt="amazon-logo"
-          href="https://amazon.com"
-        />
-        <ShopLogo
-          src="facebook-marketplace-logo.png"
-          alt="facebook-marketplace-logo"
-          href="https://www.facebook.com/marketplace"
-        />
-      </div>
-
-      <div
-        v-observe-visibility="{
-          callback: (isVisible, entry) => isViewableNow(isVisible, entry, 'b'),
-        }"
-        :class="{
-          'visible animated slideInLeft': showAnimationFor.b,
-          invisible: !showAnimationFor.b,
-        }"
-      >
-        <ShopLogo src="ebay-logo.png" alt="ebay-logo" href="https://ebay.com" />
-        <ShopLogo src="etsy-logo.png" alt="etsy-logo" href="https://etsy.com" />
-      </div>
-    </div> -->
   </v-main>
 </template>
 
@@ -146,9 +103,19 @@ export default {
       },
     }
   },
+  mounted() {
+    this.resetHeight()
+    // reset the height whenever the window's resized
+    // window.addEventListener('resize', this.resetHeight)
+  },
   methods: {
     isViewableNow(isVisible, entry, section) {
       this.showAnimationFor[section] = isVisible
+    },
+    resetHeight() {
+      const body = document.getElementById('main-wrap')
+      // reset the body height to that of the inner browser
+      body.style.height = window.innerHeight + 'px'
     },
   },
 }
@@ -175,7 +142,7 @@ export default {
 }
 .bottom-section {
   position: absolute;
-  bottom: 10%;
+  bottom: 5%;
   right: 5%;
 }
 .title {
@@ -190,20 +157,14 @@ export default {
 }
 
 .slide-from-left {
-  -webkit-animation-name: slide-from-left;
   animation-name: slide-from-left;
-  -webkit-animation-duration: 1s;
   animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
 
 .slide-from-right {
-  -webkit-animation-name: slide-from-right;
   animation-name: slide-from-right;
-  -webkit-animation-duration: 1s;
   animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
 </style>

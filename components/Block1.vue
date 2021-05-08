@@ -1,22 +1,19 @@
 <template>
   <v-main>
-    <div
-      class="main-wrap"
-      :style="{ 'background-image': 'url(' + image + ')' }"
-    >
+    <div id="main-wrap" :style="{ 'background-image': 'url(' + image + ')' }">
       <div class="d-flex justify-center fadeInDown">
-        <v-avatar :size="customSize" class="mt-5 ml-5">
+        <v-avatar :size="customSize" class="mt-5 mr-5">
           <v-img src="logo.png"></v-img>
         </v-avatar>
-        <div class="d-flex flex-column align-self-center">
-          <h1 class="text-center">F&S -</h1>
-          <h3>- HandmadeAccessories</h3>
+        <div class="d-flex flex-column align-self-center ml-5">
+          <h1 class="text-center">F&S</h1>
+          <h3>HandmadeAccessories</h3>
         </div>
       </div>
 
       <div class="title">
         <h2>Awesome stuff</h2>
-        <p>For the awesome people</p>
+        <p>For awesome people</p>
       </div>
     </div>
   </v-main>
@@ -24,7 +21,9 @@
 
 <script>
 export default {
-  // components: {  },
+  components: {
+    //
+  },
   data() {
     return {
       image: 'https://picsum.photos/1920/1080?random=1',
@@ -48,6 +47,15 @@ export default {
       return this.$vuetify.breakpoint.smAndDown ? '100' : '200'
     },
   },
+  mounted() {
+    this.resetHeight()
+  },
+  methods: {
+    resetHeight() {
+      const body = document.getElementById('main-wrap')
+      body.style.height = window.innerHeight + 'px'
+    },
+  },
 }
 </script>
 
@@ -61,18 +69,6 @@ export default {
   position: absolute;
   top: 2vh;
   bottom: 2vh;
-}
-.main-wrap {
-  height: 100vh;
-}
-.parallax {
-  width: 25vw;
-  /* background-attachment: fixed; */
-  /* background-position: center !important; */
-  /* background-repeat: no-repeat !important; */
-  /* background-size: cover !important; */
-  /* position: absolute; */
-  box-shadow: whitesmoke 0px 0px 3px 3px;
 }
 
 .title {

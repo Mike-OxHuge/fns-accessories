@@ -1,6 +1,13 @@
 <template>
-  <a :href="href">
-    <v-img :src="src" :alt="alt" eager height="100" width="200" contain></v-img>
+  <a :href="href" target="_blank">
+    <v-img
+      :src="src"
+      :alt="alt"
+      eager
+      :height="customHeight"
+      :width="customWidth"
+      contain
+    ></v-img>
   </a>
 </template>
 
@@ -20,7 +27,19 @@ export default {
       required: true,
     },
   },
+  computed: {
+    customHeight() {
+      return this.$vuetify.breakpoint.smAndDown ? '75' : '150'
+    },
+    customWidth() {
+      return this.$vuetify.breakpoint.smAndDown ? '150' : '300'
+    },
+  },
 }
 </script>
 
-<style></style>
+<style>
+/* average sizes:
+height: 100;
+width 200 */
+</style>
