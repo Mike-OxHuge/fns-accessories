@@ -22,11 +22,16 @@ export default {
         href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
         rel: 'stylesheet',
       },
+      // {
+      //   rel: 'stylesheet',
+      //   href:
+      //     'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css',
+      // },
     ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: ['@/assets/css/main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
@@ -50,6 +55,7 @@ export default {
     '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
+    '@neneos/nuxt-animate.css',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

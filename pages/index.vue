@@ -5,12 +5,10 @@
     <Block3 />
     <!-- <Block4 /> -->
     <!-- <Block5 /> -->
-    <Social />
   </v-main>
 </template>
 
 <script>
-import Social from '~/components/Social.vue'
 import Block1 from '~/components/Block1.vue'
 import Block2 from '~/components/Block2.vue'
 import Block3 from '~/components/Block3.vue'
@@ -19,7 +17,6 @@ import Block3 from '~/components/Block3.vue'
 
 export default {
   components: {
-    Social,
     Block1,
     Block2,
     Block3,

@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+h1,
+h2,
+h3 {
+  font-family: 'Satisfy', cursive;
+}
+
+p {
+  font-family: 'Itim', cursive;
+}
