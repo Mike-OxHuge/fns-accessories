@@ -1,3 +1,13 @@
+<i18n>
+{
+  "en": {
+    "message2": "I am awesome"
+  },
+  "it": {
+    "message2": "Sono molto awesome"
+  }
+}
+</i18n>
 <template>
   <v-main>
     <div id="main-wrap" :style="{ 'background-image': 'url(' + image + ')' }">
@@ -14,15 +24,19 @@
       <div class="title">
         <h2>Awesome stuff</h2>
         <p>For awesome people</p>
+        <span>{{ $t('message') }}</span>
+        <span>{{ $t('message2') }}</span>
+        <localeSwitch />
       </div>
     </div>
   </v-main>
 </template>
 
 <script>
+import localeSwitch from '~/components/LanguageInput.vue'
 export default {
   components: {
-    //
+    localeSwitch,
   },
   data() {
     return {

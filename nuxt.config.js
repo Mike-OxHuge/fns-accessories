@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+import i18n from './config/i18n'
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -56,7 +57,21 @@ export default {
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
     '@neneos/nuxt-animate.css',
+    'nuxt-i18n',
+    // {
+    //   /* module options */
+    // },
   ],
+  i18n: {
+    vueI18nLoader: true,
+    defaultLocale: 'it',
+    strategy: 'prefix',
+    locales: [
+      { code: 'en', iso: 'en-UK', file: 'en.js', dir: 'ltr', name: 'English' },
+      { code: 'it', iso: 'it-IT', file: 'it.js', dir: 'ltr', name: 'Italiano' },
+    ],
+    vueI18n: i18n,
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
