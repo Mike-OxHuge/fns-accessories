@@ -26,14 +26,14 @@
           <v-avatar :size="customSize" class="mt-5 mr-5">
             <v-img eager src="/logo.png"></v-img>
           </v-avatar>
-          <div class="d-flex flex-column align-self-center ml-5 justify-center">
+          <div class="d-flex flex-column align-self-center justify-center">
             <!-- <h1 class="text-center">F&S</h1> -->
-            <h3
-              class="text-center white--text px-2 py-1 mt-4"
+            <h2
+              class="text-center white--text px-2 py-1 mt-5 mb-n1"
               style="background-color: rgba(0, 0, 0, 0.4); border-radius: 1rem"
             >
               HandmadeAccessories
-            </h3>
+            </h2>
           </div>
         </div>
       </div>
