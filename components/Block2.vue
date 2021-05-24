@@ -27,7 +27,7 @@
           }"
         >
           <ShopLogo
-            src="../static/amazon-logo.png"
+            src="amazon-logo.png"
             alt="amazon-logo"
             href="https://amazon.com"
           />
@@ -44,7 +44,7 @@
           style="position: relative; left: 10vw"
         >
           <ShopLogo
-            src="../static/facebook-marketplace-logo.png"
+            src="facebook-marketplace-logo.png"
             alt="facebook-marketplace-logo"
             href="https://www.facebook.com/marketplace"
           />
@@ -64,7 +64,7 @@
           }"
         >
           <ShopLogo
-            src="../static/etsy-logo.png"
+            src="etsy-logo.png"
             alt="etsy-logo"
             href="https://etsy.com"
           />
@@ -81,7 +81,7 @@
           style="position: relative; right: 15vh"
         >
           <ShopLogo
-            src="../static/ebay-logo.png"
+            src="ebay-logo.png"
             alt="ebay-logo"
             href="https://ebay.com"
           />
