@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    <LocaleSwitcher />
     <nuxt />
     <Social />
   </v-app>
@@ -8,11 +7,10 @@
 
 <script>
 import Social from '~/components/Social.vue'
-import LocaleSwitcher from '~/components/LanguageInput.vue'
+
 export default {
   components: {
     Social,
-    LocaleSwitcher,
   },
   data() {
     return {}

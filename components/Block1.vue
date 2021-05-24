@@ -26,9 +26,15 @@
           <v-avatar :size="customSize" class="mt-5 mr-5">
             <v-img eager src="/logo.png"></v-img>
           </v-avatar>
-          <div class="d-flex flex-column align-self-center ml-5">
-            <h1 class="text-center">F&S</h1>
-            <h3>HandmadeAccessories</h3>
+          <div class="d-flex flex-column align-self-center ml-5 justify-center">
+            <!-- <h1 class="text-center">F&S</h1> -->
+            <h3
+              class="text-center white--text px-2 py-1 mt-4"
+              style="background-color: rgba(0, 0, 0, 0.4); border-radius: 1rem"
+            >
+              HandmadeAccessories
+            </h3>
+            <LocaleSwitcher />
           </div>
         </div>
       </div>
@@ -44,10 +50,11 @@
 <script>
 import Vue from 'vue'
 import VueObserveVisibility from 'vue-observe-visibility'
+import LocaleSwitcher from '~/components/LanguageInput.vue'
 Vue.use(VueObserveVisibility)
 
 export default {
-  components: {},
+  components: { LocaleSwitcher },
   data() {
     return {
       image: 'https://picsum.photos/1920/1080?random=1',

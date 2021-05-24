@@ -39,15 +39,16 @@ export default {
 
 <style scoped>
 .switcher {
-  position: absolute;
-  top: 0;
-  right: 0;
+  /* position: absolute; */
+  /* top: 0;
+  right: 0; */
   /* left: translateX(60%); */
   /* left: 70vw; */
-  z-index: 9999;
+  /* z-index: 9999; */
   max-width: fit-content;
   box-sizing: border-box;
   background: rgba(255, 255, 255, 0);
+  align-self: center;
 }
 .switcher span {
   padding: 0.5rem 1rem;
