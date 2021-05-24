@@ -1,12 +1,12 @@
 <i18n>
 {
   "en": {
-     "message": "Hello!",
-    "message2": "I am the third page"
+     "message": "Hello! I am:",
+    "message2": "the third page"
   },
   "it": {
-     "message": "Ciao!",
-    "message2": "Sono la terza pagina"
+     "message": "Ciao! Io sono:",
+    "message2": "la terza pagina"
   }
 }
 </i18n>
