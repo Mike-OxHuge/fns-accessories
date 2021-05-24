@@ -24,7 +24,7 @@
       >
         <div class="d-flex justify-center">
           <v-avatar :size="customSize" class="mt-5 mr-5">
-            <v-img eager src="logo.png"></v-img>
+            <v-img eager src="/logo.png"></v-img>
           </v-avatar>
           <div class="d-flex flex-column align-self-center ml-5">
             <h1 class="text-center">F&S</h1>
