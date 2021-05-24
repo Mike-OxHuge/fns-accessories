@@ -1,7 +1,17 @@
+<i18n>
+{
+  "en": {
+    "message2": "Shop with us at:"
+  },
+  "it": {
+    "message2": "Acquista con noi su:"
+  }
+}
+</i18n>
 <template>
   <v-main id="main-wrap">
     <div class="title">
-      <h2>Shop with us at:</h2>
+      <h2>{{ $t('message2') }}</h2>
     </div>
     <v-main style="height: 100vh" class="bg">
       <!-- upper section -->
@@ -104,19 +114,13 @@ export default {
     }
   },
   mounted() {
-    this.resetHeight()
-    // reset the height whenever the window's resized
-    // window.addEventListener('resize', this.resetHeight)
+    //
   },
   methods: {
     isViewableNow(isVisible, entry, section) {
       this.showAnimationFor[section] = isVisible
     },
-    resetHeight() {
-      const body = document.getElementById('main-wrap')
-      // reset the body height to that of the inner browser
-      body.style.height = window.innerHeight + 'px'
-    },
+    //
   },
 }
 </script>

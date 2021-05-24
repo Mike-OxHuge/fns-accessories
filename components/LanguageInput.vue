@@ -1,13 +1,19 @@
 <template>
-  <div>
-    <nuxt-link
-      v-for="locale in availableLocales"
-      :key="locale.code"
-      style="width: 50px; height: 50px; border: 1px solid green; display: block"
-      :to="switchLocalePath(locale.code)"
-      >{{ locale.name }}</nuxt-link
-    >
-  </div>
+  <v-sheet class="switcher">
+    <v-row style="max-width: 100%">
+      <v-col
+        v-for="(lang, i) in $i18n.availableLocales"
+        :key="`Lang${i}`"
+        cols="6"
+      >
+        <nuxt-link :to="switchLocalePath(lang)">
+          <span @click="test()">
+            {{ lang.toUpperCase() }}
+          </span>
+        </nuxt-link>
+      </v-col>
+    </v-row>
+  </v-sheet>
 </template>
 
 <script>
@@ -18,7 +24,32 @@ export default {
     },
   },
   methods: {
+    test() {
+      // console.log(this.$route.name, 'route name')
+      // console.log(this.$route.fullPath, 'route fullPath')
+      // console.log(this.$router.history.current.path, 'router curent path')
+      // console.log(this.$router.history)
+      // console.log('_startLocation:', this.$router.history._startLocation)
+      // console.log('current.fullPath:', this.$router.history.current.fullPath)
+    },
     //
   },
 }
 </script>
+
+<style scoped>
+.switcher {
+  position: absolute;
+  top: 0;
+  right: 0;
+  /* left: translateX(60%); */
+  /* left: 70vw; */
+  z-index: 9999;
+  max-width: fit-content;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0);
+}
+.switcher span {
+  padding: 0.5rem 1rem;
+}
+</style>

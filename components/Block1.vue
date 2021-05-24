@@ -1,43 +1,53 @@
 <i18n>
 {
   "en": {
-    "message2": "I am awesome"
+     "message": "Hello!",
+    "message2": "Awesome stuff. For awesome people."
   },
   "it": {
-    "message2": "Sono molto awesome"
+     "message": "Ciao!",
+    "message2": "Roba impressionante. Per persone fantastiche."
   }
 }
 </i18n>
 <template>
   <v-main>
     <div id="main-wrap" :style="{ 'background-image': 'url(' + image + ')' }">
-      <div class="d-flex justify-center fadeInDown">
-        <v-avatar :size="customSize" class="mt-5 mr-5">
-          <v-img src="logo.png"></v-img>
-        </v-avatar>
-        <div class="d-flex flex-column align-self-center ml-5">
-          <h1 class="text-center">F&S</h1>
-          <h3>HandmadeAccessories</h3>
+      <div
+        v-observe-visibility="{
+          callback: (isVisible, entry) => isViewableNow(isVisible, entry, 'a'),
+        }"
+        :class="{
+          'visible animated  fadeIn': showAnimationFor.a,
+          invisible: !showAnimationFor.a,
+        }"
+      >
+        <div class="d-flex justify-center">
+          <v-avatar :size="customSize" class="mt-5 mr-5">
+            <v-img eager src="logo.png"></v-img>
+          </v-avatar>
+          <div class="d-flex flex-column align-self-center ml-5">
+            <h1 class="text-center">F&S</h1>
+            <h3>HandmadeAccessories</h3>
+          </div>
         </div>
       </div>
 
       <div class="title">
-        <h2>Awesome stuff</h2>
-        <p>For awesome people</p>
-        <span>{{ $t('message') }}</span>
-        <span>{{ $t('message2') }}</span>
-        <localeSwitch />
+        <h2>{{ $t('message') }}</h2>
+        <p>{{ $t('message2') }}</p>
       </div>
     </div>
   </v-main>
 </template>
 
 <script>
-import localeSwitch from '~/components/LanguageInput.vue'
+import Vue from 'vue'
+import VueObserveVisibility from 'vue-observe-visibility'
+Vue.use(VueObserveVisibility)
+
 export default {
-  components: {
-    localeSwitch,
-  },
+  components: {},
   data() {
     return {
       image: 'https://picsum.photos/1920/1080?random=1',
@@ -48,15 +58,13 @@ export default {
         'https://picsum.photos/800/600?random=4',
         'https://picsum.photos/800/600?random=5',
       ],
+      isVisible: false,
+      showAnimationFor: {
+        a: false,
+      },
     }
   },
   computed: {
-    customHeight() {
-      return this.$vuetify.breakpoint.smAndDown ? '100' : '200'
-    },
-    customWidth() {
-      return this.$vuetify.breakpoint.mdAndUp ? 'width: 25vw' : 'width:35vw'
-    },
     customSize() {
       return this.$vuetify.breakpoint.smAndDown ? '100' : '200'
     },
@@ -68,6 +76,9 @@ export default {
     resetHeight() {
       const body = document.getElementById('main-wrap')
       body.style.height = window.innerHeight + 'px'
+    },
+    isViewableNow(isVisible, entry, section) {
+      this.showAnimationFor[section] = isVisible
     },
   },
 }
@@ -95,12 +106,10 @@ export default {
   background-color: rgba(0, 0, 0, 0.37);
   color: whitesmoke;
 }
-.fadeInDown {
-  -webkit-animation-name: fadeInDown;
-  animation-name: fadeInDown;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
+.fadeIn {
+  animation-name: fadeIn;
+  animation-duration: 1.5s;
   animation-fill-mode: both;
+  animation-iteration-count: 1;
 }
 </style>
