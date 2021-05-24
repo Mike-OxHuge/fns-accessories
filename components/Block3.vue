@@ -2,11 +2,11 @@
 {
   "en": {
      "message": "Hello!",
-    "message2": "This is the third page"
+    "message2": "I am the third page"
   },
   "it": {
      "message": "Ciao!",
-    "message2": "Questa è la terza pagina"
+    "message2": "Sono la terza pagina"
   }
 }
 </i18n>
