@@ -34,7 +34,6 @@
             >
               HandmadeAccessories
             </h3>
-            <LocaleSwitcher />
           </div>
         </div>
       </div>
@@ -50,11 +49,10 @@
 <script>
 import Vue from 'vue'
 import VueObserveVisibility from 'vue-observe-visibility'
-import LocaleSwitcher from '~/components/LanguageInput.vue'
 Vue.use(VueObserveVisibility)
 
 export default {
-  components: { LocaleSwitcher },
+  components: {},
   data() {
     return {
       image: 'https://picsum.photos/1920/1080?random=1',
