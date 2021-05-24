@@ -114,11 +114,16 @@ export default {
     }
   },
   mounted() {
+    this.resetHeight()
     //
   },
   methods: {
     isViewableNow(isVisible, entry, section) {
       this.showAnimationFor[section] = isVisible
+    },
+    resetHeight() {
+      const body = document.getElementById('main-wrap')
+      body.style.height = window.innerHeight + 'px'
     },
     //
   },
