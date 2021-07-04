@@ -1,7 +1,7 @@
 <i18n>
 {
   "en": {
-     "message": "Hello!",
+     "message": "Hi!",
     "message2": "Awesome stuff. For awesome people."
   },
   "it": {
