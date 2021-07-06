@@ -23,9 +23,11 @@
         }"
       >
         <div class="d-flex justify-center">
-          <v-avatar :size="customSize" class="mt-5 mr-5">
-            <v-img eager src="/logo.png"></v-img>
-          </v-avatar>
+          <NuxtLink :to="`/${$i18n.locale}/catalog`">
+            <v-avatar :size="customSize" class="mt-5 mr-5">
+              <v-img eager src="/logo.png"></v-img>
+            </v-avatar>
+          </NuxtLink>
           <div class="d-flex flex-column align-self-center justify-center">
             <!-- <h1 class="text-center">F&S</h1> -->
             <h2
