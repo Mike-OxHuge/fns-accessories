@@ -64,6 +64,7 @@ export default {
     // {
     //   /* module options */
     // },
+    '@nuxtjs/dotenv',
   ],
   i18n: {
     vueI18nLoader: true,
