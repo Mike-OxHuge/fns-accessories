@@ -34,7 +34,17 @@ export default {
     return {
       bags: [],
       isLoading: null,
+      url: '',
     }
+  },
+  computed: {
+    baseUrl() {
+      if (process.env.NUXT_APP_BACKEND_URL !== undefined) {
+        return process.env.NUXT_APP_BACKEND_URL
+      } else {
+        return 'https://fns-be.herokuapp.com'
+      }
+    },
   },
   mounted() {
     this.fetching()
@@ -42,18 +52,16 @@ export default {
   methods: {
     async fetching() {
       this.isLoading = true
-      const products = await fetch(`${process.env.NUXT_APP_BACKEND_URL}/items`)
+      const products = await fetch(`${this.baseUrl()}/items`)
       const response = await products.json()
       this.bags = await response
       this.isLoading = false
     },
     async handlePurchase(bag) {
       const id = bag._id
-      const request = await fetch(
-        `${process.env.NUXT_APP_BACKEND_URL}/items/${id}`
-      )
+      const request = await fetch(`${this.baseUrl()}/items/${id}`)
       const selectedBag = await request.json()
-      await fetch(`${process.env.NUXT_APP_BACKEND_URL}/items/${id}`, {
+      await fetch(`${this.baseUrl()}/items/${id}`, {
         method: 'PUT',
         headers: {
           'content-type': 'application/json',
