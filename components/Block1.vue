@@ -41,7 +41,7 @@
       </div>
 
       <div class="title">
-        <h2>{{ $t('message') }}</h2>
+        <h2>Firebase project is abandonded!</h2>
         <p>{{ $t('message2') }}</p>
       </div>
     </div>
