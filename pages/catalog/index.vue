@@ -35,6 +35,7 @@ export default {
       bags: [],
       isLoading: null,
       url: process.env.NUXT_APP_BACKEND_URL,
+      localurl: 'http://localhost:3001',
     }
   },
   computed: {
@@ -53,14 +54,14 @@ export default {
   methods: {
     async fetching() {
       this.isLoading = true
-      const products = await fetch(`${this.url}/items`)
+      const products = await fetch(`${this.localurl}/items`)
       const response = await products.json()
       this.bags = await response
       this.isLoading = false
     },
     async handlePurchase(bag) {
       const id = bag._id
-      const request = await fetch(`${this.url}/items/${id}`)
+      const request = await fetch(`${this.localurl}/items/${id}`)
       const selectedBag = await request.json()
       await fetch(`${this.url}/items/${id}`, {
         method: 'PUT',
@@ -76,12 +77,13 @@ export default {
       await this.fetching()
     },
     bitchin() {
-      console.log(`
-        NUXT_APP_BACKEND_URL: ${process.env.NUXT_APP_BACKEND_URL},
-        BASE_URL: ${process.env.BASE_URL},
-        NUXT_APP_TEST: ${process.env.NUXT_APP_TEST},
-        NUXT_ENV_TEST: ${process.env.NUXT_ENV_TEST},
-      `)
+      // console.log(`
+      //   NUXT_APP_BACKEND_URL: ${process.env.NUXT_APP_BACKEND_URL},
+      //   BASE_URL: ${process.env.BASE_URL},
+      //   NUXT_APP_TEST: ${process.env.NUXT_APP_TEST},
+      //   NUXT_ENV_TEST: ${process.env.NUXT_ENV_TEST},
+      // `)
+      console.log('env works well')
     },
   },
 }
