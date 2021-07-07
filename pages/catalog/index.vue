@@ -54,14 +54,14 @@ export default {
   methods: {
     async fetching() {
       this.isLoading = true
-      const products = await fetch(`${this.localurl}/items`)
+      const products = await fetch(`${this.url}/items`)
       const response = await products.json()
       this.bags = await response
       this.isLoading = false
     },
     async handlePurchase(bag) {
       const id = bag._id
-      const request = await fetch(`${this.localurl}/items/${id}`)
+      const request = await fetch(`${this.url}/items/${id}`)
       const selectedBag = await request.json()
       await fetch(`${this.url}/items/${id}`, {
         method: 'PUT',
