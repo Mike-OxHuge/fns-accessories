@@ -1,6 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
+import dotenv from 'dotenv'
 import i18n from './config/i18n'
-require('dotenv').config()
+dotenv.config()
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -65,7 +66,6 @@ export default {
     // {
     //   /* module options */
     // },
-    '@nuxtjs/dotenv',
   ],
   i18n: {
     vueI18nLoader: true,
@@ -116,4 +116,10 @@ export default {
     port: 8000, // default: 3000
     host: '0.0.0.0', // default: localhost
   }, // other configs
+  env: {
+    NUXT_APP_BACKEND_URL: process.env.NUXT_APP_BACKEND_URL,
+    BASE_URL: process.env.BASE_URL,
+    NUXT_APP_TEST: process.env.NUXT_APP_TEST,
+    NUXT_ENV_TEST: process.env.NUXT_ENV_TEST,
+  },
 }

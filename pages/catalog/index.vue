@@ -34,7 +34,7 @@ export default {
     return {
       bags: [],
       isLoading: null,
-      url: 'https://fns-be.herokuapp.com',
+      url: process.env.NUXT_APP_BACKEND_URL,
     }
   },
   computed: {
@@ -48,6 +48,7 @@ export default {
   },
   mounted() {
     this.fetching()
+    this.bitchin()
   },
   methods: {
     async fetching() {
@@ -73,6 +74,14 @@ export default {
         }),
       })
       await this.fetching()
+    },
+    bitchin() {
+      console.log(`
+        NUXT_APP_BACKEND_URL: ${process.env.NUXT_APP_BACKEND_URL},
+        BASE_URL: ${process.env.BASE_URL},
+        NUXT_APP_TEST: ${process.env.NUXT_APP_TEST},
+        NUXT_ENV_TEST: ${process.env.NUXT_ENV_TEST},
+      `)
     },
   },
 }
