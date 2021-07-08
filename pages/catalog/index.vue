@@ -63,7 +63,7 @@ export default {
     async handlePurchase(bag) {
       const id = bag._id
       const quantity = parseInt(document.getElementById(bag._id).value)
-      await fetch(`${this.localurl}/items/${id}`, {
+      await fetch(`${this.url}/items/${id}`, {
         method: 'PUT',
         headers: {
           'content-type': 'application/json',
