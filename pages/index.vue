@@ -26,6 +26,14 @@ export default {
   data() {
     return {}
   },
+  mounted() {
+    this.wakeup()
+  },
+  methods: {
+    async wakeup() {
+      await fetch(`${process.env.NUXT_APP_BACKEND_URL}/wakeup`)
+    },
+  },
 }
 </script>
 

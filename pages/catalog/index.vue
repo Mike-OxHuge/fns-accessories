@@ -22,7 +22,10 @@
         <span>Available: {{ bag.quantity }}</span>
         <v-text-field :id="bag._id" type="number" label="Quantity" />
 
-        <v-btn @click="handlePurchase(bag)">Buy Now!</v-btn>
+        <v-btn :disabled="bag.quantity <= 0" @click="handlePurchase(bag)">
+          <span v-if="bag.quantity <= 0">Out of stock</span>
+          <span v-else>Buy Now!</span>
+        </v-btn>
       </v-col>
     </v-row>
   </v-main>
@@ -36,16 +39,14 @@ export default {
       isLoading: null,
       url: process.env.NUXT_APP_BACKEND_URL,
       localurl: 'http://localhost:3001',
+      quantityRules: [
+        (v) => !!v || 'Quantity is required',
+        (v) => typeof v !== `number` || 'It has to be a number!',
+      ],
     }
   },
   computed: {
-    // baseUrl() {
-    //   if (process.env.NUXT_APP_BACKEND_URL === undefined) {
-    //     return process.env.NUXT_APP_BACKEND_URL
-    //   } else {
-    //     return 'https://fns-be.herokuapp.com'
-    //   }
-    // },
+    //
   },
   mounted() {
     this.fetching()
@@ -61,17 +62,14 @@ export default {
     },
     async handlePurchase(bag) {
       const id = bag._id
-      const request = await fetch(`${this.url}/items/${id}`)
-      const selectedBag = await request.json()
-      await fetch(`${this.url}/items/${id}`, {
+      const quantity = parseInt(document.getElementById(bag._id).value)
+      await fetch(`${this.localurl}/items/${id}`, {
         method: 'PUT',
         headers: {
           'content-type': 'application/json',
         },
         body: JSON.stringify({
-          quantity:
-            selectedBag.quantity -
-            parseInt(document.getElementById(bag._id).value),
+          purchasedAmount: Math.floor(Math.abs(quantity)),
         }),
       })
       await this.fetching()
