@@ -26,7 +26,8 @@
           <span v-if="bag.quantity <= 0">Out of stock</span>
           <span v-else>Buy Now!</span>
         </v-btn>
-        <v-btn @click="buy">Test</v-btn>
+        <v-btn @click="buy">Client side</v-btn>
+        <v-btn @click="buyServer">Server side</v-btn>
         <StripeCheckout
           ref="checkoutRef"
           :pk="pk"
@@ -99,12 +100,14 @@ export default {
       await this.fetching()
     },
     async buy() {
+      console.log(this.$refs.checkoutRef[0].redirectToCheckout)
+      await this.$refs.checkoutRef[1].redirectToCheckout()
+    },
+    async buyServer() {
       const response = await fetch(`${this.url}/api/v1/purchase`)
       const responseJson = await response.json()
       const clientSecret = responseJson.client_secret
       console.log(clientSecret)
-      console.log(this.$refs.checkoutRef[0].redirectToCheckout)
-      this.$refs.checkoutRef[1].redirectToCheckout()
     },
   },
 }
