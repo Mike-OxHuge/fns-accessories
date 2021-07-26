@@ -14,6 +14,9 @@ export default {
   head: {
     titleTemplate: '%s - fns-accessories',
     title: 'fns-accessories',
+    head: {
+      script: [{ src: 'https://js.stripe.com/v3' }],
+    },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -38,7 +41,7 @@ export default {
   css: ['@/assets/css/main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [{ src: '~/plugins/stripe.js' }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -118,5 +121,6 @@ export default {
   }, // other configs
   env: {
     NUXT_APP_BACKEND_URL: process.env.NUXT_APP_BACKEND_URL,
+    NUXT_APP_STRIPE_PK: process.env.NUXT_APP_STRIPE_PK,
   },
 }

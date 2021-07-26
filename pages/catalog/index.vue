@@ -26,23 +26,46 @@
           <span v-if="bag.quantity <= 0">Out of stock</span>
           <span v-else>Buy Now!</span>
         </v-btn>
+        <v-btn @click="buy">Test</v-btn>
+        <StripeCheckout
+          ref="checkoutRef"
+          :pk="pk"
+          mode="payment"
+          :line-items="lineItems"
+          :success-url="successURL"
+          :cancel-url="cancelURL"
+        />
       </v-col>
     </v-row>
   </v-main>
 </template>
 
 <script>
+import { StripeCheckout } from '@vue-stripe/vue-stripe'
+import * as StripePlugin from '~/plugins/stripe.js'
 export default {
+  components: {
+    StripeCheckout,
+  },
   data() {
     return {
+      pk: process.env.NUXT_APP_STRIPE_PK,
       bags: [],
       isLoading: null,
       url: process.env.NUXT_APP_BACKEND_URL,
-      localurl: 'http://localhost:3001',
+      localurl: 'http://localhost:3001/api/v1',
       quantityRules: [
         (v) => !!v || 'Quantity is required',
         (v) => typeof v !== `number` || 'It has to be a number!',
       ],
+      lineItems: [
+        {
+          price: 'price_1J40jlKuBnFIZzDsFA0PJVoJ', // The id of the one-time price you created in your Stripe dashboard
+          quantity: 1,
+        },
+      ],
+      successURL: `http://localhost:8000/${this.$i18n.locale}/catalog/success`,
+      cancelURL: `http://localhost:8000/${this.$i18n.locale}/catalog/cancel`,
     }
   },
   computed: {
@@ -50,12 +73,13 @@ export default {
   },
   mounted() {
     this.fetching()
-    this.bitchin()
+    console.log(StripePlugin)
+    console.log(this.$stripe)
   },
   methods: {
     async fetching() {
       this.isLoading = true
-      const products = await fetch(`${this.url}/items`)
+      const products = await fetch(`${this.url}/api/v1/items`)
       const response = await products.json()
       this.bags = await response
       this.isLoading = false
@@ -74,14 +98,13 @@ export default {
       })
       await this.fetching()
     },
-    bitchin() {
-      // console.log(`
-      //   NUXT_APP_BACKEND_URL: ${process.env.NUXT_APP_BACKEND_URL},
-      //   BASE_URL: ${process.env.BASE_URL},
-      //   NUXT_APP_TEST: ${process.env.NUXT_APP_TEST},
-      //   NUXT_ENV_TEST: ${process.env.NUXT_ENV_TEST},
-      // `)
-      console.log('env works well')
+    async buy() {
+      const response = await fetch(`${this.url}/api/v1/purchase`)
+      const responseJson = await response.json()
+      const clientSecret = responseJson.client_secret
+      console.log(clientSecret)
+      console.log(this.$refs.checkoutRef[0].redirectToCheckout)
+      this.$refs.checkoutRef[1].redirectToCheckout()
     },
   },
 }
