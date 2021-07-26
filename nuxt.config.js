@@ -118,8 +118,5 @@ export default {
   }, // other configs
   env: {
     NUXT_APP_BACKEND_URL: process.env.NUXT_APP_BACKEND_URL,
-    BASE_URL: process.env.BASE_URL,
-    NUXT_APP_TEST: process.env.NUXT_APP_TEST,
-    NUXT_ENV_TEST: process.env.NUXT_ENV_TEST,
   },
 }
