@@ -28,6 +28,8 @@
         </v-btn>
         <v-btn @click="buy">Client side</v-btn>
         <v-btn @click="buyServer">Server side</v-btn>
+        <v-btn @click="redirect">YT tutorial(client)</v-btn>
+        <div id="payment-form"></div>
         <StripeCheckout
           ref="checkoutRef"
           :pk="pk"
@@ -43,13 +45,16 @@
 
 <script>
 import { StripeCheckout } from '@vue-stripe/vue-stripe'
-import * as StripePlugin from '~/plugins/stripe.js'
+import { loadStripe } from '@stripe/stripe-js'
+
 export default {
   components: {
     StripeCheckout,
   },
   data() {
     return {
+      stripe: null,
+      elements: null,
       pk: process.env.NUXT_APP_STRIPE_PK,
       bags: [],
       isLoading: null,
@@ -72,10 +77,16 @@ export default {
   computed: {
     //
   },
-  mounted() {
+  async mounted() {
+    // const ELEMENT_TYPE = 'card'
     this.fetching()
-    console.log(StripePlugin)
-    console.log(this.$stripe)
+
+    this.stripe = await loadStripe(this.pk)
+    console.log(this.stripe)
+    this.elements = await this.stripe.elements
+    console.log(this.elements)
+    // const element = await this.elements.create('card')
+    // await element.mount('#payment-form')
   },
   methods: {
     async fetching() {
@@ -108,6 +119,15 @@ export default {
       const responseJson = await response.json()
       const clientSecret = responseJson.client_secret
       console.log(clientSecret)
+      console.log(this.stripe)
+    },
+    redirect() {
+      this.stripe.redirectToCheckout({
+        successUrl: this.successURL,
+        cancelUrl: this.cancelURL,
+        lineItems: this.lineItems,
+        mode: 'payment',
+      })
     },
   },
 }
