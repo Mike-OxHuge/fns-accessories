@@ -10,6 +10,9 @@
 </i18n>
 <template>
   <v-main>
+    <NuxtLink :to="`/${$i18n.locale}/catalog/fullcatalog`"
+      >Full catalog</NuxtLink
+    >
     <h1 @click="fetching()">{{ $t('message') }}</h1>
     <h3 v-if="isLoading">Loading...</h3>
     <v-row v-else>
@@ -27,9 +30,9 @@
           <span v-else>Buy Now!</span>
         </v-btn>
         <v-btn @click="buy">Client side</v-btn>
-        <v-btn @click="buyServer">Server side</v-btn>
-        <v-btn @click="redirect">YT tutorial(client)</v-btn>
-        <div id="payment-form"></div>
+        <v-btn @click="buyServer">YT tutorial (server)</v-btn>
+        <v-btn @click="redirect">YT tutorial (client)</v-btn>
+
         <StripeCheckout
           ref="checkoutRef"
           :pk="pk"
@@ -38,6 +41,35 @@
           :success-url="successURL"
           :cancel-url="cancelURL"
         />
+      </v-col>
+    </v-row>
+    <v-row justify="center">
+      <v-col cols="4">
+        <div id="payment-form"></div>
+        <v-text-field
+          v-model="billingDetails.name"
+          placeholder="name"
+        ></v-text-field>
+        <v-text-field
+          v-model="billingDetails.email"
+          placeholder="email"
+        ></v-text-field>
+        <v-text-field
+          v-model="billingDetails.address.city"
+          placeholder="city"
+        ></v-text-field>
+        <v-text-field
+          v-model="billingDetails.address.line1"
+          placeholder="line 1"
+        ></v-text-field>
+        <v-text-field
+          v-model="billingDetails.address.state"
+          placeholder="state"
+        ></v-text-field>
+        <v-text-field
+          v-model="billingDetails.address.postal_code"
+          placeholder="zip"
+        ></v-text-field>
       </v-col>
     </v-row>
   </v-main>
@@ -72,6 +104,16 @@ export default {
       ],
       successURL: `http://localhost:8000/${this.$i18n.locale}/catalog/success`,
       cancelURL: `http://localhost:8000/${this.$i18n.locale}/catalog/cancel`,
+      billingDetails: {
+        name: '',
+        email: '',
+        address: {
+          city: '',
+          line1: '',
+          state: '',
+          postal_code: '',
+        },
+      },
     }
   },
   computed: {
@@ -82,11 +124,9 @@ export default {
     this.fetching()
 
     this.stripe = await loadStripe(this.pk)
-    console.log(this.stripe)
-    this.elements = await this.stripe.elements
-    console.log(this.elements)
-    // const element = await this.elements.create('card')
-    // await element.mount('#payment-form')
+    this.elements = await this.stripe.elements()
+    const element = await this.elements.create('card')
+    element.mount('#payment-form')
   },
   methods: {
     async fetching() {
@@ -115,11 +155,33 @@ export default {
       await this.$refs.checkoutRef[1].redirectToCheckout()
     },
     async buyServer() {
-      const response = await fetch(`${this.url}/api/v1/purchase`)
+      const billingDetails = this.billingDetails
+      const element = this.elements.getElement('card')
+      const response = await fetch(
+        `${this.url}/api/v1/purchase/create-checkout-session`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ amount: 1999 }),
+        }
+      )
       const responseJson = await response.json()
-      const clientSecret = responseJson.client_secret
+      const clientSecret = responseJson.secret
       console.log(clientSecret)
       console.log(this.stripe)
+
+      const paymentMethodReq = await this.stripe.createPaymentMethod({
+        type: 'card',
+        card: element,
+        billing_details: billingDetails,
+      })
+      const { error } = await this.stripe.confirmCardPayment(clientSecret, {
+        payment_method: paymentMethodReq.paymentMethod.id,
+      })
+      if (error) return error
+      this.$router.push(`/${this.$i18n.locale}/catalog/success`)
     },
     redirect() {
       this.stripe.redirectToCheckout({
