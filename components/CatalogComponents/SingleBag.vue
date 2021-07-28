@@ -1,6 +1,13 @@
 <template>
   <v-main>
-    <Checkout v-if="isCheckout" :bag="selectedBag" />
+    <Checkout
+      v-if="isCheckout"
+      :bag="selectedBag"
+      :bag-name="bag.name"
+      :bag-id="bag._id"
+      :bag-price="bag.price"
+      @hideCheckout="isCheckout = false"
+    />
     <v-card v-else>
       <v-img v-if="selection === null" :src="bag.defaultImage"></v-img>
       <v-img v-else :src="selection"></v-img>
