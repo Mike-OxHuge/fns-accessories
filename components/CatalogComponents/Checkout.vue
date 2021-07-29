@@ -1,51 +1,69 @@
 <template>
-  <v-main
-    ><h3>CHECKOUT</h3>
-    <v-btn @click="hideCheckout">X</v-btn>
-    <v-img :src="bag.image" max-height="150"></v-img>
-    <span>{{ bagName }}({{ bag.color }})</span>
-    <v-form v-model="valid">
-      <v-text-field
-        v-model="billingDetails.name"
-        required
-        label="Name"
-      ></v-text-field>
-      <v-text-field
-        v-model="billingDetails.email"
-        required
-        label="E-mail"
-      ></v-text-field>
-      <v-text-field
-        v-model="billingDetails.address.city"
-        required
-        label="City"
-      ></v-text-field>
-      <v-text-field
-        v-model="billingDetails.address.line1"
-        required
-        label="Address"
-      ></v-text-field>
-      <v-text-field
-        v-model="billingDetails.address.state"
-        required
-        label="Province"
-      ></v-text-field>
-      <v-text-field
-        v-model="billingDetails.address.postal_code"
-        required
-        label="Postal Code"
-      ></v-text-field>
-      <div id="payment-form">
-        <!-- card injected here -->
-      </div>
-      <v-btn @click="handleSubmit">Submit</v-btn>
-    </v-form>
+  <v-main>
+    <div v-if="isError"><CheckoutError :error="errorObject" /></div>
+    <div v-else-if="isSuccess">
+      <CheckoutSuccess
+        :bag-name="bagName"
+        :bag="bag"
+        :address="billingDetails"
+      />
+    </div>
+    <div v-else>
+      <h3>CHECKOUT</h3>
+      <v-btn @click="hideCheckout">X</v-btn>
+      <v-img :src="bag.image" max-height="150"></v-img>
+      <span>{{ bagName }}({{ bag.color }})</span>
+      <v-form v-model="valid">
+        <v-text-field
+          v-model="billingDetails.name"
+          required
+          label="Name"
+        ></v-text-field>
+        <v-text-field
+          v-model="billingDetails.email"
+          required
+          label="E-mail"
+        ></v-text-field>
+        <v-text-field
+          v-model="billingDetails.address.city"
+          required
+          label="City"
+        ></v-text-field>
+        <v-text-field
+          v-model="billingDetails.address.line1"
+          required
+          label="Address"
+        ></v-text-field>
+        <v-text-field
+          v-model="billingDetails.address.state"
+          required
+          label="Province"
+        ></v-text-field>
+        <v-text-field
+          v-model="billingDetails.address.postal_code"
+          required
+          label="Postal Code"
+        ></v-text-field>
+        <div id="payment-form">
+          <!-- card injected here -->
+        </div>
+        <v-btn :disabled="isLoading" :loading="isLoading" @click="handleSubmit"
+          >Submit</v-btn
+        >
+      </v-form>
+    </div>
   </v-main>
 </template>
 
 <script>
 import { loadStripe } from '@stripe/stripe-js'
+import CheckoutError from './CheckoutError.vue'
+import CheckoutSuccess from './CheckoutSuccess.vue'
 export default {
+  components: {
+    CheckoutError,
+    CheckoutSuccess,
+  },
   props: {
     bag: {
       type: Object,
@@ -57,6 +75,10 @@ export default {
   },
   data() {
     return {
+      isError: false,
+      errorObject: null,
+      isSuccess: false,
+      isLoading: false,
       valid: false,
       billingDetails: {
         name: '',
@@ -105,6 +127,7 @@ export default {
       this.$emit('hideCheckout')
     },
     async handleSubmit() {
+      this.isLoading = true
       const billingDetails = this.billingDetails
       const element = this.elements.getElement('card')
 
@@ -138,9 +161,11 @@ export default {
         payment_method: paymentMethodReq.paymentMethod.id,
       })
       if (error) {
+        this.isError = true
+        this.errorObject = error
         return error
       } else {
-        this.$router.push(`/${this.$i18n.locale}/catalog/success`)
+        this.isSuccess = true
         await fetch(
           `${process.env.NUXT_APP_BACKEND_URL}/api/v1/bags/${this.bagId}/${variant._id}`,
           {
