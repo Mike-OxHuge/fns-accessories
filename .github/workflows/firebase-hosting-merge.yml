@@ -17,7 +17,7 @@ jobs:
           NUXT_APP_BACKEND_URL: '${{ secrets.NUXT_APP_BACKEND_URL }}'
           BASE_URL: '${{ secrets.BASE_URL }}'
           NUXT_APP_TEST: '${{ secrets.NUXT_APP_TEST }}'
-          NUXT_ENV_TEST: '${{ secrets.NUXT_ENV_TEST }}'
+          NUXT_APP_STRIPE_PK: '${{ secrets.NUXT_APP_STRIPE_PK }}'
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
