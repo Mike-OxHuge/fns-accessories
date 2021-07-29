@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     async wakeup() {
-      await fetch(`${process.env.NUXT_APP_BACKEND_URL}/wakeup`)
+      await fetch(`${process.env.NUXT_APP_BACKEND_URL}/api/v1/wakeup`)
     },
   },
 }
