@@ -9,47 +9,88 @@
       />
     </div>
     <div v-else>
-      <h3>CHECKOUT</h3>
-      <v-btn @click="hideCheckout">X</v-btn>
-      <v-img :src="bag.image" max-height="150"></v-img>
-      <span>{{ bagName }}({{ bag.color }})</span>
+      <v-container d-flex justify-space-between pa-0>
+        <h3>CHECKOUT</h3>
+        <v-icon class="pb-1" color="black" @click="hideCheckout">close</v-icon>
+      </v-container>
+
+      <v-container d-flex>
+        <v-img :src="bag.image" max-height="100" width="100" contain></v-img>
+        <v-container>
+          <span>{{ bagName }}({{ bag.color }})</span>
+          <span>{{ bagPrice }} EUR</span>
+        </v-container>
+      </v-container>
+
       <v-form v-model="valid">
-        <v-text-field
-          v-model="billingDetails.name"
-          required
-          label="Name"
-        ></v-text-field>
-        <v-text-field
-          v-model="billingDetails.email"
-          required
-          label="E-mail"
-        ></v-text-field>
-        <v-text-field
-          v-model="billingDetails.address.city"
-          required
-          label="City"
-        ></v-text-field>
+        <v-row dense>
+          <v-col>
+            <v-text-field
+              v-model="billingDetails.name"
+              dense
+              required
+              label="Name"
+            ></v-text-field>
+          </v-col>
+
+          <v-col>
+            <v-text-field
+              v-model="billingDetails.email"
+              dense
+              required
+              label="E-mail"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+
+        <v-row dense>
+          <v-col>
+            <v-text-field
+              v-model="billingDetails.address.city"
+              dense
+              required
+              label="City"
+            ></v-text-field>
+          </v-col>
+
+          <v-col>
+            <v-text-field
+              v-model="billingDetails.address.state"
+              dense
+              required
+              label="Province"
+            ></v-text-field>
+          </v-col>
+
+          <v-col>
+            <v-text-field
+              v-model="billingDetails.address.postal_code"
+              dense
+              required
+              label="Postal Code"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+
         <v-text-field
           v-model="billingDetails.address.line1"
+          dense
           required
           label="Address"
         ></v-text-field>
-        <v-text-field
-          v-model="billingDetails.address.state"
-          required
-          label="Province"
-        ></v-text-field>
-        <v-text-field
-          v-model="billingDetails.address.postal_code"
-          required
-          label="Postal Code"
-        ></v-text-field>
+
         <div id="payment-form">
           <!-- card injected here -->
         </div>
-        <v-btn :disabled="isLoading" :loading="isLoading" @click="handleSubmit"
-          >Submit</v-btn
-        >
+        <v-container mx-auto pa-0 class="text-center">
+          <v-btn
+            :disabled="isLoading"
+            :loading="isLoading"
+            color="deep-purple lighten-2"
+            @click="handleSubmit"
+            >Purchase</v-btn
+          >
+        </v-container>
       </v-form>
     </div>
   </v-main>
@@ -94,6 +135,7 @@ export default {
       elements: null,
     }
   },
+
   async mounted() {
     this.stripe = await loadStripe(process.env.NUXT_APP_STRIPE_PK)
     this.elements = await this.stripe.elements()
@@ -182,6 +224,6 @@ export default {
 
 <style scoped>
 #payment-form {
-  margin: 2rem 0;
+  margin: -0.5rem 0 1rem 0;
 }
 </style>
