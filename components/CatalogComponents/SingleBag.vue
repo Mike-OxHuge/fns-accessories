@@ -9,8 +9,10 @@
       @hideCheckout="isCheckout = false"
     />
     <v-card v-else>
-      <v-img v-if="selection === null" :src="bag.defaultImage"></v-img>
-      <v-img v-else :src="selection"></v-img>
+      <!-- <v-img v-if="selectedImage === null" :src="bag.defaultImage"></v-img>
+      <v-img v-else :src="selectedImage"></v-img> -->
+
+      <v-img :src="!selectedImage ? bag.defaultImage : selectedImage"></v-img>
       <v-card-title>{{ bag.name }}</v-card-title>
       <v-divider class="mx-4"></v-divider>
       <v-card-text>{{ bag.description }}</v-card-text>
@@ -24,14 +26,15 @@
         <v-chip
           :color="variant.color"
           @click="
-            ;(selection = variant.image),
+            ;(selectedImage = variant.image),
               (selectedBag = variant),
               (lineItems[0].price = variant.price)
           "
         >
-          {{ variant.stock }} pcs left
+          {{ variant.color }}
         </v-chip>
       </div>
+      <span>{{ selectedBag.stock }}pcs left</span>
       <v-card-actions>
         <v-btn
           color="deep-purple lighten-2"
@@ -60,7 +63,7 @@ export default {
     return {
       isCheckout: false,
       isLoading: false,
-      selection: null,
+      selectedImage: null,
       selectedBag: this.bag.variants[0], // default value, the bag object
       stripe: null,
       lineItems: [
