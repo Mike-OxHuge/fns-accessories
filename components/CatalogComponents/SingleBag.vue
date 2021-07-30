@@ -1,5 +1,5 @@
 <template>
-  <v-main>
+  <v-main class="card">
     <Checkout
       v-if="isCheckout"
       :bag="selectedBag"
@@ -8,44 +8,60 @@
       :bag-price="bag.price"
       @hideCheckout="isCheckout = false"
     />
-    <v-card v-else>
+    <div v-else>
       <!-- <v-img v-if="selectedImage === null" :src="bag.defaultImage"></v-img>
       <v-img v-else :src="selectedImage"></v-img> -->
 
       <v-img :src="!selectedImage ? bag.defaultImage : selectedImage"></v-img>
-      <v-card-title>{{ bag.name }}</v-card-title>
-      <v-divider class="mx-4"></v-divider>
-      <v-card-text>{{ bag.description }}</v-card-text>
-      <div class="my-4 text-subtitle-1">
-        {{ bag.currency }} • {{ bag.price }}
-      </div>
-      <v-divider class="mx-4"></v-divider>
+      <v-card-title>
+        <v-row justify="space-between">
+          <p>{{ bag.name }}</p>
+          <p>{{ bag.currency }} • {{ bag.price }}</p>
+        </v-row>
+      </v-card-title>
 
-      <v-card-title>Available colors:</v-card-title>
-      <div v-for="variant in bag.variants" :key="variant._id">
-        <v-chip
-          :color="variant.color"
-          @click="
-            ;(selectedImage = variant.image),
-              (selectedBag = variant),
-              (lineItems[0].price = variant.price)
-          "
-        >
-          {{ variant.color }}
-        </v-chip>
-      </div>
-      <span>{{ selectedBag.stock }}pcs left</span>
-      <v-card-actions>
-        <v-btn
-          color="deep-purple lighten-2"
-          :disabled="isLoading"
-          :loading="isLoading"
-          @click="handlePurchase"
-        >
-          Buy now
-        </v-btn>
-      </v-card-actions>
-    </v-card>
+      <v-card-text>{{ bag.description }}</v-card-text>
+      <v-row no-gutters justify="center">
+        <v-col v-for="variant in bag.variants" :key="variant._id">
+          <v-container mx-auto pa-0 class="d-flex justify-center">
+            <v-chip
+              :color="variant.color"
+              :disabled="variant.stock === 0"
+              @click="
+                ;(selectedImage = variant.image),
+                  (selectedBag = variant),
+                  (lineItems[0].price = variant.price)
+              "
+            >
+              {{ variant.color }}
+            </v-chip>
+          </v-container>
+        </v-col>
+
+        <v-col cols="8">
+          <v-container mx-auto pa-0 class="text-center">
+            <span class="text-center">
+              {{ selectedBag.stock }} {{ selectedBag.color }} bags in stock!
+            </span>
+          </v-container>
+        </v-col>
+
+        <v-col cols="6">
+          <v-card-actions>
+            <v-container mx-auto pa-0 class="text-center">
+              <v-btn
+                color="deep-purple lighten-2"
+                :disabled="selectedBag.stock === 0"
+                :loading="isLoading"
+                @click="handlePurchase"
+              >
+                Buy now
+              </v-btn>
+            </v-container>
+          </v-card-actions>
+        </v-col>
+      </v-row>
+    </div>
   </v-main>
 </template>
 
@@ -99,4 +115,10 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.card {
+  background: rgba(77, 76, 76, 0.534);
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
+</style>

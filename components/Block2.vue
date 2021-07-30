@@ -1,17 +1,17 @@
 <i18n>
 {
   "en": {
-    "message2": "Shop with us at:"
+    "message2": "Shop with us at or browse our catalog:"
   },
   "it": {
-    "message2": "Acquista con noi su:"
+    "message2": "Acquista con noi su oppure sfoglia il nostro catalogo:"
   }
 }
 </i18n>
 <template>
   <v-main id="main-wrap">
-    <div class="title">
-      <h2>{{ $t('message2') }}</h2>
+    <div class="title" @click="$router.push(`/${$i18n.locale}/catalog`)">
+      <h2><v-icon color="white">store</v-icon> {{ $t('message2') }}</h2>
     </div>
     <v-main style="height: 100vh" class="bg">
       <!-- upper section -->
@@ -163,6 +163,10 @@ export default {
   padding: 1vh 0px;
   background-color: rgba(0, 0, 0, 0.37);
   color: whitesmoke;
+  z-index: 999;
+}
+.title:hover {
+  cursor: pointer;
 }
 
 .slide-from-left {
