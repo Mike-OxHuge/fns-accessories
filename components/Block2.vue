@@ -1,92 +1,157 @@
 <i18n>
 {
   "en": {
-    "message2": "Shop with us at or browse our catalog:"
+    "shopNow" : "Shop now",
+    "message2": "Eco. Fresh. New.",
+    "message3": "Our bags will serve you well for the rest of your days.",
+    "message4" : "Or visit our Vinted shop:"
   },
   "it": {
-    "message2": "Acquista con noi su oppure sfoglia il nostro catalogo:"
+    "shopNow" : "Acquistare ora",
+    "message2": "Eco. Fresco. Nuovo.",
+    "message3": "Le nostre borse ti serviranno bene per il resto dei tuoi giorni.",
+    "message4" : "Oppure visita il nostro negozio Vinted:"
   }
 }
 </i18n>
 <template>
   <v-main id="main-wrap">
-    <div class="title" @click="$router.push(`/${$i18n.locale}/catalog`)">
-      <h2><v-icon color="white">store</v-icon> {{ $t('message2') }}</h2>
-    </div>
+    <!-- <div class="title">
+      <h2>{{ $t('message2') }}</h2>
+    </div> -->
     <v-main style="height: 100vh" class="bg">
+      <v-row no-gutters style="height: 100%">
+        <v-col sm="12" md="6">
+          <!-- <v-img src="/images/multiple-bags.png"></v-img> -->
+          <v-sheet
+            class="text-center left-one pt-10 d-flex flex-column justify-space-between"
+          >
+            <v-container fluid pt-10>
+              <h3>{{ $t('message2') }}</h3>
+              <p>{{ $t('message3') }}</p>
+            </v-container>
+            <v-container mb-15 pb-15 fluid>
+              <v-btn
+                class="mx-auto"
+                color="primary"
+                @click="$router.push(`/${$i18n.locale}/catalog`)"
+              >
+                <span>{{ $t('shopNow') }}</span>
+              </v-btn>
+            </v-container>
+          </v-sheet>
+        </v-col>
+
+        <v-col sm="12" md="6">
+          <!-- <v-img src="/images/multiple-bags1.png"></v-img> -->
+          <v-sheet
+            class="text-center right-one pt-10 d-flex flex-column justify-space-between"
+          >
+            <v-container fluid pt-10>
+              <h3>{{ $t('message4') }}</h3>
+            </v-container>
+            <v-container
+              v-observe-visibility="{
+                callback: (isVisible, entry) =>
+                  isViewableNow(isVisible, entry, 'a'),
+              }"
+              mb-15
+              pb-15
+              fluid
+              class="d-flex justify-end"
+              :class="{
+                'visible animated slide-from-left': showAnimationFor.a,
+                invisible: !showAnimationFor.a,
+              }"
+            >
+              <ShopLogo
+                src="/vinted-logo.png"
+                alt="vinted-logo"
+                href="https://vinted.com"
+              />
+            </v-container>
+          </v-sheet>
+        </v-col>
+      </v-row>
+
       <!-- upper section -->
-      <div class="upper-section">
-        <div
+      <!-- <v-row
+        justify="space-between"
+        no-gutters
+        :class="{
+          'mt-15': $vuetify.breakpoint.mdAndUp,
+          'mt-16 pt-16': $vuetify.breakpoint.smAndDown,
+        }"
+      >
+        <v-col
           v-observe-visibility="{
             callback: (isVisible, entry) =>
               isViewableNow(isVisible, entry, 'a'),
           }"
+          offset="1"
+          align-self="end"
+          cols="5"
           :class="{
             'visible animated slide-from-right': showAnimationFor.a,
             invisible: !showAnimationFor.a,
           }"
         >
-          <ShopLogo
-            src="/amazon-logo.png"
-            alt="amazon-logo"
-            href="https://amazon.com"
-          />
-        </div>
-        <div
+          <v-container>
+            <ShopLogo
+              src="/ebay-logo.png"
+              alt="ebay-logo"
+              href="https://ebay.com"
+            />
+          </v-container>
+        </v-col>
+        <v-col
           v-observe-visibility="{
             callback: (isVisible, entry) =>
               isViewableNow(isVisible, entry, 'b'),
           }"
+          align-self="end"
+          cols="5"
           :class="{
-            'visible animated slide-from-right': showAnimationFor.b,
+            'visible animated fadeIn': showAnimationFor.b,
             invisible: !showAnimationFor.b,
           }"
-          style="position: relative; left: 10vw"
         >
-          <ShopLogo
-            src="/facebook-marketplace-logo.png"
-            alt="facebook-marketplace-logo"
-            href="https://www.facebook.com/marketplace"
-          />
-        </div>
-      </div>
+          <v-container>
+            <ShopLogo
+              src="/facebook-marketplace-logo.png"
+              alt="facebook-marketplace-logo"
+              href="https://www.facebook.com/marketplace"
+            />
+          </v-container>
+        </v-col>
+      </v-row> -->
 
       <!-- bottom section -->
-      <div class="bottom-section">
-        <div
-          v-observe-visibility="{
-            callback: (isVisible, entry) =>
-              isViewableNow(isVisible, entry, 'c'),
-          }"
-          :class="{
-            'visible animated slide-from-left': showAnimationFor.c,
-            invisible: !showAnimationFor.c,
-          }"
-        >
-          <ShopLogo
-            src="/etsy-logo.png"
-            alt="etsy-logo"
-            href="https://etsy.com"
-          />
-        </div>
-        <div
-          v-observe-visibility="{
-            callback: (isVisible, entry) =>
-              isViewableNow(isVisible, entry, 'd'),
-          }"
-          :class="{
-            'visible animated slide-from-left': showAnimationFor.d,
-            invisible: !showAnimationFor.d,
-          }"
-          style="position: relative; right: 15vh"
-        >
-          <ShopLogo
-            src="/ebay-logo.png"
-            alt="ebay-logo"
-            href="https://ebay.com"
-          />
-        </div>
-      </div>
+      <!-- <v-container style="position: absolute; bottom: 15px">
+        <v-row no-gutters justify="center"
+          ><v-spacer></v-spacer>
+          <v-col
+            v-observe-visibility="{
+              callback: (isVisible, entry) =>
+                isViewableNow(isVisible, entry, 'd'),
+            }"
+            cols="6"
+            :class="{
+              'visible animated slide-from-left': showAnimationFor.d,
+              invisible: !showAnimationFor.d,
+            }"
+            style="position: relative; right: 15vh"
+          >
+            <v-container>
+              <ShopLogo
+                src="/vinted-logo.png"
+                alt="vinted-logo"
+                href="https://vinted.com"
+              />
+            </v-container>
+          </v-col>
+        </v-row>
+      </v-container> -->
     </v-main>
   </v-main>
 </template>
@@ -131,10 +196,32 @@ export default {
 </script>
 
 <style scoped>
+.left-one {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.52),
+      rgba(0, 0, 0, 0.73)
+    ),
+    url('/images/multiple-bags.png');
+  height: 100%;
+}
+.right-one {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.52),
+      rgba(0, 0, 0, 0.73)
+    ),
+    url('/images/multiple-bags1.png');
+  height: 100%;
+}
+#shop-container {
+  display: flex;
+  justify-content: end;
+}
 .bg {
   /* background-image: rgba(0, 0, 0, 0.753)
     url('https://picsum.photos/1800/600?random=1') no-repeat center; */
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
       to bottom,
       rgba(245, 246, 252, 0.52),
       rgba(117, 19, 93, 0.73)
@@ -142,17 +229,17 @@ export default {
     url('https://picsum.photos/1800/600?random=1');
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center; */
 }
-.upper-section {
-  position: absolute;
-  top: 5%;
-  left: 5%;
+h3 {
+  font-size: 3rem;
 }
-.bottom-section {
-  position: absolute;
-  bottom: 5%;
-  right: 5%;
+p {
+  font-size: 1.5rem;
+}
+h3,
+p {
+  color: #fff;
 }
 .title {
   position: absolute;
@@ -164,9 +251,6 @@ export default {
   background-color: rgba(0, 0, 0, 0.37);
   color: whitesmoke;
   z-index: 999;
-}
-.title:hover {
-  cursor: pointer;
 }
 
 .slide-from-left {

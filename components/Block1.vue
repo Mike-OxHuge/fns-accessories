@@ -12,7 +12,11 @@
 </i18n>
 <template>
   <v-main>
-    <div id="main-wrap" :style="{ 'background-image': 'url(' + image + ')' }">
+    <div
+      id="main-wrap"
+      :style="{ 'background-image': mainBackgroundImage }"
+      style="background-size: cover; background-repeat: no-repeat"
+    >
       <div
         v-observe-visibility="{
           callback: (isVisible, entry) => isViewableNow(isVisible, entry, 'a'),
@@ -23,11 +27,11 @@
         }"
       >
         <div class="d-flex justify-center">
-          <NuxtLink :to="`/${$i18n.locale}/catalog`">
+          <a :href="`/${$i18n.locale}/`">
             <v-avatar :size="customSize" class="mt-5 mr-5">
               <v-img eager src="/logo.png"></v-img>
             </v-avatar>
-          </NuxtLink>
+          </a>
           <div class="d-flex flex-column align-self-center justify-center">
             <!-- <h1 class="text-center">F&S</h1> -->
             <h2
@@ -75,6 +79,11 @@ export default {
     customSize() {
       return this.$vuetify.breakpoint.smAndDown ? '100' : '200'
     },
+    mainBackgroundImage() {
+      return this.$vuetify.breakpoint.smAndDown
+        ? 'url(/mobile-bg.jpg)'
+        : 'url(/desktop-bg.jpg)'
+    },
   },
   mounted() {
     this.resetHeight()
@@ -106,7 +115,7 @@ export default {
 .title {
   position: absolute;
   top: 53%;
-  transform: translateY(-60%);
+  transform: translateY(-80%);
   width: 100vw;
   text-align: center;
   padding: 1vh 0px;
@@ -118,5 +127,13 @@ export default {
   animation-duration: 1.5s;
   animation-fill-mode: both;
   animation-iteration-count: 1;
+}
+.tada {
+  -webkit-animation-name: tada;
+  animation-name: tada;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
 }
 </style>

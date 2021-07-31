@@ -1,14 +1,16 @@
 <template>
-  <a :href="href" target="_blank">
-    <v-img
-      :src="src"
-      :alt="alt"
-      eager
-      :height="customHeight"
-      :width="customWidth"
-      contain
-    ></v-img>
-  </a>
+  <div class="mx-auto">
+    <a :href="href" target="_blank">
+      <v-img
+        :src="src"
+        :alt="alt"
+        eager
+        :max-height="customHeight"
+        :max-width="customWidth"
+        contain
+      ></v-img>
+    </a>
+  </div>
 </template>
 
 <script>
@@ -29,11 +31,31 @@ export default {
   },
   computed: {
     customHeight() {
-      return this.$vuetify.breakpoint.smAndDown ? '75' : '150'
+      if (this.$vuetify.breakpoint.smAndDown) {
+        return '100'
+      } else if (this.$vuetify.breakpoint.mdAndDown) {
+        return '200'
+      } else if (this.$vuetify.breakpoint.lgAndDown) {
+        return '230'
+      } else {
+        return '400'
+      }
     },
     customWidth() {
-      return this.$vuetify.breakpoint.smAndDown ? '150' : '300'
+      if (this.$vuetify.breakpoint.smAndDown) {
+        return '200'
+      } else if (this.$vuetify.breakpoint.mdAndDown) {
+        return '400'
+      } else if (this.$vuetify.breakpoint.lgAndDown) {
+        return '460'
+      } else {
+        return '800'
+      }
     },
+  },
+  mounted() {
+    // console.log('width: ', this.customHeight, 'heigth: ', this.customWidth)
+    // console.log(this.$vuetify.breakpoint)
   },
 }
 </script>
