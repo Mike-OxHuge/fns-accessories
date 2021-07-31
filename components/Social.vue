@@ -47,6 +47,7 @@ export default {
   position: fixed;
   right: 0;
   bottom: 5%;
+  z-index: 5;
 }
 a {
   text-decoration: none;

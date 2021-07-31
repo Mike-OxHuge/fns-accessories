@@ -21,7 +21,7 @@
     </div> -->
     <v-main style="height: 100vh" class="bg">
       <v-row no-gutters style="height: 100%">
-        <v-col sm="12" md="6">
+        <v-col cols="12" sm="12" md="6">
           <!-- <v-img src="/images/multiple-bags.png"></v-img> -->
           <v-sheet
             class="text-center left-one pt-10 d-flex flex-column justify-space-between"
@@ -42,7 +42,7 @@
           </v-sheet>
         </v-col>
 
-        <v-col sm="12" md="6">
+        <v-col cols="12" sm="12" md="6">
           <!-- <v-img src="/images/multiple-bags1.png"></v-img> -->
           <v-sheet
             class="text-center right-one pt-10 d-flex flex-column justify-space-between"
