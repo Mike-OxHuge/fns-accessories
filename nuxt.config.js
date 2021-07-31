@@ -35,7 +35,7 @@ export default {
       // },
     ],
   },
-  router: { linkActiveClass: 'active-link' },
+  router: { linkExactActiveClass: 'active-link' },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['@/assets/css/main.css'],
@@ -101,7 +101,7 @@ export default {
       light: true,
       themes: {
         light: {
-          primary: colors.blue.darken2,
+          primary: '#08b1ba',
           accent: colors.grey.darken3,
           secondary: colors.amber.darken3,
           info: colors.teal.lighten1,

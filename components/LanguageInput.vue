@@ -31,6 +31,9 @@ export default {
       // console.log(this.$router.history)
       // console.log('_startLocation:', this.$router.history._startLocation)
       // console.log('current.fullPath:', this.$router.history.current.fullPath)
+      // console.log('current.path: ', this.$router.history.current.path)
+      // console.log(window.location.href, 'window location')
+      // console.log('current locale: ', this.$i18n.locale)
     },
     //
   },
