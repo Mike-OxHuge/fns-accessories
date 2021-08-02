@@ -9,17 +9,14 @@
         </v-col>
       </v-row>
     </v-container>
-    <Header />
   </div>
 </template>
 
 <script>
 import SingleBag from '~/components/CatalogComponents/SingleBag.vue'
-import Header from '~/components/Header.vue'
 export default {
   components: {
     SingleBag,
-    Header,
   },
   data() {
     return {

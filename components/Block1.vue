@@ -122,18 +122,4 @@ export default {
   background-color: rgba(0, 0, 0, 0.37);
   color: whitesmoke;
 }
-.fadeIn {
-  animation-name: fadeIn;
-  animation-duration: 1.5s;
-  animation-fill-mode: both;
-  animation-iteration-count: 1;
-}
-.tada {
-  -webkit-animation-name: tada;
-  animation-name: tada;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
 </style>

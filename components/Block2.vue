@@ -19,7 +19,7 @@
     <!-- <div class="title">
       <h2>{{ $t('message2') }}</h2>
     </div> -->
-    <v-main style="height: 100vh" class="bg">
+    <v-main style="height: 100%" class="bg">
       <v-row no-gutters style="height: 100%">
         <v-col cols="12" sm="12" md="6">
           <!-- <v-img src="/images/multiple-bags.png"></v-img> -->

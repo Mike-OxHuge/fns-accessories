@@ -4,6 +4,7 @@
     <LocaleSwitcher />
     <nuxt />
     <Social />
+    <Header />
   </v-app>
 </template>
 

@@ -1,50 +1,95 @@
+<i18n>
+{
+  "en": {
+     "title": "Classic",
+    "article": "For book worms and coffee abusers."
+  },
+  "it": {
+     "title": "Classica",
+    "article": "Per i tarli dei libri e gli abusatori di caffè."
+  }
+}
+</i18n>
 <template>
-  <v-main>
-    <div id="bg-img">
-      <div class="title">Fifth image</div>
-    </div>
-
-    <section>
-      <h2>Section Five</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt,
-        laudantium, quibusdam? Nobis, delectus, commodi, fugit amet tempora
-        facere dolores nisi facilis consequatur, odio hic minima nostrum.
-        Perferendis eos earum praesentium, blanditiis sapiente labore aliquam
-        ipsa architecto vitae. Minima soluta temporibus voluptates inventore
-        commodi cumque esse suscipit optio aliquam et, dolorem a cupiditate
-        nihil fuga laboriosam fugiat placeat dignissimos! Unde eveniet placeat
-        quisquam blanditiis voluptatem doloremque fugiat dolor repellendus
-        ratione in. Distinctio provident dolorem modi cumque illo enim quidem
-        tempora deserunt nostrum voluptate labore repellat quisquam quasi cum
-        suscipit dolore ab consequuntur, ad porro earum temporibus. Laborum ad
-        temporibus ex, omnis!
-      </p>
-    </section>
-  </v-main>
+  <v-container>
+    <v-row>
+      <v-col sm="12" md="6" class="d-flex">
+        <v-container
+          v-observe-visibility="{
+            callback: (isVisible, entry) =>
+              isViewableNow(isVisible, entry, 'a'),
+          }"
+          class="text-center my-auto"
+          :class="{
+            'visible animated slideInUp': showAnimationFor.a,
+            invisible: !showAnimationFor.a,
+          }"
+        >
+          <h1>{{ $t('title') }}</h1>
+          <p>{{ $t('article') }}</p>
+        </v-container>
+      </v-col>
+      <v-col sm="12" md="6">
+        <v-img
+          v-observe-visibility="{
+            callback: (isVisible, entry) =>
+              isViewableNow(isVisible, entry, 'b'),
+          }"
+          src="/images/bag-and-coffee.png"
+          :class="{
+            'visible animated fadeIn': showAnimationFor.b,
+            invisible: !showAnimationFor.b,
+          }"
+        ></v-img>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
-export default {}
+import Vue from 'vue'
+import VueObserveVisibility from 'vue-observe-visibility'
+Vue.use(VueObserveVisibility)
+
+export default {
+  data() {
+    return {
+      isVisible: false,
+      showAnimationFor: {
+        a: false,
+        b: false,
+      },
+    }
+  },
+  methods: {
+    isViewableNow(isVisible, entry, section) {
+      this.showAnimationFor[section] = isVisible
+    },
+  },
+}
 </script>
 
-<style>
-#bg-img {
-  height: 30vh;
-  background-attachment: fixed;
-  position: relative;
-  margin: 0px 10vw 0px 10vw;
-  background-image: url('https://picsum.photos/2000/3000?random=5');
+<style scoped>
+.tada {
+  -webkit-animation-name: tada;
+  animation-name: tada;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
 }
-.title {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: #141414;
-  width: 50%;
-  left: 25%;
-  text-align: center;
-  padding: 2vh 0px;
-  text-transform: uppercase;
+.fadeIn {
+  animation-name: fadeIn;
+  animation-duration: 1.5s;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+}
+.slideInUp {
+  -webkit-animation-name: slideInUp;
+  animation-name: slideInUp;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
 }
 </style>
