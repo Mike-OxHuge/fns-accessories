@@ -16,13 +16,9 @@
 </i18n>
 <template>
   <v-main id="main-wrap">
-    <!-- <div class="title">
-      <h2>{{ $t('message2') }}</h2>
-    </div> -->
     <v-main style="height: 100%" class="bg">
       <v-row no-gutters style="height: 100%">
         <v-col cols="12" sm="12" md="6">
-          <!-- <v-img src="/images/multiple-bags.png"></v-img> -->
           <v-sheet
             class="text-center left-one pt-10 d-flex flex-column justify-space-between"
           >
@@ -43,7 +39,6 @@
         </v-col>
 
         <v-col cols="12" sm="12" md="6">
-          <!-- <v-img src="/images/multiple-bags1.png"></v-img> -->
           <v-sheet
             class="text-center right-one pt-10 d-flex flex-column justify-space-between"
           >
@@ -57,7 +52,6 @@
               }"
               mb-15
               pb-15
-              fluid
               class="d-flex justify-end"
               :class="{
                 'visible animated slide-from-left': showAnimationFor.a,
@@ -73,85 +67,6 @@
           </v-sheet>
         </v-col>
       </v-row>
-
-      <!-- upper section -->
-      <!-- <v-row
-        justify="space-between"
-        no-gutters
-        :class="{
-          'mt-15': $vuetify.breakpoint.mdAndUp,
-          'mt-16 pt-16': $vuetify.breakpoint.smAndDown,
-        }"
-      >
-        <v-col
-          v-observe-visibility="{
-            callback: (isVisible, entry) =>
-              isViewableNow(isVisible, entry, 'a'),
-          }"
-          offset="1"
-          align-self="end"
-          cols="5"
-          :class="{
-            'visible animated slide-from-right': showAnimationFor.a,
-            invisible: !showAnimationFor.a,
-          }"
-        >
-          <v-container>
-            <ShopLogo
-              src="/ebay-logo.png"
-              alt="ebay-logo"
-              href="https://ebay.com"
-            />
-          </v-container>
-        </v-col>
-        <v-col
-          v-observe-visibility="{
-            callback: (isVisible, entry) =>
-              isViewableNow(isVisible, entry, 'b'),
-          }"
-          align-self="end"
-          cols="5"
-          :class="{
-            'visible animated fadeIn': showAnimationFor.b,
-            invisible: !showAnimationFor.b,
-          }"
-        >
-          <v-container>
-            <ShopLogo
-              src="/facebook-marketplace-logo.png"
-              alt="facebook-marketplace-logo"
-              href="https://www.facebook.com/marketplace"
-            />
-          </v-container>
-        </v-col>
-      </v-row> -->
-
-      <!-- bottom section -->
-      <!-- <v-container style="position: absolute; bottom: 15px">
-        <v-row no-gutters justify="center"
-          ><v-spacer></v-spacer>
-          <v-col
-            v-observe-visibility="{
-              callback: (isVisible, entry) =>
-                isViewableNow(isVisible, entry, 'd'),
-            }"
-            cols="6"
-            :class="{
-              'visible animated slide-from-left': showAnimationFor.d,
-              invisible: !showAnimationFor.d,
-            }"
-            style="position: relative; right: 15vh"
-          >
-            <v-container>
-              <ShopLogo
-                src="/vinted-logo.png"
-                alt="vinted-logo"
-                href="https://vinted.com"
-              />
-            </v-container>
-          </v-col>
-        </v-row>
-      </v-container> -->
     </v-main>
   </v-main>
 </template>
@@ -196,6 +111,7 @@ export default {
 </script>
 
 <style scoped>
+@import url(~/assets/css/keyframes.css);
 .left-one {
   background-image: linear-gradient(
       to bottom,
@@ -204,6 +120,7 @@ export default {
     ),
     url('/images/multiple-bags.png');
   height: 100%;
+  background-repeat: repeat;
 }
 .right-one {
   background-image: linear-gradient(
@@ -213,23 +130,11 @@ export default {
     ),
     url('/images/multiple-bags1.png');
   height: 100%;
+  background-repeat: repeat;
 }
 #shop-container {
   display: flex;
   justify-content: end;
-}
-.bg {
-  /* background-image: rgba(0, 0, 0, 0.753)
-    url('https://picsum.photos/1800/600?random=1') no-repeat center; */
-  /* background-image: linear-gradient(
-      to bottom,
-      rgba(245, 246, 252, 0.52),
-      rgba(117, 19, 93, 0.73)
-    ),
-    url('https://picsum.photos/1800/600?random=1');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center; */
 }
 h3 {
   font-size: 3rem;
@@ -251,17 +156,5 @@ p {
   background-color: rgba(0, 0, 0, 0.37);
   color: whitesmoke;
   z-index: 999;
-}
-
-.slide-from-left {
-  animation-name: slide-from-left;
-  animation-duration: 1s;
-  animation-fill-mode: both;
-}
-
-.slide-from-right {
-  animation-name: slide-from-right;
-  animation-duration: 1s;
-  animation-fill-mode: both;
 }
 </style>

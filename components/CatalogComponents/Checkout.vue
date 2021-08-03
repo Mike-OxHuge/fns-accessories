@@ -1,5 +1,5 @@
 <template>
-  <v-main>
+  <v-container class="bg accent--text">
     <div v-if="isError"><CheckoutError :error="errorObject" /></div>
     <div v-else-if="isSuccess">
       <CheckoutSuccess
@@ -11,7 +11,9 @@
     <div v-else>
       <v-container d-flex justify-space-between pa-0>
         <h3>CHECKOUT</h3>
-        <v-icon class="pb-1" color="black" @click="hideCheckout">close</v-icon>
+        <v-icon class="pb-1" color="primary" @click="hideCheckout"
+          >close</v-icon
+        >
       </v-container>
 
       <v-container d-flex>
@@ -22,7 +24,11 @@
         </v-container>
       </v-container>
 
-      <v-form v-model="valid">
+      <v-form
+        v-model="valid"
+        style="background: grey; border-radius: 2rem"
+        class="pa-5"
+      >
         <v-row dense>
           <v-col>
             <v-text-field
@@ -78,22 +84,25 @@
           required
           label="Address"
         ></v-text-field>
-
-        <div id="payment-form">
+        <p class="text-center">
+          Payments are proccessed by <a href="https://stripe.com">Stripe</a>, we
+          don't collect any of your bank credentials.
+        </p>
+        <div id="cardInput">
           <!-- card injected here -->
         </div>
-        <v-container mx-auto pa-0 class="text-center">
+        <v-container mx-auto pt-5 class="text-center">
           <v-btn
             :disabled="isLoading"
             :loading="isLoading"
-            color="deep-purple lighten-2"
+            color="primary"
             @click="handleSubmit"
             >Purchase</v-btn
           >
         </v-container>
       </v-form>
     </div>
-  </v-main>
+  </v-container>
 </template>
 
 <script>
@@ -162,7 +171,7 @@ export default {
         },
       },
     })
-    element.mount('#payment-form')
+    await element.mount('#cardInput')
   },
   methods: {
     hideCheckout() {

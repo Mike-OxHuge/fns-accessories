@@ -50,37 +50,6 @@
       :image-animation="'fadeIn'"
       :text-animation="'fadeInSlow'"
     />
-    <!-- <v-row>
-      <v-col sm="12" md="6" class="d-flex">
-        <v-container
-          v-observe-visibility="{
-            callback: (isVisible, entry) =>
-              isViewableNow(isVisible, entry, 'a'),
-          }"
-          class="text-center my-auto"
-          :class="{
-            'visible animated lightSpeedIn': showAnimationFor.a,
-            invisible: !showAnimationFor.a,
-          }"
-        >
-          <h1>{{ $t('title') }}</h1>
-          <p>{{ $t('article') }}</p>
-        </v-container>
-      </v-col>
-      <v-col sm="12" md="6">
-        <v-img
-          v-observe-visibility="{
-            callback: (isVisible, entry) =>
-              isViewableNow(isVisible, entry, 'b'),
-          }"
-          src="/images/bag-in-use.png"
-          :class="{
-            'visible animated flipInY': showAnimationFor.b,
-            invisible: !showAnimationFor.b,
-          }"
-        ></v-img>
-      </v-col>
-    </v-row> -->
   </v-container>
 </template>
 
@@ -95,17 +64,11 @@ export default {
   components: { RowsWithImages },
   data() {
     return {
-      isVisible: false,
-      showAnimationFor: {
-        a: false,
-        b: false,
-      },
+      //
     }
   },
   methods: {
-    isViewableNow(isVisible, entry, section) {
-      this.showAnimationFor[section] = isVisible
-    },
+    //
   },
 }
 </script>

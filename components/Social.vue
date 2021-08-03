@@ -46,7 +46,7 @@ export default {
   float: right;
   position: fixed;
   right: 0;
-  bottom: 5%;
+  bottom: 2%;
   z-index: 5;
 }
 a {

@@ -1,26 +1,38 @@
 <template>
-  <v-main class="card">
-    <Checkout
-      v-if="isCheckout"
-      :bag="selectedBag"
-      :bag-name="bag.name"
-      :bag-id="bag._id"
-      :bag-price="bag.price"
-      @hideCheckout="isCheckout = false"
-    />
-    <div v-else>
-      <!-- <v-img v-if="selectedImage === null" :src="bag.defaultImage"></v-img>
-      <v-img v-else :src="selectedImage"></v-img> -->
+  <v-container class="accent--text">
+    <v-dialog v-model="isCheckout">
+      <Checkout
+        :bag="selectedBag"
+        :bag-name="bag.name"
+        :bag-id="bag._id"
+        :bag-price="bag.price"
+        @hideCheckout="isCheckout = false"
+      />
+    </v-dialog>
 
-      <v-img :src="!selectedImage ? bag.defaultImage : selectedImage"></v-img>
+    <v-card
+      v-if="!isCheckout"
+      style="background: rgba(255, 255, 255, 0)"
+      class="accent--text"
+    >
+      <v-img
+        ripple
+        :src="!selectedImage ? bag.defaultImage : selectedImage"
+        class="clickableImage"
+        @click="
+          $router.push(
+            `/${$i18n.locale}/catalog/${bag._id}?variant=${selectedBag._id}`
+          )
+        "
+      ></v-img>
       <v-card-title>
-        <v-row justify="space-between">
+        <v-row justify="space-between" class="px-2">
           <p>{{ bag.name }}</p>
           <p>{{ bag.currency }} • {{ bag.price }}</p>
         </v-row>
       </v-card-title>
 
-      <v-card-text>{{ bag.description }}</v-card-text>
+      <v-card-text class="accent--text">{{ bag.description }}</v-card-text>
       <v-row no-gutters justify="center">
         <v-col v-for="variant in bag.variants" :key="variant._id">
           <v-container mx-auto pa-0 class="d-flex justify-center">
@@ -39,30 +51,45 @@
         </v-col>
 
         <v-col cols="8">
-          <v-container mx-auto pa-0 class="text-center">
+          <v-container mx-auto pa-0 class="text-center accent--text">
             <span class="text-center">
               {{ selectedBag.stock }} {{ selectedBag.color }} bags in stock!
             </span>
           </v-container>
         </v-col>
 
-        <v-col cols="6">
+        <v-col cols="12">
           <v-card-actions>
-            <v-container mx-auto pa-0 class="text-center">
+            <v-container
+              d-flex
+              justify-space-between
+              mx-auto
+              pa-0
+              class="text-center"
+            >
               <v-btn
-                color="deep-purple lighten-2"
+                color="primary"
                 :disabled="selectedBag.stock === 0"
                 :loading="isLoading"
                 @click="handlePurchase"
               >
                 Buy now
               </v-btn>
+              <v-btn
+                color="primary"
+                @click="
+                  $router.push(
+                    `/${$i18n.locale}/catalog/${bag._id}?variant=${selectedBag._id}`
+                  )
+                "
+                >Details</v-btn
+              >
             </v-container>
           </v-card-actions>
         </v-col>
       </v-row>
-    </div>
-  </v-main>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
@@ -96,9 +123,7 @@ export default {
     this.stripe = await loadStripe(process.env.NUXT_APP_STRIPE_PK)
   },
   updated() {
-    // console.log(this.lineItems[0].price)
-    // console.log(typeof this.lineItems[0].price)
-    // console.log(this.lineItems)
+    //
   },
   methods: {
     handlePurchase() {
@@ -116,9 +141,7 @@ export default {
 </script>
 
 <style>
-.card {
-  background: rgba(77, 76, 76, 0.534);
-  padding: 0.5rem;
-  border-radius: 0.25rem;
+.clickableImage:hover {
+  cursor: pointer;
 }
 </style>

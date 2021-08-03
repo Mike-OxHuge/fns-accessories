@@ -88,7 +88,4 @@ export default {
 <style scoped>
 @import url(~/assets/css/keyframes.css);
 @import url('~~/assets/css/keyframes.css');
-* {
-  /* overflow: hidden; */
-}
 </style>

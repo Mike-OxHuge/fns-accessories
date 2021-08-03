@@ -24,3 +24,16 @@ span {
 a {
   text-decoration: none;
 }
+.clickableImage:hover {
+  cursor: pointer;
+}
+.bg {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.3)
+    ),
+    url('/images/grass.png');
+  background-size: auto;
+  background-repeat: repeat;
+}
