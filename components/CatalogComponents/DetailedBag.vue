@@ -6,18 +6,33 @@
       width="300"
       height="300"
       contain
+      class="mx-auto"
     ></v-img>
-    <v-container>
-      <v-row dense>
-        <v-col v-for="image in images" :key="image.i" cols="2">
-          <v-img
-            :src="image"
-            class="clickableImage"
-            @click="selectedImage = image"
-          ></v-img>
-        </v-col>
-      </v-row>
-    </v-container>
+    <div>
+      <v-sheet
+        elevation="8"
+        max-width="800"
+        class="mx-auto my-2"
+        style="background: rgba(0, 0, 0, 0.5); border-radius: 20px"
+      >
+        <v-slide-group v-model="model">
+          <v-slide-item
+            v-for="image in variantImages"
+            :key="image.i"
+            v-slot="{ toggle }"
+          >
+            <v-card class="ma-3" height="auto" width="auto" @click="toggle">
+              <v-img
+                :src="image"
+                class="clickableImage"
+                :max-width="$vuetify.breakpoint.smAndDown ? '50' : '100'"
+                @click="selectedImage = image"
+              ></v-img>
+            </v-card>
+          </v-slide-item>
+        </v-slide-group>
+      </v-sheet>
+    </div>
   </v-container>
 </template>
 
@@ -41,7 +56,13 @@ export default {
         'https://picsum.photos/600/600?random=5',
       ],
       selectedImage: null,
+      model: null,
     }
+  },
+  computed: {
+    variantImages() {
+      return this.bag.images?.length > 0 ? this.bag.images : this.images
+    },
   },
 }
 </script>

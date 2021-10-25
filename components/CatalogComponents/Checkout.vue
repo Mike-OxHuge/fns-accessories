@@ -84,11 +84,7 @@
           required
           label="Address"
         ></v-text-field>
-        <p class="text-center">
-          Payments are proccessed by <a href="https://stripe.com">Stripe</a>, we
-          don't collect any of your bank credentials.
-        </p>
-        <div id="cardInput">
+        <div id="cardInput" class="mt-5">
           <!-- card injected here -->
         </div>
         <v-container mx-auto pt-5 class="text-center">

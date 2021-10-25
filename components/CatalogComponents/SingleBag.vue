@@ -12,7 +12,9 @@
 
     <v-card
       v-if="!isCheckout"
-      style="background: rgba(255, 255, 255, 0)"
+      style="background: rgba(0, 0, 0, 0.5)"
+      outlined
+      shaped
       class="accent--text"
     >
       <v-img

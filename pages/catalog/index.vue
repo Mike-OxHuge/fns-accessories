@@ -2,8 +2,8 @@
   <div id="bg" class="bg">
     <v-container mt-3>
       <v-icon color="primary" @click="$router.go(-1)"
-        >arrow_back_ios_new</v-icon
-      >
+        >arrow_back_ios_new
+      </v-icon>
       <v-row justify="space-around">
         <v-container v-if="catalog.length === 0">
           <v-row justify="space-around" style="overflow: hidden">
