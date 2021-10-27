@@ -21,7 +21,7 @@ export default async function isLoggedIn(context) {
     )
     if (validator.status === 200) {
       try {
-        await context.redirect('auth/editor')
+        await context.redirect('/en/auth/editor')
       } catch (error) {
         // eslint-disable-next-line no-console
         console.log(error)
