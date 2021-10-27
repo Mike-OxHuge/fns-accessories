@@ -134,7 +134,7 @@ export default {
 }
 #shop-container {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 h3 {
   font-size: 3rem;

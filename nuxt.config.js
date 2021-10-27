@@ -41,7 +41,10 @@ export default {
   css: ['@/assets/css/main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  // plugins: [{ src: '~/plugins/stripe.js' }],
+  plugins: [
+    { src: '~/plugins/vuex-persisten', ssr: false },
+    // { src: '~/src/plugins/stripe.js' },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -82,7 +85,9 @@ export default {
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: process.env.NUXT_APP_BACKEND_URL || 'http://localhost:3001',
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
