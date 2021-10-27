@@ -76,7 +76,7 @@ export default {
         })
         if (request.status) {
           this.$store.commit('setToken', request.data.accessToken)
-          this.$router.push('auth/editor')
+          this.$router.replace('/auth/editor')
         }
       } catch (error) {
         this.error.message = error.response.data.message
