@@ -1,6 +1,13 @@
 <template>
   <v-container>
-    <span>{{ bag.stock }} {{ bag.color }} bags available</span>
+    <span
+      >{{ bag.stock }}
+      {{
+        $i18n.locale === 'it'
+          ? `${bag.colorName.it} disponibile`
+          : `${bag.colorName.en} available`
+      }}</span
+    >
     <v-img
       :src="selectedImage === null ? bag.image : selectedImage"
       width="300"
@@ -61,7 +68,9 @@ export default {
   },
   computed: {
     variantImages() {
-      return this.bag.images?.length > 0 ? this.bag.images : this.images
+      return this.bag.images?.length > 0
+        ? [...this.bag.images, this.bag.image]
+        : this.images
     },
   },
 }

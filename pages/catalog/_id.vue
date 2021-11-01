@@ -1,29 +1,22 @@
 <template>
   <div id="bg" class="bg">
     <v-container class="accent--text text-center" d-flex justify-center>
-      <v-dialog v-model="isCheckout">
-        <Checkout
-          v-if="isCheckout"
-          :bag="variant[0]"
-          :bag-name="bag.name"
-          s
-          :bag-id="bag._id"
-          :bag-price="bag.price"
-          @hideCheckout="isCheckout = false"
-        />
-      </v-dialog>
       <h1 v-if="bag === null">LOADING...</h1>
       <v-container v-else pt-0>
         <div class="d-flex justify-center">
           <v-icon class="mr-auto" color="primary" @click="$router.go(-1)"
             >arrow_back_ios_new</v-icon
           >
-          <h1 class="mr-auto">{{ bag.name }}</h1>
+          <h1 class="mr-auto">
+            {{ $i18n.locale === 'it' ? bag.name.it : bag.name.en }}
+          </h1>
         </div>
-        <p>{{ bag.description }}</p>
+        <p>
+          {{ $i18n.locale === 'it' ? bag.description.it : bag.description.en }}
+        </p>
         <DetailedBag v-if="variant !== null" :bag="variant[0]" />
-        <v-btn color="primary" @click="isCheckout = true"
-          >Buy now for {{ bag.currency }} {{ bag.price }}</v-btn
+        <v-btn v-if="variant" color="primary" @click="buy"
+          >Buy now for EUR {{ variant[0].price }}</v-btn
         >
       </v-container>
     </v-container>
@@ -32,14 +25,13 @@
 
 <script>
 import DetailedBag from '~/components/CatalogComponents/DetailedBag.vue'
-import Checkout from '~/components/CatalogComponents/Checkout.vue'
+import { handlePurchase } from '~/composables/stripeHandlers.js'
 
 export default {
-  components: { DetailedBag, Checkout },
+  components: { DetailedBag },
   data() {
     return {
       isLoading: false,
-      isCheckout: false,
       bag: null,
       variant: null,
     }
@@ -62,6 +54,9 @@ export default {
         (v) => v._id === this.$route.query.variant
       )
       this.isLoading = false
+    },
+    async buy() {
+      await handlePurchase()
     },
   },
 }

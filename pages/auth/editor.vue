@@ -4,12 +4,16 @@
       <h1>Editor</h1>
       <v-btn color="grey" @click="handleLogout()">logout</v-btn>
     </div>
-    <p>Here you'll have things to add/delete/edit</p>
+    <CreateEditForm />
   </v-container>
 </template>
 
 <script>
+import CreateEditForm from '~/components/admin/CreateEditForm.vue'
+
 export default {
+  components: { CreateEditForm },
+
   layout: 'admin',
   middleware: ['isAdmin'],
   data() {

@@ -1,17 +1,6 @@
 <template>
   <v-container class="accent--text">
-    <v-dialog v-model="isCheckout">
-      <Checkout
-        :bag="selectedBag"
-        :bag-name="bag.name"
-        :bag-id="bag._id"
-        :bag-price="bag.price"
-        @hideCheckout="isCheckout = false"
-      />
-    </v-dialog>
-
     <v-card
-      v-if="!isCheckout"
       style="background: rgba(0, 0, 0, 0.5)"
       outlined
       shaped
@@ -29,12 +18,14 @@
       ></v-img>
       <v-card-title>
         <v-row justify="space-between" class="px-2">
-          <p>{{ bag.name }}</p>
-          <p>{{ bag.currency }} • {{ bag.price }}</p>
+          <p>{{ $i18n.locale === 'it' ? bag.name.it : bag.name.en }}</p>
+          <p>EUR • {{ selectedBag.price }}</p>
         </v-row>
       </v-card-title>
 
-      <v-card-text class="accent--text">{{ bag.description }}</v-card-text>
+      <v-card-text class="accent--text">{{
+        $i18n.locale === 'it' ? bag.description.it : bag.description.en
+      }}</v-card-text>
       <v-row no-gutters justify="center">
         <v-col v-for="variant in bag.variants" :key="variant._id">
           <v-container mx-auto pa-0 class="d-flex justify-center">
@@ -47,7 +38,11 @@
                   (lineItems[0].price = variant.price)
               "
             >
-              {{ variant.color }}
+              {{
+                $i18n.locale === 'it'
+                  ? variant.colorName.it
+                  : variant.colorName.en
+              }}
             </v-chip>
           </v-container>
         </v-col>
@@ -55,7 +50,12 @@
         <v-col cols="8">
           <v-container mx-auto pa-0 class="text-center accent--text">
             <span class="text-center">
-              {{ selectedBag.stock }} {{ selectedBag.color }} bags in stock!
+              {{ selectedBag.stock }}
+              {{
+                $i18n.locale === 'it'
+                  ? `${selectedBag.colorName.it} disponibile`
+                  : `${selectedBag.colorName.en} available`
+              }}
             </span>
           </v-container>
         </v-col>
@@ -73,7 +73,7 @@
                 color="primary"
                 :disabled="selectedBag.stock === 0"
                 :loading="isLoading"
-                @click="handlePurchase"
+                @click="buy"
               >
                 Buy now
               </v-btn>
@@ -95,20 +95,16 @@
 </template>
 
 <script>
-import { loadStripe } from '@stripe/stripe-js'
-import Checkout from './Checkout.vue'
+import { handlePurchase } from '~/composables/stripeHandlers.js'
 export default {
-  components: {
-    Checkout,
-  },
+  components: {},
   props: {
     bag: { type: Object, required: true },
   },
   data() {
     return {
-      isCheckout: false,
       isLoading: false,
-      selectedImage: null,
+      selectedImage: this.bag.variants[0].image,
       selectedBag: this.bag.variants[0], // default value, the bag object
       stripe: null,
       lineItems: [
@@ -121,14 +117,15 @@ export default {
       cancelURL: `http://localhost:8000/${this.$i18n.locale}/catalog/cancel`,
     }
   },
-  async mounted() {
-    this.stripe = await loadStripe(process.env.NUXT_APP_STRIPE_PK)
+  mounted() {
+    //
   },
   updated() {
     //
   },
   methods: {
-    handlePurchase() {
+    async buy() {
+      await handlePurchase()
       //   this.isLoading = true
       //   this.stripe.redirectToCheckout({
       //     successUrl: this.successURL,
@@ -136,7 +133,10 @@ export default {
       //     lineItems: this.lineItems,
       //     mode: 'payment',
       //   })
-      this.isCheckout = true
+      // console.log('checkout')
+      // alert(
+      // 'sorry, not supported now. But if you really really want one please contact us'
+      // )
     },
   },
 }
