@@ -113,20 +113,20 @@ export default {
   },
   computed: {
     isValid() {
-      // return true
-      const { name, description, price, variants } = this.bag
-      const { en, it } = description
-      return (
-        en &&
-        it &&
-        name.en &&
-        name.it &&
-        price.amount > 0 &&
-        // eslint-disable-next-line no-self-compare
-        parseInt(price.amount) === parseInt(price.amount) &&
-        variants.length > 0 &&
-        variants.images.length > 0
-      )
+      return true // uncomment for testing
+      // const { name, description, price, variants } = this.bag
+      // const { en, it } = description
+      // return (
+      //   en &&
+      //   it &&
+      //   name.en &&
+      //   name.it &&
+      //   price.amount > 0 &&
+      //   // eslint-disable-next-line no-self-compare
+      //   parseInt(price.amount) === parseInt(price.amount) &&
+      //   variants.length > 0 &&
+      //   variants.images.length > 0
+      // )
     },
   },
 
@@ -147,7 +147,6 @@ export default {
         }
 
         await saveToDB(this.bag)
-        console.log(saveToDB(this.bag))
       } catch (error) {
         alert(error)
       } finally {

@@ -86,7 +86,10 @@ export const saveToDB = async (bag) => {
         },
       }
     )
-    alert(data.name.en + ' has been created successfully')
+    alert(
+      data.name.en +
+        ' has been created successfully, navigate to catalog to see your newly created bag'
+    )
     return data
   } catch (error) {
     alert(error)

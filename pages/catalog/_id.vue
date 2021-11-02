@@ -40,7 +40,7 @@ export default {
     //
     this.getBag()
   },
-  updated() {
+  mounted() {
     //
   },
   methods: {
@@ -56,7 +56,7 @@ export default {
       this.isLoading = false
     },
     async buy() {
-      await handlePurchase()
+      await handlePurchase(this.variant[0], this.$route.params.id)
     },
   },
 }

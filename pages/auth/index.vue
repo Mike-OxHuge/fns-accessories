@@ -79,6 +79,18 @@ export default {
           this.$router.replace('/auth/editor')
         }
       } catch (error) {
+        try {
+          const { data } = await this.$axios.post('/api/admin/register', {
+            name: this.login,
+            password: this.password,
+          })
+          alert(`The user with name ${data.name} wasn't found, we registred your account. 
+          However to access the CMS you'll have to ask your administrator to change your role.`)
+          this.error.status = true
+        } catch (error) {
+          this.error.message = error.response.data.message
+          this.error.status = true
+        }
         this.error.message = error.response.data.message
         this.error.status = true
       }

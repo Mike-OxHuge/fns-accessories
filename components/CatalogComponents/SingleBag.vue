@@ -107,14 +107,6 @@ export default {
       selectedImage: this.bag.variants[0].image,
       selectedBag: this.bag.variants[0], // default value, the bag object
       stripe: null,
-      lineItems: [
-        {
-          price: this.bag.variants[0].price, // The price_id from Stripe dashboard // default value
-          quantity: 1,
-        },
-      ],
-      successURL: `http://localhost:8000/${this.$i18n.locale}/catalog/success`,
-      cancelURL: `http://localhost:8000/${this.$i18n.locale}/catalog/cancel`,
     }
   },
   mounted() {
@@ -125,18 +117,8 @@ export default {
   },
   methods: {
     async buy() {
-      await handlePurchase()
-      //   this.isLoading = true
-      //   this.stripe.redirectToCheckout({
-      //     successUrl: this.successURL,
-      //     cancelUrl: this.cancelURL,
-      //     lineItems: this.lineItems,
-      //     mode: 'payment',
-      //   })
-      // console.log('checkout')
-      // alert(
-      // 'sorry, not supported now. But if you really really want one please contact us'
-      // )
+      this.isLoading = true
+      await handlePurchase(this.selectedBag, this.bag._id)
     },
   },
 }
