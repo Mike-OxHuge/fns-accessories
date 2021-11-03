@@ -6,7 +6,17 @@
 </template>
 
 <script>
-export default {}
+export default {
+  async asyncData({ $axios, route }) {
+    const { data } = await $axios.get(
+      `/api/v1/purchase/order-status?session_id=${route.query.session_id}`
+    )
+    return { data }
+  },
+  mounted() {
+    console.log(this.$route.query.session_id)
+  },
+}
 </script>
 
 <style></style>

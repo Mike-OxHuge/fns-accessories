@@ -15,7 +15,7 @@
           {{ $i18n.locale === 'it' ? bag.description.it : bag.description.en }}
         </p>
         <DetailedBag v-if="variant !== null" :bag="variant[0]" />
-        <v-btn v-if="variant" color="primary" @click="buy"
+        <v-btn v-if="variant" color="primary" :loading="isLoading" @click="buy"
           >Buy now for EUR {{ variant[0].price }}</v-btn
         >
       </v-container>
@@ -56,6 +56,7 @@ export default {
       this.isLoading = false
     },
     async buy() {
+      this.isLoading = true
       await handlePurchase(this.variant[0], this.$route.params.id)
     },
   },

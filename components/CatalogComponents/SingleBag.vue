@@ -32,11 +32,7 @@
             <v-chip
               :color="variant.color"
               :disabled="variant.stock === 0"
-              @click="
-                ;(selectedImage = variant.image),
-                  (selectedBag = variant),
-                  (lineItems[0].price = variant.price)
-              "
+              @click=";(selectedImage = variant.image), (selectedBag = variant)"
             >
               {{
                 $i18n.locale === 'it'
