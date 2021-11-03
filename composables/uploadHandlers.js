@@ -8,7 +8,7 @@ export const uploadDefaultImage = async (bag) => {
   try {
     // eslint-disable-next-line prefer-const
     let image = new FormData()
-    image.append('name', bag.name.en.replace(' ', '-'))
+    image.append('name', bag.name.en.replaceAll(' ', '-'))
     image.append('bag-cover', bag.defaultImage)
     const { data } = await axios.post(
       `${process.env.NUXT_APP_BACKEND_URL}/api/files/upload-bag-cover`,
