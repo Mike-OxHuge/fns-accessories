@@ -41,7 +41,7 @@
                   accept="image/*"
                   chips
                   multiple
-                  label="Images (ORDER MATTERS!)"
+                  label="Images (ORDER MATTERS:the first (by name) will be used as default)"
                   @change="(e) => setFiles(e)"
                 ></v-file-input>
               </v-col>
