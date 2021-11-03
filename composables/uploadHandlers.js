@@ -39,7 +39,7 @@ export const uploadVariantImages = async (bag, cloudinaryFolderName) => {
       // eslint-disable-next-line prefer-const
       let images = new FormData()
       images.append('name', cloudinaryFolderName)
-      images.append('color', variants[i].colorName.en)
+      images.append('color', variants[i].colorName.en.replaceAll(' ', '-'))
       images.append('variant-image', variants[i].images[0])
       for (let j = 0; j < variants[i].images.length; j++) {
         images.set('variant-image', variants[i].images[j])
