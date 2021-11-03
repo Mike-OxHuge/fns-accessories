@@ -1,5 +1,8 @@
 import axios from 'axios'
-import { token } from './stripeHandlers.js'
+// import { token } from './stripeHandlers.js'
+const { token } = window.sessionStorage.data?.includes('token')
+  ? JSON.parse(window.sessionStorage.data)
+  : {}
 
 export const uploadDefaultImage = async (bag) => {
   try {
