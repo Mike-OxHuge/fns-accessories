@@ -7,6 +7,7 @@
 
 <script>
 export default {
+  // destructuring context
   async asyncData({ $axios, route }) {
     const { data } = await $axios.get(
       `/api/v1/purchase/order-status?session_id=${route.query.session_id}`
@@ -14,7 +15,7 @@ export default {
     return { data }
   },
   mounted() {
-    console.log(this.$route.query.session_id)
+    // console.log(this.$route.query.session_id)
   },
 }
 </script>

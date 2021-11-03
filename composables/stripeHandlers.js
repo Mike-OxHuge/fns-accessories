@@ -1,8 +1,10 @@
 import axios from 'axios'
 
-export const { token } = window.sessionStorage.token
+export const { token } = window.sessionStorage.data.includes('token')
   ? JSON.parse(window.sessionStorage.data)
   : {}
+// export const { token } = JSON.parse(window.sessionStorage.data)
+// console.log(window.sessionStorage.data.includes('token'))
 
 export const createProduct = async (product) => {
   const { description, defaultImage, name, price } = product

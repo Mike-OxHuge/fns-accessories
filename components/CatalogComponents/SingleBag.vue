@@ -8,7 +8,7 @@
     >
       <v-img
         ripple
-        :src="!selectedImage ? bag.defaultImage : selectedImage"
+        :src="!selectedImage ? bag.variants[0].images[0] : selectedImage"
         class="clickableImage"
         @click="
           $router.push(
@@ -32,7 +32,9 @@
             <v-chip
               :color="variant.color"
               :disabled="variant.stock === 0"
-              @click=";(selectedImage = variant.image), (selectedBag = variant)"
+              @click="
+                ;(selectedImage = variant.images[0]), (selectedBag = variant)
+              "
             >
               {{
                 $i18n.locale === 'it'
@@ -100,7 +102,7 @@ export default {
   data() {
     return {
       isLoading: false,
-      selectedImage: this.bag.variants[0].image,
+      selectedImage: null,
       selectedBag: this.bag.variants[0], // default value, the bag object
       stripe: null,
     }

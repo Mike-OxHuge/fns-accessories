@@ -34,7 +34,7 @@
     <section class="data">
       <v-file-input
         accept="image/*"
-        label="Main image"
+        label="Main cover image (will be used for featured section)"
         @change="(e) => setFile(e)"
       ></v-file-input>
       <v-dialog v-model="dialog">
@@ -113,20 +113,10 @@ export default {
   },
   computed: {
     isValid() {
-      return true // uncomment for testing
-      // const { name, description, price, variants } = this.bag
-      // const { en, it } = description
-      // return (
-      //   en &&
-      //   it &&
-      //   name.en &&
-      //   name.it &&
-      //   price.amount > 0 &&
-      //   // eslint-disable-next-line no-self-compare
-      //   parseInt(price.amount) === parseInt(price.amount) &&
-      //   variants.length > 0 &&
-      //   variants.images.length > 0
-      // )
+      // return true // uncomment for testing
+      const { name, description, variants } = this.bag
+      const { en, it } = description
+      return en && it && name.en && name.it && variants.length > 0
     },
   },
 
@@ -167,7 +157,7 @@ export default {
           },
           defaultImage: null,
         }
-        location.reload()
+        // location.reload()
       }
     },
 

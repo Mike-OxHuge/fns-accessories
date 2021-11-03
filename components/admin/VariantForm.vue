@@ -36,19 +36,12 @@
 
           <section class="data">
             <v-row style="max-width: 100%; overflow: hidden" align="center">
-              <v-col cols="12" sm="12" md="6">
-                <v-file-input
-                  accept="image/*"
-                  label="Main image"
-                  @change="(e) => setFile(e)"
-                ></v-file-input>
-              </v-col>
-              <v-col cols="12" sm="12" md="6">
+              <v-col cols="12">
                 <v-file-input
                   accept="image/*"
                   chips
                   multiple
-                  label="The rest images"
+                  label="Images (ORDER MATTERS!)"
                   @change="(e) => setFiles(e)"
                 ></v-file-input>
               </v-col>
@@ -94,7 +87,6 @@ export default {
         colorName: { en: '', it: '' },
         price: null,
         stock: null,
-        image: null,
         images: [],
         stripeProductId: '',
       },
@@ -102,29 +94,19 @@ export default {
   },
   computed: {
     isValid() {
-      const { image, images, color, colorName, price, stock } = this.variant
+      const { images, color, colorName, price, stock } = this.variant
       return (
         color &&
         colorName.en &&
         colorName.it &&
-        image &&
         images &&
-        price &&
+        // eslint-disable-next-line no-self-compare
+        parseInt(price) === parseInt(price) &&
         stock
       )
     },
   },
-  mounted() {
-    alert('CLEAR all the file input fields!')
-  },
   methods: {
-    setFile(e) {
-      try {
-        this.variant.image = e
-      } catch (error) {
-        alert(error)
-      }
-    },
     setFiles(e) {
       try {
         this.variant.images = e
@@ -143,7 +125,6 @@ export default {
         images: [],
         stripeProductId: '',
       }
-      this.setFile(null)
       this.setFiles(null)
     },
   },

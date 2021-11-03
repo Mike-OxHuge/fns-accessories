@@ -34,27 +34,10 @@ export const uploadVariantImages = async (bag, cloudinaryFolderName) => {
   try {
     for (let i = 0; i < variants.length; i++) {
       // eslint-disable-next-line prefer-const
-      let image = new FormData()
-      image.append('name', cloudinaryFolderName)
-      image.append('color', variants[i].colorName.en)
-      image.append('variant-image', variants[i].image)
-      // eslint-disable-next-line prefer-const
       let images = new FormData()
       images.append('name', cloudinaryFolderName)
       images.append('color', variants[i].colorName.en)
-      images.append('variant-image', variants[i].image)
-      const { data } = await axios.post(
-        `${process.env.NUXT_APP_BACKEND_URL}/api/files/upload-variant-image`,
-        image,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'multipart/form-data',
-          },
-        }
-      )
-      variants[i].image = data
-
+      images.append('variant-image', variants[i].images[0])
       for (let j = 0; j < variants[i].images.length; j++) {
         images.set('variant-image', variants[i].images[j])
         const { data } = await axios.post(

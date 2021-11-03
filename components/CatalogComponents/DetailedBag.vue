@@ -9,7 +9,7 @@
       }}</span
     >
     <v-img
-      :src="selectedImage === null ? bag.image : selectedImage"
+      :src="selectedImage === null ? bag.images[0] : selectedImage"
       width="300"
       height="300"
       contain
@@ -55,7 +55,6 @@ export default {
     return {
       isShown: false,
       images: [
-        this.bag.image,
         'https://picsum.photos/600/600?random=1',
         'https://picsum.photos/600/600?random=2',
         'https://picsum.photos/600/600?random=3',
@@ -68,9 +67,7 @@ export default {
   },
   computed: {
     variantImages() {
-      return this.bag.images?.length > 0
-        ? [...this.bag.images, this.bag.image]
-        : this.images
+      return this.bag.images?.length > 0 ? [...this.bag.images] : this.images
     },
   },
 }
