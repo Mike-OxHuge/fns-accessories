@@ -100,6 +100,7 @@
                 class="mx-auto"
                 color="success"
                 @click="adminSelection(bag)"
+                disabled
               >
                 edit
               </v-btn>
