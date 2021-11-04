@@ -1,6 +1,8 @@
 <template>
   <v-form @submit.prevent="handleSubmit()">
-    <h1 class="text-center">Create a new bag.</h1>
+    <h1 class="text-center">
+      {{ product ? 'Edit the bag:' : 'Create a new bag:' }}
+    </h1>
     <section class="data">
       <v-text-field
         v-model="bag.name.en"
@@ -80,35 +82,42 @@ import { createVariantProduct } from '../../composables/stripeHandlers.js'
 import {
   uploadDefaultImage,
   uploadVariantImages,
-  // eslint-disable-next-line no-unused-vars
   saveToDB,
 } from '../../composables/uploadHandlers.js'
 import VariantForm from './VariantForm'
 import DisplayVariant from './DisplayVariant.vue'
 export default {
   components: { VariantForm, DisplayVariant },
+  props: {
+    product: {
+      type: Object,
+      default: null,
+    },
+  },
   data() {
     return {
       dialog: false,
       isLoading: false,
 
       cloudinaryFolderName: '',
-      bag: {
-        name: {
-          en: '',
-          it: '',
-        },
-        description: {
-          en: '',
-          it: '',
-        },
-        variants: [],
-        price: {
-          amount: null,
-          currency: 'EUR',
-        },
-        defaultImage: null,
-      },
+      bag: this.product
+        ? this.product
+        : {
+            name: {
+              en: '',
+              it: '',
+            },
+            description: {
+              en: '',
+              it: '',
+            },
+            variants: [],
+            price: {
+              amount: null,
+              currency: 'EUR',
+            },
+            defaultImage: null,
+          },
     }
   },
   computed: {
@@ -124,19 +133,21 @@ export default {
     async handleSubmit() {
       this.isLoading = true
       try {
-        this.cloudinaryFolderName = await uploadDefaultImage(this.bag)
+        if (!this.product) {
+          this.cloudinaryFolderName = await uploadDefaultImage(this.bag)
 
-        if (this.bag.variants.length > 0) {
-          await uploadVariantImages(this.bag, this.cloudinaryFolderName)
-          for (let i = 0; i < this.bag.variants.length; i++) {
-            this.bag.variants[i].stripeProductId = await createVariantProduct(
-              this.bag.variants[i],
-              this.bag
-            )
+          if (this.bag.variants.length > 0) {
+            await uploadVariantImages(this.bag, this.cloudinaryFolderName)
+            for (let i = 0; i < this.bag.variants.length; i++) {
+              this.bag.variants[i].stripeProductId = await createVariantProduct(
+                this.bag.variants[i],
+                this.bag
+              )
+            }
           }
         }
 
-        await saveToDB(this.bag)
+        await saveToDB(this.bag, this.product)
       } catch (error) {
         alert(error)
       } finally {

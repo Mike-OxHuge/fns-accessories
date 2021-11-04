@@ -11,9 +11,11 @@
         :src="!selectedImage ? bag.variants[0].images[0] : selectedImage"
         class="clickableImage"
         @click="
-          $router.push(
-            `/${$i18n.locale}/catalog/${bag._id}?variant=${selectedBag._id}`
-          )
+          isAdmin
+            ? adminSelection(bag)
+            : $router.push(
+                `/${$i18n.locale}/catalog/${bag._id}?variant=${selectedBag._id}`
+              )
         "
       ></v-img>
       <v-card-title>
@@ -61,6 +63,7 @@
         <v-col cols="12">
           <v-card-actions>
             <v-container
+              v-if="!isAdmin"
               d-flex
               justify-space-between
               mx-auto
@@ -85,6 +88,25 @@
                 >Details</v-btn
               >
             </v-container>
+
+            <v-container
+              v-if="isAdmin"
+              d-flex
+              justify-space-between
+              mx-auto
+              pa-0
+            >
+              <v-btn
+                class="mx-auto"
+                color="success"
+                @click="adminSelection(bag)"
+              >
+                edit
+              </v-btn>
+              <v-btn class="mx-auto" color="error" @click="adminDelete(bag)">
+                Delete
+              </v-btn>
+            </v-container>
           </v-card-actions>
         </v-col>
       </v-row>
@@ -98,6 +120,7 @@ export default {
   components: {},
   props: {
     bag: { type: Object, required: true },
+    isAdmin: { type: Boolean, default: false },
   },
   data() {
     return {
@@ -117,6 +140,12 @@ export default {
     async buy() {
       this.isLoading = true
       await handlePurchase(this.selectedBag, this.bag._id)
+    },
+    adminSelection(payload) {
+      this.$emit('bagSelected', payload)
+    },
+    adminDelete(payload) {
+      this.$emit('bagDeleted', payload)
     },
   },
 }

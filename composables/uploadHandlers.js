@@ -61,22 +61,40 @@ export const uploadVariantImages = async (bag, cloudinaryFolderName) => {
   }
 }
 
-export const saveToDB = async (bag) => {
+export const saveToDB = async (bag, status) => {
+  // status is either a null or a bag object (coming from prop with default value of null)
   try {
-    const { data } = await axios.post(
-      `${process.env.NUXT_APP_BACKEND_URL}/api/v1/bags`,
-      bag,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
-    alert(
-      data.name.en +
-        ' has been created successfully, navigate to catalog to see your newly created bag'
-    )
-    return data
+    if (!status) {
+      const { data } = await axios.post(
+        `${process.env.NUXT_APP_BACKEND_URL}/api/v1/bags`,
+        bag,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      alert(
+        data.name.en +
+          ' has been created successfully, navigate to catalog to see your newly created bag'
+      )
+      return data
+    } else {
+      const { data } = await axios.put(
+        `${process.env.NUXT_APP_BACKEND_URL}/api/v1/bags/${bag._id}`,
+        bag,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      alert(
+        data.name.en +
+          ' has been edited successfully, navigate to catalog to see your newly created bag'
+      )
+      return data
+    }
   } catch (error) {
     alert(error)
   }
