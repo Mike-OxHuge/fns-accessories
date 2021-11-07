@@ -11,7 +11,7 @@
       </v-col>
 
       <v-col cols="4" align-self="center">
-        <h1 class="text-right" @click="stage = null">Admin panel:</h1>
+        <h1 class="text-right" @click="pageReload()">Admin panel:</h1>
       </v-col>
 
       <v-col cols="4">
@@ -33,18 +33,10 @@
         <v-btn
           class="mx-auto"
           color="primary"
-          :disabled="amountOfFiles.length < 4"
           :loading="isLoading"
           @click="createDummyBag()"
           >Or create a test bag</v-btn
         >
-        <v-file-input
-          accept="image/*"
-          chips
-          multiple
-          label="but select some images first! (5 is enough)"
-          @change="(e) => setFiles(e)"
-        ></v-file-input>
       </div>
       <CreateEditForm v-if="currentStage === 'create'" />
       <BagSelector
@@ -57,11 +49,7 @@
 </template>
 
 <script>
-import {
-  uploadDefaultImage,
-  uploadVariantImages,
-  saveToDB,
-} from '../../composables/uploadHandlers.js'
+import { saveToDB } from '../../composables/uploadHandlers.js'
 import CreateEditForm from '~/components/admin/CreateEditForm.vue'
 import BagSelector from '~/components/admin/BagSelector.vue'
 
@@ -93,27 +81,36 @@ export default {
         },
         variants: [
           {
-            color: '#ffc20d',
-            colorName: { en: 'yellow', it: 'giallo' },
+            color: '#23ff00',
+            colorName: { en: 'green', it: 'verde' },
             price: '69',
             stock: 420,
-            images: [],
-            stripeProductId: 'price_1Jrk3EKuBnFIZzDsDfflC3bH',
+            images: [
+              'https://res.cloudinary.com/bollockses/image/upload/v1636225842/bags/bag-to-be-deleted-i6cvl2my1kvo6lzwn/variants/green-i6cvl2my1kvo6mbn0.jpg',
+              'https://res.cloudinary.com/bollockses/image/upload/v1636225840/bags/bag-to-be-deleted-i6cvl2my1kvo6lzwn/variants/green-i6cvl2my1kvo6m9tp.png',
+              'https://res.cloudinary.com/bollockses/image/upload/v1636225838/bags/bag-to-be-deleted-i6cvl2my1kvo6lzwn/variants/green-i6cvl2my1kvo6m8a5.png',
+            ],
+            stripeProductId: 'price_1JsuHqKuBnFIZzDsPENqBqAd',
           },
           {
-            color: '#00e676',
-            colorName: { en: 'green', it: 'verde' },
+            color: '#f40303',
+            colorName: { en: 'red', it: 'rojo' },
             price: '420',
             stock: 69,
-            images: [],
-            stripeProductId: 'price_1Jrk3EKuBnFIZzDsDfflC3bH',
+            images: [
+              'https://res.cloudinary.com/bollockses/image/upload/v1636225830/bags/bag-to-be-deleted-i6cvl2my1kvo6lzwn/variants/red-i6cvl2my1kvo6m237.png',
+              'https://res.cloudinary.com/bollockses/image/upload/v1636225833/bags/bag-to-be-deleted-i6cvl2my1kvo6lzwn/variants/red-i6cvl2my1kvo6m4d9.png',
+              'https://res.cloudinary.com/bollockses/image/upload/v1636225836/bags/bag-to-be-deleted-i6cvl2my1kvo6lzwn/variants/red-i6cvl2my1kvo6m5wz.png',
+            ],
+            stripeProductId: 'price_1JsuHoKuBnFIZzDsla5xM8Yu',
           },
         ],
         price: {
           amount: null,
           currency: 'EUR',
         },
-        defaultImage: null,
+        defaultImage:
+          'https://res.cloudinary.com/bollockses/image/upload/v1636225828/bags/bag-to-be-deleted-i6cvl2my1kvo6lzwn/to-be-deleted-i6cvl2my1kvo6lzwm.jpg',
       },
     }
   },
@@ -137,32 +134,20 @@ export default {
       this.$store.commit('eraseToken')
       this.$router.replace('/en')
     },
-    setFiles(e) {
-      this.amountOfFiles = e
-      this.bag.defaultImage = e[0]
-      this.bag.variants[0].images.push(e[1], e[2])
-      this.bag.variants[1].images.push(e[3], e[4])
-    },
     async createDummyBag() {
       this.isLoading = true
       try {
-        if (!this.product) {
-          this.cloudinaryFolderName = await uploadDefaultImage(this.bag)
-
-          if (this.bag.variants.length > 0) {
-            await uploadVariantImages(this.bag, this.cloudinaryFolderName)
-          }
-        }
-
         const response = await saveToDB(this.bag, this.product)
         this.bags.push(response)
       } catch (error) {
         alert(error)
       } finally {
         this.isLoading = false
-        this.amountOfFiles = []
-        // location.reload()
       }
+    },
+    pageReload() {
+      this.stage = ''
+      window.location.reload()
     },
   },
 }

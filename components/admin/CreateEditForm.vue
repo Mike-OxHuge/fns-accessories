@@ -35,17 +35,33 @@
 
     <section class="data">
       <v-file-input
+        v-if="!isImageUploaded"
         accept="image/*"
         label="Main cover image (will be used for featured section)"
         @change="(e) => setFile(e)"
       ></v-file-input>
+      <div v-else class="d-flex flex-column">
+        <h3 class="text-center">default image</h3>
+        <v-img width="200" :src="bag.defaultImage"></v-img>
+        <v-btn class="mx-auto my-2" color="error" @click="bag.defaultImage = ''"
+          >delete image</v-btn
+        >
+      </div>
       <v-dialog v-model="dialog">
         <template #activator="{ on, attrs }">
-          <v-btn v-bind="attrs" color="warning" v-on="on" @click="dialog = true"
+          <v-btn
+            v-bind="attrs"
+            color="warning"
+            class="my-auto"
+            v-on="on"
+            @click="dialog = true"
             >Add variant</v-btn
           >
         </template>
-        <VariantForm @add="(payload) => handleAdd(payload)" />
+        <VariantForm
+          :product="variant"
+          @add="(payload) => handleAdd(payload)"
+        />
       </v-dialog>
     </section>
 
@@ -60,6 +76,7 @@
           <DisplayVariant
             :variant="item"
             @deleteVariant="(payload) => deleteVariant(payload)"
+            @editVariant="(payload) => editVariant(payload)"
           />
         </v-col>
       </v-row>
@@ -71,13 +88,14 @@
       :disabled="!isValid"
       color="primary"
       block
-      >submit</v-btn
+      >{{ edit ? 'save' : 'create' }}</v-btn
     >
   </v-form>
 </template>
 
 <script>
-// import axios from 'axios'
+/* eslint-disable no-void */
+
 import { createVariantProduct } from '../../composables/stripeHandlers.js'
 import {
   uploadDefaultImage,
@@ -93,12 +111,16 @@ export default {
       type: Object,
       default: null,
     },
+    edit: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       dialog: false,
       isLoading: false,
-
+      variant: null,
       cloudinaryFolderName: '',
       bag: this.product
         ? this.product
@@ -127,16 +149,50 @@ export default {
       const { en, it } = description
       return en && it && name.en && name.it && variants.length > 0
     },
+    isImageUploaded() {
+      return typeof this.bag.defaultImage === 'string' &&
+        this.bag.defaultImage.length > 0
+        ? !!this.bag.defaultImage.includes('https')
+        : false
+      // return this.bag.defaultImage || this.bag.defaultImage.includes('https')
+    },
   },
 
   methods: {
     async handleSubmit() {
+      // if (!this.edit) {
       this.isLoading = true
       try {
-        if (!this.product) {
-          this.cloudinaryFolderName = await uploadDefaultImage(this.bag)
+        if (this.isImageUploaded) {
+          this.cloudinaryFolderName = this.bag.defaultImage.split('/')[8]
+        } else if (this.edit) {
+          // editing
+          // await this.deleteDefaultImage()
+          this.cloudinaryFolderName = await uploadDefaultImage(this.bag, false)
+        } else {
+          // creating
+          this.cloudinaryFolderName = await uploadDefaultImage(this.bag, true)
+        }
 
-          if (this.bag.variants.length > 0) {
+        if (this.bag.variants.length > 0) {
+          if (this.edit) {
+            const { data } = await this.$axios.get(
+              `/api/v1/bags/${this.product._id}`
+            )
+            // fetch the bag from db and compare with local data
+            if (
+              JSON.stringify(data.variants) !==
+              JSON.stringify(this.bag.variants)
+            ) {
+              console.log('local variants are different from remote ones') // TODO: upload files
+              console.log('local', JSON.stringify(this.bag.variants))
+              console.log('remote', JSON.stringify(data.variants))
+            } else {
+              console.log('local variants are the same as remote')
+              console.log('local', JSON.stringify(this.bag.variants))
+              console.log('remote', JSON.stringify(data.variants))
+            }
+          } else {
             await uploadVariantImages(this.bag, this.cloudinaryFolderName)
             for (let i = 0; i < this.bag.variants.length; i++) {
               this.bag.variants[i].stripeProductId = await createVariantProduct(
@@ -150,26 +206,31 @@ export default {
         await saveToDB(this.bag, this.product)
       } catch (error) {
         alert(error)
+        console.log(error)
       } finally {
         this.isLoading = false
-        this.bag = {
-          name: {
-            en: '',
-            it: '',
-          },
-          description: {
-            en: '',
-            it: '',
-          },
-          variants: [],
-          price: {
-            amount: null,
-            currency: 'EUR',
-          },
-          defaultImage: null,
+        if (!this.edit) {
+          this.bag = {
+            name: {
+              en: '',
+              it: '',
+            },
+            description: {
+              en: '',
+              it: '',
+            },
+            variants: [],
+            price: {
+              amount: null,
+              currency: 'EUR',
+            },
+            defaultImage: null,
+          }
         }
-        // location.reload()
       }
+      // } else {
+      //   console.log('bag to save:', this.bag)
+      // }
     },
 
     setFile(e) {
@@ -181,11 +242,40 @@ export default {
     },
 
     handleAdd(payload) {
-      this.bag.variants.push(payload)
-      this.dialog = false
+      if (this.edit) {
+        this.bag.variants = this.bag.variants.filter(
+          (e) => e._id !== payload._id
+        )
+        this.bag.variants.push(payload)
+        this.dialog = false
+      } else {
+        this.bag.variants.push(payload)
+        this.dialog = false
+      }
     },
     deleteVariant(payload) {
       this.bag.variants = this.bag.variants.filter((e) => e !== payload)
+    },
+
+    editVariant(payload) {
+      this.variant = payload
+      this.dialog = true
+    },
+
+    async deleteDefaultImage() {
+      const imageId = this.bag.defaultImage.split('/')
+      await this.$axios.post(
+        '/api/files/delete-image',
+        {
+          public_id:
+            imageId[7] + '/' + imageId[8] + '/' + imageId[9].split('.')[0],
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${this.$store.state.token}`,
+          },
+        }
+      )
     },
   },
 }

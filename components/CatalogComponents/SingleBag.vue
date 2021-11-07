@@ -100,11 +100,15 @@
                 class="mx-auto"
                 color="success"
                 @click="adminSelection(bag)"
-                disabled
               >
                 edit
               </v-btn>
-              <v-btn class="mx-auto" color="error" @click="adminDelete(bag)">
+              <v-btn
+                class="mx-auto"
+                color="error"
+                :loading="isLoading"
+                @click="adminDelete(bag)"
+              >
                 Delete
               </v-btn>
             </v-container>
@@ -146,6 +150,7 @@ export default {
       this.$emit('bagSelected', payload)
     },
     adminDelete(payload) {
+      this.isLoading = true
       this.$emit('bagDeleted', payload)
     },
   },

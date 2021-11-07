@@ -71,7 +71,7 @@
           color="success"
           class="mt-5"
           :disabled="!isValid"
-          >add</v-btn
+          >{{ product ? 'save' : 'add' }}</v-btn
         >
       </v-form>
     </v-container>
@@ -80,16 +80,24 @@
 
 <script>
 export default {
+  props: {
+    product: {
+      type: Object,
+      default: null,
+    },
+  },
   data() {
     return {
-      variant: {
-        color: '',
-        colorName: { en: '', it: '' },
-        price: null,
-        stock: null,
-        images: [],
-        stripeProductId: '',
-      },
+      variant: this.product
+        ? this.product
+        : {
+            color: '',
+            colorName: { en: '', it: '' },
+            price: null,
+            stock: null,
+            images: [],
+            stripeProductId: '',
+          },
     }
   },
   computed: {
