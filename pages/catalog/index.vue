@@ -46,7 +46,7 @@ export default {
     this.fetching()
   },
   mounted() {
-    //
+    this.$store.commit('resetCounter')
   },
   methods: {
     async fetching() {

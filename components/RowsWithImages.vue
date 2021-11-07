@@ -8,6 +8,7 @@
               callback: (isVisible, entry) =>
                 isViewableNow(isVisible, entry, 'b'),
             }"
+            eager
             :src="image"
             :class="{
               [animatedImage]: showAnimationFor.b,
@@ -40,6 +41,7 @@
             callback: (isVisible, entry) =>
               isViewableNow(isVisible, entry, 'b'),
           }"
+          eager
           :src="image"
           :class="{
             [animatedImage]: showAnimationFor.b,

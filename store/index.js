@@ -28,6 +28,7 @@ const store = {
   state() {
     return {
       token: '',
+      counter: 0,
     }
   },
   // state: {
@@ -39,6 +40,12 @@ const store = {
     },
     eraseToken(state) {
       state.token = ''
+    },
+    incCounter(state) {
+      state.counter++
+    },
+    resetCounter(state) {
+      state.counter = 0
     },
   },
   actions: {

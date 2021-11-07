@@ -15,7 +15,12 @@
           {{ $i18n.locale === 'it' ? bag.description.it : bag.description.en }}
         </p>
         <DetailedBag v-if="variant !== null" :bag="variant[0]" />
-        <v-btn v-if="variant" color="primary" :loading="isLoading" @click="buy"
+        <v-btn
+          v-if="variant"
+          color="primary"
+          :loading="isLoading"
+          :disabled="variant[0].stock <= 0"
+          @click="buy"
           >Buy now for EUR {{ variant[0].price }}</v-btn
         >
       </v-container>
@@ -41,7 +46,7 @@ export default {
     this.getBag()
   },
   mounted() {
-    //
+    this.$store.commit('resetCounter')
   },
   methods: {
     async getBag() {

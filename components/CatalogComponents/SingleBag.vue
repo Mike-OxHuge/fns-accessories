@@ -25,15 +25,15 @@
         </v-row>
       </v-card-title>
 
-      <v-card-text class="accent--text">{{
+      <!-- <v-card-text class="accent--text">{{
         $i18n.locale === 'it' ? bag.description.it : bag.description.en
-      }}</v-card-text>
+      }}</v-card-text> -->
       <v-row no-gutters justify="center">
         <v-col v-for="variant in bag.variants" :key="variant._id">
           <v-container mx-auto pa-0 class="d-flex justify-center">
             <v-chip
               :color="variant.color"
-              :disabled="variant.stock === 0"
+              :disabled="variant.stock <= 0"
               @click="
                 ;(selectedImage = variant.images[0]), (selectedBag = variant)
               "
@@ -72,7 +72,7 @@
             >
               <v-btn
                 color="primary"
-                :disabled="selectedBag.stock === 0"
+                :disabled="selectedBag.stock <= 0"
                 :loading="isLoading"
                 @click="buy"
               >
@@ -131,7 +131,8 @@ export default {
     return {
       isLoading: false,
       selectedImage: null,
-      selectedBag: this.bag.variants[0], // default value, the bag object
+      // selectedBag: this.bag.variants[0], // default value, the bag object
+      selectedBag: this.bag.variants.find((e) => e.stock > 0),
       stripe: null,
     }
   },

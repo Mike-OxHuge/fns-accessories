@@ -20,7 +20,14 @@
       <v-row no-gutters style="height: 100%">
         <v-col cols="12" sm="12" md="6">
           <v-sheet
-            class="text-center left-one pt-10 d-flex flex-column justify-space-between"
+            class="
+              text-center
+              left-one
+              pt-10
+              d-flex
+              flex-column
+              justify-space-between
+            "
           >
             <v-container fluid pt-10>
               <h3>{{ $t('message2') }}</h3>
@@ -40,7 +47,14 @@
 
         <v-col cols="12" sm="12" md="6">
           <v-sheet
-            class="text-center right-one pt-10 d-flex flex-column justify-space-between"
+            class="
+              text-center
+              right-one
+              pt-10
+              d-flex
+              flex-column
+              justify-space-between
+            "
           >
             <v-container fluid pt-10>
               <h3>{{ $t('message4') }}</h3>
