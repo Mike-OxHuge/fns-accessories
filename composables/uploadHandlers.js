@@ -1,7 +1,23 @@
 import axios from 'axios'
+
 const { token } = window.sessionStorage.data?.includes('token')
   ? JSON.parse(window.sessionStorage.data)
   : {}
+
+// const getToken = () => {
+//   const getter = () => {
+//     if (window.$nuxt.$store.state.token) {
+//       clearInterval(timer)
+//       console.log(window.$nuxt.$store.state.token)
+//       return window.$nuxt.$store.state.token
+//     } else {
+//       return ''
+//     }
+//   }
+//   const timer = setInterval(getter, 5000)
+// }
+// const token = getToken() ? getToken() : ''
+// console.log(token)
 
 export const uploadDefaultImage = async (bag, isNew) => {
   try {

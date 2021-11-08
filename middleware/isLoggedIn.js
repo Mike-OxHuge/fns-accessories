@@ -1,11 +1,9 @@
 import axios from 'axios'
 
 export default async function isLoggedIn(context) {
-  // console.log(window.sessionStorage.length)
-  const { token } = window.sessionStorage.data
-    ? JSON.parse(window.sessionStorage.data)
-    : {}
-  // console.log('Bearer ', token) // token is here
+  const { token } = context.store.state
+  // console.log('isLoggedInMiddleware', token) // available
+
   try {
     const validator = await axios.post(
       `${process.env.NUXT_APP_BACKEND_URL}/api/admin/auth`,

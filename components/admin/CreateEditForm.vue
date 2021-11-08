@@ -157,6 +157,9 @@ export default {
       // return this.bag.defaultImage || this.bag.defaultImage.includes('https')
     },
   },
+  mounted() {
+    //
+  },
 
   methods: {
     async handleSubmit() {

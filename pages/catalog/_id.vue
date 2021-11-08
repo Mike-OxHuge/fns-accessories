@@ -46,7 +46,7 @@ export default {
     this.getBag()
   },
   mounted() {
-    this.$store.commit('resetCounter')
+    // this.$store.commit('resetCounter')
   },
   methods: {
     async getBag() {

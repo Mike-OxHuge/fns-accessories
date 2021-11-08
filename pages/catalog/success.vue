@@ -61,15 +61,14 @@
 export default {
   // destructuring context
   async asyncData({ $axios, route, store, i18n, redirect }) {
-    if (store.state.counter > 0) {
-      redirect(`/${i18n.locale}/`)
-    } else {
-      const { data } = await $axios.get(
-        `/api/v1/purchase/order-status?session_id=${route.query.session_id}`
-      )
-      // console.log('fetch')
-      return { data }
-    }
+    // if (store.state.counter > 0) {
+    //   redirect(`/${i18n.locale}/`)
+    // } else {
+    const { data } = await $axios.get(
+      `/api/v1/purchase/order-status?session_id=${route.query.session_id}`
+    )
+    return { data }
+    // }
   },
   data() {
     return {
