@@ -101,15 +101,15 @@ export default {
             )
           })
 
-          // delete from DB
+          // real bag, delete from DB and delete images/folders
           await this.$axios.delete(`/api/v1/bags/${payload._id}`, {
             headers: {
               Authorization: `Bearer ${this.$store.state.token}`,
             },
           })
         } else {
-          // delete from DB
-          await this.$axios.delete(`/api/v1/bags/${payload._id}`, {
+          // test bag, delete from DB only
+          await this.$axios.delete(`/api/v1/bags/${payload._id}?test=true`, {
             headers: {
               Authorization: `Bearer ${this.$store.state.token}`,
             },
