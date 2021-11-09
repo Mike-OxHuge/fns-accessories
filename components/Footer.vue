@@ -9,11 +9,11 @@
 }
 </i18n>
 <template>
-  <v-main id="header">
+  <v-footer id="header">
     <v-container class="text-center">
       <p class="my-2 px-5">{{ $t('message') }}</p>
     </v-container>
-  </v-main>
+  </v-footer>
 </template>
 
 <script>

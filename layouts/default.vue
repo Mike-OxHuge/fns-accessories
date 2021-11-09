@@ -2,7 +2,9 @@
   <v-app>
     <Header />
     <LocaleSwitcher />
+    <!-- <v-main> -->
     <nuxt keep-alive />
+    <!-- </v-main> -->
     <Social />
     <Footer />
   </v-app>

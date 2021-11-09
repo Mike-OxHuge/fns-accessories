@@ -1,5 +1,5 @@
 <template>
-  <div id="bg" class="bg">
+  <v-main id="bg" class="bg">
     <v-container mt-3>
       <v-icon color="primary" @click="$router.go(-1)"
         >arrow_back_ios_new
@@ -28,7 +28,7 @@
         </v-col>
       </v-row>
     </v-container>
-  </div>
+  </v-main>
 </template>
 
 <script>

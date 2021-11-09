@@ -1,25 +1,25 @@
 <template>
-  <v-container>
-    <span
-      >{{ bag.stock }}
+  <v-container pa-0 d-flex flex-column>
+    <!-- <span>
+      {{ bag.stock }}
       {{
         $i18n.locale === 'it'
           ? `${bag.colorName.it} disponibile`
           : `${bag.colorName.en} available`
-      }}</span
-    >
+      }}
+    </span> -->
     <v-img
       :src="selectedImage === null ? bag.images[0] : selectedImage"
-      width="300"
-      height="300"
+      width="800"
+      :max-height="responsiveImageHeight"
       contain
       class="mx-auto"
     ></v-img>
-    <div>
+    <div class="mt-auto">
       <v-sheet
         elevation="8"
         max-width="800"
-        class="mx-auto my-2"
+        class="mx-auto"
         style="background: rgba(0, 0, 0, 0.5); border-radius: 20px"
       >
         <v-slide-group v-model="model">
@@ -33,7 +33,7 @@
                 :src="image"
                 class="clickableImage"
                 :max-width="$vuetify.breakpoint.smAndDown ? '50' : '100'"
-                @click="selectedImage = image"
+                @click="selection(image)"
               ></v-img>
             </v-card>
           </v-slide-item>
@@ -68,6 +68,17 @@ export default {
   computed: {
     variantImages() {
       return this.bag.images?.length > 0 ? [...this.bag.images] : this.images
+    },
+    responsiveImageHeight() {
+      return this.$vuetify.breakpoint.lg ? '400' : '600'
+    },
+    // selection() {
+    //   return null
+    // },
+  },
+  methods: {
+    selection(image) {
+      this.selectedImage = image
     },
   },
 }
