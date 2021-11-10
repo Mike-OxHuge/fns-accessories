@@ -34,6 +34,14 @@ export default {
       catalog: [],
     }
   },
+  head: {
+    title: 'Home page |',
+    meta: [
+      {
+        //
+      },
+    ],
+  },
   mounted() {
     // this.wakeup()
   },

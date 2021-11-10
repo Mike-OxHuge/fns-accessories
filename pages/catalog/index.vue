@@ -51,6 +51,14 @@ export default {
       catalog: [],
     }
   },
+  head: {
+    title: 'Catalog |',
+    meta: [
+      {
+        //
+      },
+    ],
+  },
   beforeMount() {
     this.fetching()
   },

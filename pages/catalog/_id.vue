@@ -95,11 +95,38 @@ export default {
     )
     this.bag = await wholeBag
   },
+  head() {
+    return {
+      title: this.pageTitle,
+      meta: [
+        {
+          //
+        },
+      ],
+    }
+  },
   computed: {
     variant() {
       return this.bag.variants.filter(
         (v) => v._id === this.$route.query.variant
       )
+    },
+    pageTitle() {
+      let title = ''
+      if (this.bag) {
+        if (this.$route.query.variant) {
+          title =
+            this.$i18n.locale === 'it'
+              ? `${this.bag.name.it} (${this.variant[0].colorName.it}) |`
+              : `${this.bag.name.en} (${this.variant[0].colorName.en}) |`
+        } else {
+          title =
+            this.$i18n.locale === 'it'
+              ? this.bag.name.it + ' |'
+              : this.bag.name.en + ' |'
+        }
+      }
+      return title
     },
   },
   created() {

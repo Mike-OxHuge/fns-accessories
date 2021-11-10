@@ -12,10 +12,10 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - fns-accessories',
-    title: 'fns-accessories',
+    titleTemplate: '%s F&S shop',
+    title: '',
     head: {
-      script: [{ src: 'https://js.stripe.com/v3' }],
+      // script: [{ src: 'https://js.stripe.com/v3' }],
     },
     meta: [
       { charset: 'utf-8' },
