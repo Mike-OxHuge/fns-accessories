@@ -1,5 +1,6 @@
 <template>
   <v-main id="bg" class="bg">
+    <!-- skeleton -->
     <v-row
       v-if="isLoading"
       justify="center"
@@ -13,8 +14,9 @@
         <v-skeleton-loader type="heading, paragraph@2"></v-skeleton-loader>
       </v-col>
     </v-row>
+    <!-- content with query -->
     <v-row
-      v-else
+      v-else-if="!isLoading && $route.query.variant"
       class="accent--text ma-auto"
       justify="center"
       style="max-width: 100%"
@@ -64,6 +66,14 @@
         >
       </v-col>
     </v-row>
+    <!-- content without query -->
+    <v-container v-else-if="!isLoading && !$route.query.variant">
+      <v-row justify="center">
+        <v-col cols="auto" sm="12" md="6">
+          <SingleBag :bag="bag" />
+        </v-col>
+      </v-row>
+    </v-container>
     <v-container class="accent--text text-center" d-flex justify-center>
       <!-- <v-container v-else pt-0>
         <div class="d-flex justify-center">
@@ -93,10 +103,11 @@
 
 <script>
 import DetailedBag from '~/components/CatalogComponents/DetailedBag.vue'
+import SingleBag from '~/components/CatalogComponents/SingleBag.vue'
 import { handlePurchase } from '~/composables/stripeHandlers.js'
 
 export default {
-  components: { DetailedBag },
+  components: { DetailedBag, SingleBag },
   data() {
     return {
       isLoading: false,

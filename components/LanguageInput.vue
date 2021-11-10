@@ -7,9 +7,16 @@
         cols="6"
       >
         <nuxt-link :to="switchLocalePath(lang)">
-          <span @click="test()">
+          <v-btn
+            :x-small="$vuetify.breakpoint.smAndDown"
+            :medium="$vuetify.breakpoint.mdAndUp"
+            color="primary"
+            :outlined="lang !== $i18n.locale"
+            class="black--text"
+            :class="{ 'ml-2': $vuetify.breakpoint.smAndDown }"
+          >
             {{ lang.toUpperCase() }}
-          </span>
+          </v-btn>
         </nuxt-link>
       </v-col>
     </v-row>
@@ -45,14 +52,9 @@ export default {
   position: absolute;
   top: 0;
   right: 0;
-  /* left: translateX(60%); */
-  /* left: 70vw; */
   z-index: 9999;
   max-width: fit-content;
   box-sizing: border-box;
   background: rgba(255, 255, 255, 0);
-}
-.switcher span {
-  padding: 0.5rem 1rem;
 }
 </style>

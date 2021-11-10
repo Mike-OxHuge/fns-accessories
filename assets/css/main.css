@@ -13,14 +13,7 @@ p,
 span {
   font-family: 'Itim', cursive;
 }
-.active-link {
-  background-color: rgba(110, 89, 230, 0.747);
-  border: white 1px solid;
-  border-radius: 20px;
-}
-.active-link span {
-  color: black;
-}
+
 a {
   text-decoration: none;
 }
