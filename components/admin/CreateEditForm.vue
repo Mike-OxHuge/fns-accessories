@@ -122,7 +122,14 @@ export default {
     return {
       dialog: false,
       isLoading: false,
-      variant: null,
+      variant: {
+        color: '',
+        colorName: { en: '', it: '' },
+        price: null,
+        stock: null,
+        images: [],
+        stripeProductId: '',
+      },
       cloudinaryFolderName: '',
       bag: this.product
         ? this.product
