@@ -8,6 +8,7 @@
           :is-admin="true"
           @bagSelected="(payload) => bagIsChosen(payload)"
           @bagDeleted="(payload) => deleteTheBag(payload)"
+          @setFeatured="(payload) => setFeatured(payload)"
         />
       </v-col>
     </v-row>
@@ -40,7 +41,6 @@ export default {
       try {
         if (!payload.name.en.includes('deleted')) {
           // here the code the delete cloudinary images
-          // TODO: handle stripe product deletion
           const imagesIDs = []
           const mainImageId = payload.defaultImage.split('/')
           imagesIDs.push(
@@ -121,6 +121,21 @@ export default {
       } finally {
         this.$emit('bagDeleted', payload)
       }
+    },
+    async setFeatured(payload) {
+      const { bag, status } = payload
+      // await console.log(bag, status)
+      await this.$axios.put(
+        `/api/v1/bags/${bag._id}`,
+        {
+          featured: status,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${this.$store.state.token}`,
+          },
+        }
+      )
     },
   },
 }

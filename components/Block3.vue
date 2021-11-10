@@ -23,30 +23,63 @@
 }
 </i18n>
 <template>
-  <v-container style="overflow: hidden">
+  <v-container v-if="featuredBags.length > 0" style="overflow: hidden">
     <RowsWithImages
+      v-if="featuredBags.length >= 1"
+      :id="featuredBags[0]._id"
       :is-left="true"
-      :image="'/images/bag-in-use.png'"
-      :header="`${$t('title1')}`"
-      :description="`${$t('article1')}`"
+      :image="featuredBags[0].defaultImage"
+      :header="
+        $i18n.locale === 'it'
+          ? featuredBags[0].name.it
+          : featuredBags[0].name.en
+      "
+      :description="
+        $i18n.locale === 'it'
+          ? featuredBags[0].description.it
+          : featuredBags[0].description.en
+      "
       :image-animation="'flipInY'"
       :text-animation="'lightSpeedIn'"
     />
-    <v-divider class="mx-4 my-15 py-15"></v-divider>
+    <v-divider
+      v-if="featuredBags.length >= 2"
+      class="mx-4 my-15 py-15"
+    ></v-divider>
     <RowsWithImages
+      v-if="featuredBags.length >= 2"
+      :id="featuredBags[1]._id"
       :is-left="false"
-      :image="'/images/bag-in-use-2.png'"
-      :header="`${$t('title2')}`"
-      :description="`${$t('article2')}`"
-      :image-animation="'animated-flip'"
+      :image="featuredBags[1].defaultImage"
+      :header="
+        $i18n.locale === 'it'
+          ? featuredBags[1].name.it
+          : featuredBags[1].name.en
+      "
+      :description="
+        $i18n.locale === 'it'
+          ? featuredBags[1].description.it
+          : featuredBags[1].description.en
+      "
+      :image-animation="'rotateInDownRight'"
       :text-animation="'tada'"
     />
-    <v-divider class="mx-4 my-15"></v-divider>
+    <v-divider v-if="featuredBags.length >= 3" class="mx-4 my-15"></v-divider>
     <RowsWithImages
+      v-if="featuredBags.length >= 3"
+      :id="featuredBags[2]._id"
       :is-left="true"
-      :image="'/images/bag-and-coffee.png'"
-      :header="`${$t('title3')}`"
-      :description="`${$t('article3')}`"
+      :image="featuredBags[2].defaultImage"
+      :header="
+        $i18n.locale === 'it'
+          ? featuredBags[2].name.it
+          : featuredBags[2].name.en
+      "
+      :description="
+        $i18n.locale === 'it'
+          ? featuredBags[2].description.it
+          : featuredBags[2].description.en
+      "
       :image-animation="'fadeIn'"
       :text-animation="'fadeInSlow'"
     />
@@ -62,10 +95,22 @@ Vue.use(VueObserveVisibility)
 
 export default {
   components: { RowsWithImages },
+  props: {
+    catalog: { type: Array, default: () => [] },
+  },
   data() {
     return {
       //
     }
+  },
+  computed: {
+    featuredBags() {
+      return this.catalog.filter((item) => item.featured).slice(0, 3)
+    },
+  },
+  mounted() {
+    // console.log('featured bags: ', this.featuredBags)
+    // TODO: featured bags on main page
   },
   methods: {
     //

@@ -23,6 +23,15 @@
           <p>{{ $i18n.locale === 'it' ? bag.name.it : bag.name.en }}</p>
           <p>EUR • {{ selectedBag.price }}</p>
         </v-row>
+        <v-btn
+          v-if="isAdmin"
+          color="primary"
+          :outlined="!isFeatured"
+          class="ma-auto"
+          block
+          @click="setFeatured(bag)"
+          >{{ bag.featured ? 'remove ' : 'set ' }} featured
+        </v-btn>
       </v-card-title>
 
       <!-- <v-card-text class="accent--text">{{
@@ -134,6 +143,7 @@ export default {
       // selectedBag: this.bag.variants[0], // default value, the bag object
       selectedBag: this.bag.variants.find((e) => e.stock > 0),
       stripe: null,
+      isFeatured: this.bag.featured,
     }
   },
   mounted() {
@@ -153,6 +163,10 @@ export default {
     adminDelete(payload) {
       this.isLoading = true
       this.$emit('bagDeleted', payload)
+    },
+    setFeatured(payload) {
+      this.isFeatured = !this.isFeatured
+      this.$emit('setFeatured', { bag: payload, status: this.isFeatured })
     },
   },
 }

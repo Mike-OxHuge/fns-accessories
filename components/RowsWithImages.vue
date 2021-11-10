@@ -31,7 +31,13 @@
           }"
         >
           <h1>{{ header }}</h1>
-          <p>{{ description }}</p>
+          <p>{{ description.split('.')[0] }}</p>
+          <v-btn
+            color="primary"
+            @click="$router.push(`/${$i18n.locale}/catalog/${id}`)"
+          >
+            {{ $i18n.locale === 'it' ? 'Vedi altro' : 'see more' }}
+          </v-btn>
         </v-container>
       </v-col>
 
@@ -39,13 +45,13 @@
         <v-img
           v-observe-visibility="{
             callback: (isVisible, entry) =>
-              isViewableNow(isVisible, entry, 'b'),
+              isViewableNow(isVisible, entry, 'c'),
           }"
           eager
           :src="image"
           :class="{
-            [animatedImage]: showAnimationFor.b,
-            invisible: !showAnimationFor.b,
+            [animatedImage]: showAnimationFor.c,
+            invisible: !showAnimationFor.c,
           }"
         ></v-img>
       </v-col>
@@ -66,6 +72,7 @@ export default {
     description: { type: String, required: true },
     imageAnimation: { type: String, required: true },
     textAnimation: { type: String, required: true },
+    id: { type: String, required: true },
   },
   data() {
     return {
@@ -73,6 +80,7 @@ export default {
       showAnimationFor: {
         a: false,
         b: false,
+        c: false,
       },
       animatedText: `visible animated ${this.textAnimation}`,
       animatedImage: `visible animated ${this.imageAnimation}`,

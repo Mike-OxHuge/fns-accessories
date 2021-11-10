@@ -39,6 +39,7 @@
               <v-col cols="12">
                 <v-file-input
                   accept="image/*"
+                  :disabled="edit"
                   chips
                   multiple
                   label="Images (ORDER MATTERS:the first (by name) will be used as default)"
@@ -55,6 +56,7 @@
               outlined
               label="price"
               placeholder="set price"
+              :disabled="edit"
             ></v-text-field>
             <v-text-field
               v-model="variant.stock"
@@ -83,21 +85,30 @@ export default {
   props: {
     product: {
       type: Object,
-      default: null,
+      default: () => ({
+        color: '',
+        colorName: { en: '', it: '' },
+        price: null,
+        stock: null,
+        images: [],
+        stripeProductId: '',
+      }),
+    },
+    edit: {
+      type: Boolean,
+      required: true,
     },
   },
   data() {
     return {
-      variant: this.product
-        ? this.product
-        : {
-            color: '',
-            colorName: { en: '', it: '' },
-            price: null,
-            stock: null,
-            images: [],
-            stripeProductId: '',
-          },
+      variant: {
+        color: '',
+        colorName: { en: '', it: '' },
+        price: null,
+        stock: null,
+        images: [],
+        stripeProductId: '',
+      },
     }
   },
   computed: {
@@ -114,6 +125,19 @@ export default {
       )
     },
   },
+  watch: {
+    product: {
+      immediate: true,
+      handler(newVal, oldVal) {
+        if (oldVal !== newVal) {
+          this.variant = newVal
+        } else {
+          this.variant = oldVal
+        }
+      },
+    },
+  },
+
   methods: {
     setFiles(e) {
       try {

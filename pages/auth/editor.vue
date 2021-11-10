@@ -54,6 +54,7 @@ import CreateEditForm from '~/components/admin/CreateEditForm.vue'
 import BagSelector from '~/components/admin/BagSelector.vue'
 
 export default {
+  name: 'Admin',
   components: { CreateEditForm, BagSelector },
 
   layout: 'admin',

@@ -60,6 +60,7 @@
         </template>
         <VariantForm
           :product="variant"
+          :edit="edit"
           @add="(payload) => handleAdd(payload)"
         />
       </v-dialog>
@@ -75,6 +76,7 @@
         >
           <DisplayVariant
             :variant="item"
+            :edit="edit"
             @deleteVariant="(payload) => deleteVariant(payload)"
             @editVariant="(payload) => editVariant(payload)"
           />
@@ -187,13 +189,13 @@ export default {
               JSON.stringify(data.variants) !==
               JSON.stringify(this.bag.variants)
             ) {
-              console.log('local variants are different from remote ones') // TODO: upload files
-              console.log('local', JSON.stringify(this.bag.variants))
-              console.log('remote', JSON.stringify(data.variants))
+              // console.log('local variants are different from remote ones') // TODO: upload files
+              // console.log('local', JSON.stringify(this.bag.variants))
+              // console.log('remote', JSON.stringify(data.variants))
             } else {
-              console.log('local variants are the same as remote')
-              console.log('local', JSON.stringify(this.bag.variants))
-              console.log('remote', JSON.stringify(data.variants))
+              // console.log('local variants are the same as remote')
+              // console.log('local', JSON.stringify(this.bag.variants))
+              // console.log('remote', JSON.stringify(data.variants))
             }
           } else {
             await uploadVariantImages(this.bag, this.cloudinaryFolderName)
@@ -209,7 +211,7 @@ export default {
         await saveToDB(this.bag, this.product)
       } catch (error) {
         alert(error)
-        console.log(error)
+        // console.log(error)
       } finally {
         this.isLoading = false
         if (!this.edit) {
@@ -261,6 +263,7 @@ export default {
     },
 
     editVariant(payload) {
+      this.variant = null
       this.variant = payload
       this.dialog = true
     },

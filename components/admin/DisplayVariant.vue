@@ -10,7 +10,12 @@
     <v-btn class="mx-2" color="success" @click="$emit('editVariant', variant)"
       >edit</v-btn
     >
-    <v-btn color="error" @click="$emit('deleteVariant', variant)">delete</v-btn>
+    <v-btn
+      color="error"
+      :disabled="edit"
+      @click="$emit('deleteVariant', variant)"
+      >delete</v-btn
+    >
   </v-container>
 </template>
 
@@ -21,6 +26,7 @@ export default {
       type: Object,
       default: () => {},
     },
+    edit: { type: Boolean, default: false },
   },
 }
 </script>

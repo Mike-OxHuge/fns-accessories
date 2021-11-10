@@ -2,7 +2,7 @@
   <v-main>
     <Block1 />
     <Block2 />
-    <Block3 />
+    <Block3 :catalog="catalog" />
     <!-- <v-divider v-if="$vuetify.breakpoint.smAndDown" class="mx-4"></v-divider>
     <Block4 />
     <v-divider v-if="$vuetify.breakpoint.smAndDown" class="mx-4"></v-divider>
@@ -25,11 +25,17 @@ export default {
     // Block4,
     // Block5,
   },
+  async asyncData({ $axios }) {
+    const { data } = await $axios.get('/api/v1/bags')
+    return { catalog: data }
+  },
   data() {
-    return {}
+    return {
+      catalog: [],
+    }
   },
   mounted() {
-    this.wakeup()
+    // this.wakeup()
   },
   methods: {
     async wakeup() {
