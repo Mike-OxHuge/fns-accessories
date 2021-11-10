@@ -59,10 +59,8 @@
           :loading="isLoading"
           :disabled="variant[0].stock <= 0"
           @click="buy"
-          >{{
-            $i18n.locale === 'it' ? `Compra ora per EUR` : `Buy now for EUR`
-          }}
-          {{ variant[0].price }}</v-btn
+          >{{ $i18n.locale === 'it' ? `Compra ora per €` : `Buy now for €`
+          }}{{ variant[0].price }}</v-btn
         >
       </v-col>
     </v-row>

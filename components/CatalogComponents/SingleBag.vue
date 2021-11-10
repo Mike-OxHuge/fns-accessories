@@ -21,7 +21,7 @@
       <v-card-title>
         <v-row justify="space-between" class="px-2">
           <p>{{ $i18n.locale === 'it' ? bag.name.it : bag.name.en }}</p>
-          <p>EUR • {{ selectedBag.price }}</p>
+          <p>€{{ selectedBag.price }}</p>
         </v-row>
         <v-btn
           v-if="isAdmin"
@@ -56,21 +56,21 @@
           </v-container>
         </v-col>
 
-        <v-col cols="8">
+        <v-col cols="12">
           <v-container mx-auto pa-0 class="text-center accent--text">
             <span class="text-center">
               {{ selectedBag.stock }}
               {{
                 $i18n.locale === 'it'
                   ? `${selectedBag.colorName.it} disponibile`
-                  : `${selectedBag.colorName.en} available`
+                  : `${selectedBag.colorName.en} in stock`
               }}
             </span>
           </v-container>
         </v-col>
 
         <v-col cols="12">
-          <v-card-actions>
+          <v-card-actions class="px-0 pb-0">
             <v-container
               v-if="!isAdmin"
               d-flex
@@ -80,6 +80,7 @@
               class="text-center"
             >
               <v-btn
+                medium
                 color="primary"
                 :disabled="selectedBag.stock <= 0"
                 :loading="isLoading"
@@ -88,6 +89,7 @@
                 Buy now
               </v-btn>
               <v-btn
+                medium
                 color="primary"
                 @click="
                   $router.push(

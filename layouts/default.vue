@@ -2,7 +2,7 @@
   <v-app>
     <Header />
     <!-- <v-main> -->
-    <nuxt keep-alive />
+    <nuxt />
     <!-- </v-main> -->
     <Social />
     <Footer />

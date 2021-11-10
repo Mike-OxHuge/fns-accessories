@@ -31,7 +31,7 @@
           }"
         >
           <h1>{{ header }}</h1>
-          <p>{{ description.split('.')[0] }}</p>
+          <p>{{ description.split('.')[0] }}.</p>
           <v-btn
             color="primary"
             @click="$router.push(`/${$i18n.locale}/catalog/${id}`)"
