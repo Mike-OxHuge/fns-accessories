@@ -103,8 +103,8 @@
 
 <script>
 import { loadStripe } from '@stripe/stripe-js'
-import CheckoutError from './CheckoutError.vue'
-import CheckoutSuccess from './CheckoutSuccess.vue'
+import CheckoutError from '../components/CatalogComponents./../legacy/CheckoutError.vue'
+import CheckoutSuccess from '../components/CatalogComponents./../legacy/CheckoutSuccess.vue'
 export default {
   components: {
     CheckoutError,

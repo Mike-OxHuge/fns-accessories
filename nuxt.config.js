@@ -15,7 +15,7 @@ export default {
     titleTemplate: '%s F&S shop',
     title: '',
     head: {
-      // script: [{ src: 'https://js.stripe.com/v3' }],
+      //
     },
     meta: [
       { charset: 'utf-8' },
@@ -28,11 +28,6 @@ export default {
         href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
         rel: 'stylesheet',
       },
-      // {
-      //   rel: 'stylesheet',
-      //   href:
-      //     'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css',
-      // },
     ],
   },
   router: { linkExactActiveClass: 'active-link' },
@@ -41,10 +36,7 @@ export default {
   css: ['@/assets/css/main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    { src: '~/plugins/vuex-persisten', ssr: false },
-    // { src: '~/src/plugins/stripe.js' },
-  ],
+  plugins: [{ src: '~/plugins/vuex-persisten', ssr: false }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
