@@ -2,7 +2,7 @@
   <v-main id="bg" class="bg">
     <!-- skeleton -->
     <v-row
-      v-if="isLoading"
+      v-if="$fetchState.pending"
       justify="center"
       style="max-width: 100%"
       class="ma-auto"
@@ -16,7 +16,7 @@
     </v-row>
     <!-- content with query -->
     <v-row
-      v-else-if="!isLoading && $route.query.variant"
+      v-else-if="!$fetchState.pending && $route.query.variant"
       class="accent--text ma-auto"
       justify="center"
       style="max-width: 100%"
@@ -25,7 +25,7 @@
         <v-icon
           class="mx-auto mt-15 mb-auto"
           color="primary"
-          @click="$router.go(-1)"
+          @click="$router.push(`/${$i18n.locale}/catalog`)"
         >
           arrow_back_ios_new
         </v-icon>
@@ -39,7 +39,7 @@
           {{ $i18n.locale === 'it' ? bag.name.it : bag.name.en }}
         </h1>
         <p
-          class="my-auto pa-2"
+          class="my-auto pa-3"
           style="background: rgba(0, 0, 0, 0.5); border-radius: 20px"
         >
           {{ $i18n.locale === 'it' ? bag.description.it : bag.description.en }}
@@ -48,7 +48,7 @@
           {{ variant[0].stock }}
           {{
             $i18n.locale === 'it'
-              ? `${variant[0].colorName.it} borse disponibile`
+              ? `borse ${variant[0].colorName.it} disponibile`
               : `${variant[0].colorName.en} bags available`
           }}
         </p>
@@ -67,36 +67,12 @@
       </v-col>
     </v-row>
     <!-- content without query -->
-    <v-container v-else-if="!isLoading && !$route.query.variant">
+    <v-container v-else-if="!$fetchState.pending && !$route.query.variant">
       <v-row justify="center">
         <v-col cols="auto" sm="12" md="6">
           <SingleBag :bag="bag" />
         </v-col>
       </v-row>
-    </v-container>
-    <v-container class="accent--text text-center" d-flex justify-center>
-      <!-- <v-container v-else pt-0>
-        <div class="d-flex justify-center">
-          <v-icon class="mr-auto" color="primary" @click="$router.go(-1)"
-            >arrow_back_ios_new</v-icon
-          >
-          <h1 class="mr-auto">
-            {{ $i18n.locale === 'it' ? bag.name.it : bag.name.en }}
-          </h1>
-        </div>
-        <p>
-          {{ $i18n.locale === 'it' ? bag.description.it : bag.description.en }}
-        </p>
-        <DetailedBag v-if="variant !== null" :bag="variant[0]" />
-        <v-btn
-          v-if="variant"
-          color="primary"
-          :loading="isLoading"
-          :disabled="variant[0].stock <= 0"
-          @click="buy"
-          >Buy now for EUR {{ variant[0].price }}</v-btn
-        >
-      </v-container> -->
     </v-container>
   </v-main>
 </template>
@@ -112,15 +88,30 @@ export default {
     return {
       isLoading: false,
       bag: null,
-      variant: null,
+      // variant: null,
     }
+  },
+  async fetch() {
+    const wholeBag = await this.$axios.$get(
+      `/api/v1/bags/${this.$route.params.id}`
+    )
+    this.bag = await wholeBag
+  },
+  computed: {
+    variant() {
+      return this.bag.variants.filter(
+        (v) => v._id === this.$route.query.variant
+      )
+    },
   },
   created() {
     //
-    this.getBag()
+    // this.getBag()
   },
   mounted() {
-    // this.$store.commit('resetCounter')
+    // this.variant = this.wholeBag.variants.filter(
+    //   (e) => e._id === this.$route.query.variant
+    // )[0]
   },
   methods: {
     async getBag() {

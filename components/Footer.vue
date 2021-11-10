@@ -1,10 +1,10 @@
 <i18n>
 {
   "en": {
-     "message": "Warning: currenty we ship only to Italy, please contact us for shipping to another country (additional charges may apply)."
+     "message": "Warning: currenty we ship only to Italy, France and Spain, please contact us for shipping to another country (additional charges may apply)."
   },
   "it": {
-     "message": "Attenzione: attualmente spediamo solo in Italia, vi preghiamo di contattarci per la spedizione in un altro paese (potrebbero essere applicati costi aggiuntivi)."
+     "message": "Attenzione: attualmente spediamo solo in Italia, Francia e Spagna, vi preghiamo di contattarci per la spedizione in un altro paese (potrebbero essere applicati costi aggiuntivi)."
   }
 }
 </i18n>

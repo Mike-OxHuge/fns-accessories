@@ -1,7 +1,6 @@
 <template>
   <v-app>
     <Header />
-    <LocaleSwitcher />
     <!-- <v-main> -->
     <nuxt keep-alive />
     <!-- </v-main> -->
@@ -12,14 +11,12 @@
 
 <script>
 import Social from '~/components/Social.vue'
-import LocaleSwitcher from '~/components/LanguageInput.vue'
 import Header from '~/components/Header.vue'
 import Footer from '~/components/Footer.vue'
 
 export default {
   components: {
     Social,
-    LocaleSwitcher,
     Header,
     Footer,
   },

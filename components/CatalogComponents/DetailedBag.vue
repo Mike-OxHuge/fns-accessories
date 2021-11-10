@@ -1,13 +1,5 @@
 <template>
   <v-container pa-0 d-flex flex-column>
-    <!-- <span>
-      {{ bag.stock }}
-      {{
-        $i18n.locale === 'it'
-          ? `${bag.colorName.it} disponibile`
-          : `${bag.colorName.en} available`
-      }}
-    </span> -->
     <v-img
       :src="selectedImage === null ? bag.images[0] : selectedImage"
       width="800"
@@ -17,10 +9,9 @@
     ></v-img>
     <div class="mt-auto">
       <v-sheet
-        elevation="8"
         max-width="800"
         class="mx-auto"
-        style="background: rgba(0, 0, 0, 0.5); border-radius: 20px"
+        style="background: rgba(0, 0, 0, 0.5); border-radius: 0 0 20px 20px"
       >
         <v-slide-group v-model="model">
           <v-slide-item
