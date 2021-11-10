@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="2">
-        <NuxtLink to="/">
+        <NuxtLink :to="`/${$i18n.locale}`">
           <v-btn color="success">
             <v-icon small>arrow_back_ios_new</v-icon>
             Back home

@@ -30,7 +30,7 @@
           class="ma-auto"
           block
           @click="setFeatured(bag)"
-          >{{ bag.featured ? 'remove ' : 'set ' }} featured
+          >{{ isFeatured ? 'remove ' : 'set ' }} featured
         </v-btn>
       </v-card-title>
 
