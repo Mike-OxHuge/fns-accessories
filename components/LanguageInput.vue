@@ -13,7 +13,10 @@
             color="primary"
             :outlined="lang !== $i18n.locale"
             class="black--text"
-            :class="{ 'ml-2': $vuetify.breakpoint.smAndDown }"
+            :class="{
+              'ml-2': $vuetify.breakpoint.smAndDown,
+              'mt-2': $vuetify.breakpoint.mdAndUp,
+            }"
           >
             {{ lang.toUpperCase() }}
           </v-btn>
