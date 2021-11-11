@@ -1,5 +1,7 @@
 # fns-accessories
 
+Nice cool fresh and awesome bags. Get one and be the happiest person in the room.
+
 ## Build Setup
 
 ```bash
