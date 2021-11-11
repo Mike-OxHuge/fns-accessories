@@ -88,7 +88,7 @@ export default {
         href: '/favicon/favicon_io/apple-touch-icon.png',
       },
 
-      { rel: 'manifest', href: './favicon/favicon_io/site.webmanifest' },
+      // { rel: 'manifest', href: './favicon/favicon_io/site.webmanifest' },
       {
         href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
         rel: 'stylesheet',
