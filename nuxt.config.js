@@ -20,10 +20,75 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'Nice cool fresh and awesome bags. Get one and be the happiest person in the room.',
+      },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/favicon/favicon_io/favicon.ico',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        href: '/favicon/favicon_io/favicon-16x16.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        href: '/favicon/favicon_io/favicon-32x32.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '192x192',
+        href: '/favicon/favicon_io/android-chrome-192x192.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '512x512',
+        href: '/favicon/favicon_io/android-chrome-512x512.png',
+      },
+      //       <!-- Open Graph / Facebook -->
+      { property: 'og:type', content: 'website' },
+      { property: 'og:url', content: 'https://fns-accessories.web.app/en/' },
+      { property: 'og:title', content: 'F&S Store' },
+      {
+        property: 'og:description',
+        content:
+          'Nice cool fresh and awesome bags. Get one and be the happiest person in the room.',
+      },
+      { property: 'og:image', content: '/images/multiple-bags.png' },
+
+      //        {!-- Twitter --},
+      { property: 'twitter:card', content: 'summary_large_image' },
+      {
+        property: 'twitter:url',
+        content: 'https://fns-accessories.web.app/en/',
+      },
+      { property: 'twitter:title', content: 'F&S Store' },
+      {
+        property: 'twitter:description',
+        content:
+          'Nice cool fresh and awesome bags. Get one and be the happiest person in the room.',
+      },
+      { property: 'twitter:image', content: 'multiple-bags.png' },
+
+      {
+        rel: 'apple-touch-icon',
+        sizes: '180x180',
+        href: '/favicon/favicon_io/apple-touch-icon.png',
+      },
+
+      { rel: 'manifest', href: './favicon/favicon_io/site.webmanifest' },
       {
         href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
         rel: 'stylesheet',

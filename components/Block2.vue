@@ -132,7 +132,7 @@ export default {
       rgba(0, 0, 0, 0.52),
       rgba(0, 0, 0, 0.73)
     ),
-    url('/images/multiple-bags.png');
+    url('/images/multiple-bags.jpg');
   height: 100%;
   background-repeat: repeat;
 }
@@ -142,7 +142,7 @@ export default {
       rgba(0, 0, 0, 0.52),
       rgba(0, 0, 0, 0.73)
     ),
-    url('/images/multiple-bags1.png');
+    url('/images/multiple-bags1.jpg');
   height: 100%;
   background-repeat: repeat;
 }
