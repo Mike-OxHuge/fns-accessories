@@ -100,7 +100,19 @@ export default {
       title: this.pageTitle,
       meta: [
         {
-          //
+          hid: 'description',
+          name: 'description',
+          content: () => this.pageTitle,
+        },
+        {
+          property: 'og:description',
+          hid: 'og:description',
+          content: () => this.pageTitle,
+        },
+        {
+          hid: 'twitter:description',
+          name: 'twitter:description',
+          content: () => this.pageTitle,
         },
       ],
     }

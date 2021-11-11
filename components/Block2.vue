@@ -73,7 +73,7 @@
               }"
             >
               <ShopLogo
-                src="/vinted-logo.png"
+                src="/vinted-logo.webp"
                 alt="vinted-logo"
                 href="https://vinted.com"
               />
@@ -132,7 +132,7 @@ export default {
       rgba(0, 0, 0, 0.52),
       rgba(0, 0, 0, 0.73)
     ),
-    url('/images/multiple-bags.jpg');
+    url('/images/multiple-bags.webp');
   height: 100%;
   background-repeat: repeat;
 }
@@ -142,7 +142,7 @@ export default {
       rgba(0, 0, 0, 0.52),
       rgba(0, 0, 0, 0.73)
     ),
-    url('/images/multiple-bags1.jpg');
+    url('/images/multiple-bags1.webp');
   height: 100%;
   background-repeat: repeat;
 }

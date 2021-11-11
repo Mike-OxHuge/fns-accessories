@@ -55,7 +55,19 @@ export default {
     title: 'Catalog |',
     meta: [
       {
-        //
+        hid: 'description',
+        name: 'description',
+        content: 'Browse our catalog for your favorite bags.',
+      },
+      {
+        property: 'og:description',
+        hid: 'og:description',
+        content: 'Browse our catalog for your favorite bags.',
+      },
+      {
+        hid: 'twitter:description',
+        name: 'twitter:description',
+        content: 'Browse our catalog for your favorite bags.',
       },
     ],
   },

@@ -25,20 +25,36 @@ export default {
     // Block4,
     // Block5,
   },
-  async asyncData({ $axios }) {
-    const { data } = await $axios.get('/api/v1/bags')
-    return { catalog: data }
-  },
   data() {
     return {
       catalog: [],
     }
   },
+  async fetch() {
+    const { data } = await this.$axios.get('/api/v1/bags')
+    this.catalog = await data
+    // return data
+  },
   head: {
     title: 'Home page |',
     meta: [
       {
-        //
+        hid: 'description',
+        name: 'description',
+        content:
+          'Nice cool fresh and awesome bags. Get one and be the happiest person in the room.',
+      },
+      {
+        property: 'og:description',
+        hid: 'og:description',
+        content:
+          'Nice cool fresh and awesome bags. Get one and be the happiest person in the room.',
+      },
+      {
+        hid: 'twitter:description',
+        name: 'twitter:description',
+        content:
+          'Nice cool fresh and awesome bags. Get one and be the happiest person in the room.',
       },
     ],
   },

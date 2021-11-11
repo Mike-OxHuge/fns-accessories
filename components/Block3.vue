@@ -110,7 +110,6 @@ export default {
   },
   mounted() {
     // console.log('featured bags: ', this.featuredBags)
-    // TODO: featured bags on main page
   },
   methods: {
     //
