@@ -81,7 +81,7 @@ export default {
     },
   },
   mounted() {
-    this.$store.commit('incCounter')
+    // this.$store.commit('incCounter')
   },
 }
 </script>

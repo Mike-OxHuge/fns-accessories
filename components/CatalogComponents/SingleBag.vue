@@ -37,8 +37,8 @@
       <!-- <v-card-text class="accent--text">{{
         $i18n.locale === 'it' ? bag.description.it : bag.description.en
       }}</v-card-text> -->
-      <v-row no-gutters justify="center">
-        <v-col v-for="variant in bag.variants" :key="variant._id">
+      <v-row dense justify="center">
+        <v-col v-for="variant in bag.variants" :key="variant._id" cols="auto">
           <v-container mx-auto pa-0 class="d-flex justify-center">
             <v-chip
               :color="variant.color"
@@ -86,7 +86,7 @@
                 :loading="isLoading"
                 @click="buy"
               >
-                Buy now
+                {{ $i18n.locale === 'it' ? `Compra ora` : `Buy now` }}
               </v-btn>
               <v-btn
                 medium
@@ -96,8 +96,9 @@
                     `/${$i18n.locale}/catalog/${bag._id}?variant=${selectedBag._id}`
                   )
                 "
-                >Details</v-btn
               >
+                {{ $i18n.locale === 'it' ? 'Vedi altro' : 'see more' }}
+              </v-btn>
             </v-container>
 
             <v-container

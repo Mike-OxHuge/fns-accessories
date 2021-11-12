@@ -29,7 +29,7 @@
         <div class="d-flex justify-center">
           <a :href="`/${$i18n.locale}/`">
             <v-avatar :size="customSize" class="mt-5 mr-5">
-              <v-img eager src="/logo.webp"></v-img>
+              <v-img eager src="/logo.png"></v-img>
             </v-avatar>
           </a>
           <div class="d-flex flex-column align-self-center justify-center">
@@ -81,8 +81,8 @@ export default {
     },
     mainBackgroundImage() {
       return this.$vuetify.breakpoint.smAndDown
-        ? 'url(/mobile-bg.webp)'
-        : 'url(/desktop-bg.webp)'
+        ? 'url(/mobile-bg.jpg)'
+        : 'url(/desktop-bg.jpg)'
     },
   },
   mounted() {
