@@ -1,74 +1,81 @@
+<i18n>
+{
+  "en": {
+    "thanks": "Thank you for your order, ",
+    "orderMessage": "Your order is on its way to: ",
+    "question": "If you have any questions please do not hesitate to contact us at:",
+    "purchase": "Your purchase:"
+  },
+  "it": {
+    "thanks": "Grazie per il vostro ordine, ",
+    "orderMessage": "Il tuo ordine è in viaggio per: ",
+    "question": "In caso di domande, non esitate a contattarci all'indirizzo:",
+    "purchase": "Il tuo acquisto:"
+  }
+}
+</i18n>
 <template>
-  <v-main>
-    <v-container d-flex flex-column>
-      <h1 class="text-center">Thank you for your order, {{ data.name }}</h1>
-      <p class="text-center">
-        Your purchase will be delivered to: {{ data.shipping.name }},
-        {{ address.postal_code }},
-        {{
-          address.line2 ? address.line1 + ' ' + address.line2 : address.line1
-        }}, {{ address.city }}, {{ address.country }}.
-      </p>
-      <h2 class="text-center">
-        Purchased {{ data.purchasedBags.length > 1 ? 'items' : 'item' }}:
-      </h2>
-      <v-row>
-        <v-col v-for="bag in data.purchasedBags" :key="bag._id" cols="12">
-          <h4 class="text-center my-2">
-            {{
-              $i18n.locale === 'it'
-                ? data.bagName.name.it +
-                  ' (' +
-                  bag.colorName.it +
-                  ') ' +
-                  'por ' +
-                  bag.price +
-                  '€'
-                : data.bagName.name.en +
-                  ' (' +
-                  bag.colorName.en +
-                  ') ' +
-                  'for ' +
-                  bag.price +
-                  '€'
-            }}
-          </h4>
-          <v-row justify="center">
-            <v-col
-              v-for="image in bag.images"
-              :key="image.i"
-              cols="12"
-              sm="6"
-              md="4"
-            >
-              <v-img width="auto" :src="image"></v-img>
-            </v-col>
-          </v-row>
-        </v-col>
-      </v-row>
-      <v-btn
-        :block="$vuetify.breakpoint.smAndDown"
-        color="primary"
-        class="mx-auto my-5"
-        @click="$router.replace(`/${$i18n.locale}/`)"
-        >HOME</v-btn
+  <v-container
+    d-flex
+    flex-column
+    my-auto
+    style="border-radius: 20px; background: rgba(0, 0, 0, 0.5)"
+  >
+    <h1 class="text-center">{{ $t('thanks') + data.name }}</h1>
+    <div class="d-flex mx-auto">
+      <p>{{ $t('orderMessage') }}</p>
+      <div class="address">
+        <p>{{ data.shipping.name }}</p>
+        <p>
+          {{
+            address.line2 ? address.line1 + ' ' + address.line2 : address.line1
+          }}
+        </p>
+        <p>
+          {{
+            address.postal_code + ' ' + address.city + ', ' + address.country
+          }}
+        </p>
+      </div>
+    </div>
+
+    <!-- <p class="text-center">
+      Your purchase will be delivered to: {{ data.shipping.name }},
+      {{ address.postal_code }},
+      {{ address.line2 ? address.line1 + ' ' + address.line2 : address.line1 }},
+      {{ address.city }}, {{ address.country }}.
+    </p> -->
+    <h2 class="text-center">{{ $t('purchase') }}:</h2>
+    <DetailedBag :bag="data.purchasedBags[0]" />
+    <p>
+      {{ $t('question') }}
+      <a target="_blank" href="mailto:mikelitoris34@icloud.com"
+        >mikelitoris34@icloud.com</a
       >
-    </v-container>
-  </v-main>
+    </p>
+    <v-btn
+      :block="$vuetify.breakpoint.smAndDown"
+      color="primary"
+      class="mx-auto my-5"
+      @click="$router.replace(`/${$i18n.locale}/`)"
+    >
+      <v-icon>home</v-icon>
+      homepage</v-btn
+    >
+  </v-container>
 </template>
 
 <script>
+import DetailedBag from '~/components/CatalogComponents/DetailedBag.vue'
 export default {
+  components: { DetailedBag },
+  layout: 'order-status',
   // destructuring context
   async asyncData({ $axios, route, store, i18n, redirect }) {
-    // if (store.state.counter > 0) {
-    //   redirect(`/${i18n.locale}/`)
-    // } else {
     const { data } = await $axios.get(
       `/api/v1/purchase/order-status?session_id=${route.query.session_id}`
     )
     return { data }
-    // }
   },
   data() {
     return {
@@ -81,9 +88,14 @@ export default {
     },
   },
   mounted() {
-    // this.$store.commit('incCounter')
+    //
   },
 }
 </script>
 
-<style></style>
+<style>
+.address p {
+  margin: 0 0 0 10px;
+  text-align: left;
+}
+</style>
