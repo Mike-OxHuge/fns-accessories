@@ -105,7 +105,8 @@ export default {
       // { rel: 'manifest', href: './favicon/favicon_io/site.webmanifest' },
       {
         href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
-        rel: 'stylesheet',
+        rel: 'preload',
+        as: 'stylesheet',
       },
     ],
   },
