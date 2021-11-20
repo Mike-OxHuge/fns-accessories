@@ -17,26 +17,26 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      // {
-      //   hid: 'description',
-      //   name: 'description',
-      //   content:
-      //     'Nice cool fresh and awesome bags. Get one and be the happiest person in the room.',
-      // },
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'Nice cool fresh and awesome bags. Get one and be the happiest person in the room.',
+      },
       //       <!-- Open Graph / Facebook -->
       { property: 'og:type', content: 'website' },
       { property: 'og:url', content: 'https://fns-accessories.web.app/en/' },
       { hid: 'og:title', property: 'og:title', content: 'F&S Store' },
-      // {
-      //   property: 'og:description',
-      //   hid: 'og:description',
-      //   content:
-      //     'Nice cool fresh and awesome bags. Get one and be the happiest person in the room.',
-      // },
       {
         property: 'og:image',
         content:
           'https://res.cloudinary.com/bollockses/image/upload/v1636647211/bags/meta_boa0xm.webp',
+      },
+      {
+        property: 'og:description',
+        hid: 'og:description',
+        content:
+          'Nice cool fresh and awesome bags. Get one and be the happiest person in the room.',
       },
 
       //        {!-- Twitter --},
@@ -47,17 +47,17 @@ export default {
         content: 'https://fns-accessories.web.app/en/',
       },
       { hid: 'twitter:title', name: 'twitter:title', content: 'F&S Store' },
-      // {
-      //   hid: 'twitter:description',
-      //   name: 'twitter:description',
-      //   content:
-      //     'Nice cool fresh and awesome bags. Get one and be the happiest person in the room.',
-      // },
       {
         hid: 'twitter:image',
         name: 'twitter:image',
         content:
           'https://res.cloudinary.com/bollockses/image/upload/v1636647211/bags/meta_boa0xm.webp',
+      },
+      {
+        hid: 'twitter:description',
+        name: 'twitter:description',
+        content:
+          'Nice cool fresh and awesome bags. Get one and be the happiest person in the room.',
       },
     ],
     link: [
@@ -104,9 +104,11 @@ export default {
 
       // { rel: 'manifest', href: './favicon/favicon_io/site.webmanifest' },
       {
-        href: 'https://fonts.googleapis.com/icon?family=Material+Icons',
-        rel: 'preload',
-        as: 'stylesheet',
+        href: 'https://fonts.googleapis.com/icon?family=Material+Icons&display=swap',
+        rel: 'stylesheet',
+        // rel: 'prefetch',
+        // as: 'stylesheet',
+        // type: 'stylesheet',
       },
     ],
   },
