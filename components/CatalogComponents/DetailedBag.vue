@@ -63,9 +63,6 @@ export default {
     responsiveImageHeight() {
       return this.$vuetify.breakpoint.lg ? '400' : '600'
     },
-    // selection() {
-    //   return null
-    // },
   },
   methods: {
     selection(image) {

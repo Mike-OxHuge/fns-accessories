@@ -34,9 +34,6 @@
         </v-btn>
       </v-card-title>
 
-      <!-- <v-card-text class="accent--text">{{
-        $i18n.locale === 'it' ? bag.description.it : bag.description.en
-      }}</v-card-text> -->
       <v-row dense justify="center">
         <v-col v-for="variant in bag.variants" :key="variant._id" cols="auto">
           <v-container mx-auto pa-0 class="d-flex justify-center">
@@ -143,7 +140,6 @@ export default {
     return {
       isLoading: false,
       selectedImage: null,
-      // selectedBag: this.bag.variants[0], // default value, the bag object
       selectedBag: this.bag.variants.find((e) => e.stock > 0),
       stripe: null,
       isFeatured: this.bag.featured,

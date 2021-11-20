@@ -51,38 +51,25 @@ export default {
       catalog: [],
     }
   },
+  async fetch() {
+    const { data } = await this.$axios.get('/api/v1/bags')
+    this.catalog = await data
+  },
   head: {
     title: 'Catalog |',
     meta: [
-      {
-        hid: 'description',
-        name: 'description',
-        content: 'Browse our catalog for your favorite bags.',
-      },
-      {
-        property: 'og:description',
-        hid: 'og:description',
-        content: 'Browse our catalog for your favorite bags.',
-      },
-      {
-        hid: 'twitter:description',
-        name: 'twitter:description',
-        content: 'Browse our catalog for your favorite bags.',
-      },
+      // not working SSG
     ],
   },
   beforeMount() {
-    this.fetching()
-  },
-  mounted() {
-    // this.$store.commit('resetCounter')
+    // this.fetching()
   },
   methods: {
-    async fetching() {
-      await fetch(`${process.env.NUXT_APP_BACKEND_URL}/api/v1/bags`)
-        .then((response) => response.json())
-        .then((json) => (this.catalog = json))
-    },
+    // async fetching() {
+    //   await fetch(`${process.env.NUXT_APP_BACKEND_URL}/api/v1/bags`)
+    //     .then((response) => response.json())
+    //     .then((json) => (this.catalog = json))
+    // },
   },
 }
 </script>

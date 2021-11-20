@@ -94,8 +94,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-@import url(~/assets/css/keyframes.css);
-@import url('~~/assets/css/keyframes.css');
-</style>

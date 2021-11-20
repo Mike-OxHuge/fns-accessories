@@ -109,7 +109,6 @@ export default {
   },
   mounted() {
     this.resetHeight()
-    //
   },
   methods: {
     isViewableNow(isVisible, entry, section) {
@@ -125,7 +124,6 @@ export default {
 </script>
 
 <style scoped>
-@import url(~/assets/css/keyframes.css);
 .left-one {
   background-image: linear-gradient(
       to bottom,

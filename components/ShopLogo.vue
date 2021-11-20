@@ -53,15 +53,5 @@ export default {
       }
     },
   },
-  mounted() {
-    // console.log('width: ', this.customHeight, 'heigth: ', this.customWidth)
-    // console.log(this.$vuetify.breakpoint)
-  },
 }
 </script>
-
-<style>
-/* average sizes:
-height: 100;
-width 200 */
-</style>

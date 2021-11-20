@@ -98,34 +98,11 @@ export default {
   props: {
     catalog: { type: Array, default: () => [] },
   },
-  data() {
-    return {
-      //
-    }
-  },
+
   computed: {
     featuredBags() {
       return this.catalog.filter((item) => item.featured).slice(0, 3)
     },
   },
-  mounted() {
-    // console.log('featured bags: ', this.featuredBags)
-  },
-  methods: {
-    //
-  },
 }
 </script>
-
-<style scoped>
-/* .title {
-  position: absolute;
-  top: 53%;
-  transform: translateY(-60%);
-  width: 100vw;
-  text-align: center;
-  padding: 1vh 0px;
-  background-color: rgba(0, 0, 0, 0.37);
-  color: whitesmoke;
-} */
-</style>
