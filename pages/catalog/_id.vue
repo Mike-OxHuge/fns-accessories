@@ -55,7 +55,7 @@
         <v-btn
           v-if="variant"
           color="primary"
-          class="mx-10"
+          class="mx-10 black--text"
           :loading="isLoading"
           :disabled="variant[0].stock <= 0"
           @click="buy"

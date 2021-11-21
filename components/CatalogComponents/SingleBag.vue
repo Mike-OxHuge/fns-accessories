@@ -81,6 +81,7 @@
                 color="primary"
                 :disabled="selectedBag.stock <= 0"
                 :loading="isLoading"
+                class="black--text"
                 @click="buy"
               >
                 {{ $i18n.locale === 'it' ? `Compra ora` : `Buy now` }}
@@ -88,6 +89,7 @@
               <v-btn
                 medium
                 color="primary"
+                class="black--text"
                 @click="
                   $router.push(
                     `/${$i18n.locale}/catalog/${bag._id}?variant=${selectedBag._id}`

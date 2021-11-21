@@ -2,7 +2,11 @@
   <div class="floating">
     <v-list-item v-for="social in socials" :key="social.i" dense class="px-0">
       <v-list-item-icon class="mx-0">
-        <a :href="social.link" target="_blank">
+        <a
+          :href="social.link"
+          target="_blank"
+          :aria-label="`visit our ${social.icon.split('-')[1]}`"
+        >
           <v-icon left color="primary">
             {{ social.icon }}
           </v-icon>

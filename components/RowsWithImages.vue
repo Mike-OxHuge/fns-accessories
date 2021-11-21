@@ -34,6 +34,7 @@
           <p>{{ description.split('.')[0] }}.</p>
           <v-btn
             color="primary"
+            class="black--text"
             @click="$router.push(`/${$i18n.locale}/catalog/${id}`)"
           >
             {{ $i18n.locale === 'it' ? 'Vedi altro' : 'see more' }}

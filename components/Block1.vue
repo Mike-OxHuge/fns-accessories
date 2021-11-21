@@ -27,9 +27,12 @@
         }"
       >
         <div class="d-flex justify-center">
-          <a :href="`/${$i18n.locale}/`">
+          <a
+            aria-label="shop logo click to go back home"
+            :href="`/${$i18n.locale}/`"
+          >
             <v-avatar :size="customSize" class="mt-5 mr-5">
-              <v-img eager src="/logo.png"></v-img>
+              <v-img eager src="/logo.png" alt="shop logo"></v-img>
             </v-avatar>
           </a>
           <div class="d-flex flex-column align-self-center justify-center">

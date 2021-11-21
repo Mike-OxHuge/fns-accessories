@@ -39,7 +39,7 @@
                 color="primary"
                 @click="$router.push(`/${$i18n.locale}/catalog`)"
               >
-                <span>{{ $t('shopNow') }}</span>
+                <span class="black--text">{{ $t('shopNow') }}</span>
               </v-btn>
             </v-container>
           </v-sheet>
