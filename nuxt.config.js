@@ -131,6 +131,8 @@ export default {
     '@nuxtjs/vuetify',
     // dot env
     '@nuxtjs/dotenv',
+    // https://composition-api.nuxtjs.org/getting-started/setup
+    '@nuxtjs/composition-api/module',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
