@@ -148,6 +148,7 @@ export default {
     // {
     //   /* module options */
     // },
+    '@nuxtjs/firebase',
   ],
   i18n: {
     vueI18nLoader: true,
@@ -169,6 +170,21 @@ export default {
   pwa: {
     manifest: {
       lang: 'en',
+    },
+  },
+
+  firebase: {
+    config: {
+      apiKey: 'AIzaSyBd3vhu1wUqaehAn2-urOpA1kQu9ZLGW78',
+      authDomain: 'fns-accessories.firebaseapp.com',
+      projectId: 'fns-accessories',
+      storageBucket: 'fns-accessories.appspot.com',
+      messagingSenderId: '478773782961',
+      appId: '1:478773782961:web:870591ecdeacac23423590',
+    },
+    services: {
+      auth: true,
+      firestore: true,
     },
   },
 
